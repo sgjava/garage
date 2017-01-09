@@ -1,0 +1,11 @@
+export \tmp\*.c
+export \tmp\cia.h
+export \tmp\demo.h
+export \tmp\sid.h
+export \tmp\vdc.h
+export \tmp\*.mak
+export \tmp\*.sub
+export \tmp\*.pcx
+export \tmp\*.chr
+export \tmp\*.cdf
+export \tmp\*.raw

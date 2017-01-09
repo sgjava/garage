@@ -1,0 +1,1209 @@
+     ;COVOX DIGITIZED SPEECH DEMO
+     ;
+     ;(C) 1989 STEVE GOLDSMITH
+     ;
+     ;
+     R6510 = $01 ;INPUT/OUTPUT REGISTER
+     ;
+     ;CIA #1 CHIP
+     ;
+     PORTA1 = $DC00 ;CIA #1 DATA PORT REGISTER A
+     DDRA1 = $DC02 ;CIA #1 DATA DIRECTION REGISTER PORT A
+     ICR1 = $DC0D ;INTERRUPT CONTROL REGISTER
+     ;
+     ;CIA #2 CHIP
+     ;
+     PORTA2 = $DD00 ;CIA #2 DATA PORT REGISTER A
+     DDRA2 = $DD02 ;CIA #2 DATA DIRECTION REGISTER PORT A
+     TIMEA2 = $DD04 ;CIA #2 TIMER LO BYTE
+     CRA2 = $DD0E ;CIA #2 CONTROL REGISTER
+     ICR2 = $DD0D ;INTERRUPT CONTROL REGISTER
+     ;
+     ;VIC CHIP & OTHER VIDEO
+     ;
+     VICREG = $D000 ;VIC CHIP
+     BITCOL = $5C00 ;BITMAP COLOR MEMORY
+     SPPTR = $5FF8 ;SPRITE POINTERS
+     TEXTSC = $8000 ;TEXT SCREEN
+     COLORM = $D800 ;TEXT COLOR RAM
+     TXTDAT = $8400 ;START OF TEXT DATA
+     GETTXT = $B0 ;INDIRECT INDEX TO TEXT DATA
+     ;
+     ;SID CHIP
+     ;
+     SIDREG = $D400 ;SID CHIP
+     VOLUME = $D418 ;SID MASTER VOLUME CONTROL
+     ;
+     ;PLAY BACK VARIBLES
+     ;
+     SAMPLE = $F7 ;WHERE SOUND IS RECORDED TO OR PLAYED FROM
+     FBYTE = $F9 ;FREQ BYTE
+     MAXBLK = $FA ;MAX # OF BLOCKS YOU CAN RECORD
+     MS5 = $FB ;5 MICRO SEC DELAY       NUMBER
+     BITCNT = $FC ;BIT COUNT
+     ;
+     ;KERNAL ROUTINES AND VARIABLES
+     ;
+     LOAD = $FFD5 ;LOAD RAM
+     SETLFS = $FFBA ;SET LOGICAL FILE #
+     SETNAM = $FFBD ;SET FILE NAME
+     IRQVEC = $0314 ;IRQ VECTOR
+     ;
+     * = $C000 ;START OF PROGRAM
+     ;
+     :FILE @0:DIGISND.EXE,8
+     ;
+     ;INITILIZE PROGRAM
+     ;
+C000 20 A6 C0              JSR LOADAL ;LOAD ALL DATA FILES
+     INITAPP = *
+C003 20 73 C8              JSR CLRSID ;CLEAR SID CHIP
+C006 20 05 C1              JSR INITDT ;INIT DIR TOGGLES
+C009 20 25 C1              JSR INITXY ;INIT SPRITE X,Y DIRS
+C00C 20 3B C1              JSR INITSV ;INIT VARIOUS SPRITE VARS
+C00F 20 0C C2              JSR INITSB ;INITILIZE SPRITE BOUNDRIES
+C012 20 6F C1              JSR INITC2 ;INIT CIA #2 TIMER
+C015 20 E0 C0              JSR SETGR1 ;SET GRAPHICS MODE
+C018 20 96 C4              JSR INITTS ;INITILIZE TEXT SCREEN
+C01B 20 A8 C3              JSR INITRI ;INITILIZE RASTER IRQ
+C01E 20 82 C5              JSR DISP1 ;DISPLAY SPRITES
+C021 20 DB C5              JSR INITED ;INITILIZE EVENT DISPATCH
+C024 4C 27 C0              JMP MAIN
+     ;
+     ;MAIN LOOP
+     ;
+     MAIN = *
+C027 20 87 C1  JUMP1       JSR SPMOVE
+C02A 20 74 C3              JSR SOUND1
+C02D 20 F5 C5              JSR EVENT ;EVENT DISPATCH
+C030 AD 67 C9              LDA LINCNT
+C033 C9 0B                 CMP #11 ;LAST TEXT LINE
+C035 D0 F0                 BNE JUMP1
+C037 4C 03 C0              JMP INITAPP
+     ;
+     ;PLAY SOUND FROM MEMORY
+     ;
+C03A 78        PLAY        SEI ;DISABLE IRQ INTERRUPT
+C03B 20 73 C8              JSR CLRSID ;CLEAR SID
+C03E A9 00                 LDA #$00
+C040 8D 1A D0              STA VICREG+26 ;DISABLE VIC IRQS
+C043 8D 15 D0              STA VICREG+21 ;DISABLE SPRITES
+C046 AD 11 D0              LDA VICREG+17
+C049 29 EF                 AND %11101111 ;BLANK SCREEN
+C04B 8D 11 D0              STA VICREG+17
+C04E A2 00                 LDX #$00 ;BYTE COUNTER
+C050 45 FB     REPEAT1     EOR MS5 ;-
+C052 EE 20 D0              INC VICREG+32 ; - 15 MICRO SEC DELAY
+C055 EE 20 D0              INC VICREG+32 ;-
+C058 A0 08     LOOP1       LDY #$08 ;BIT COUNTER
+C05A 3E FF FF  DOWHILE1    ROL $FFFF,X ;THIS IS A SELF MODIFING ADDRESS
+C05D 90 05     IF1         BCC THEN1
+C05F A9 0F     AMP         LDA #$0F ;SELF MODIFING  ADDRESS
+C061 4C 67 C0              JMP ELSE1
+C064 EA        THEN1       NOP ;MICRO SEC DELAY
+C065 A9 00                 LDA #$00
+C067 8D 18 D4  ELSE1       STA VOLUME
+C06A 88                    DEY
+C06B F0 0D                 BEQ ENDDO1
+C06D EA                    NOP ;-
+C06E EA                    NOP ; -
+C06F EA                    NOP ;  -
+C070 EA                    NOP ;   -
+C071 EA                    NOP ;    -
+C072 EA                    NOP ;    - 20 MICRO SEC DELAY
+C073 EA                    NOP ;   -
+C074 EA                    NOP ;  -
+C075 EA                    NOP ; -
+C076 EA                    NOP ;-
+C077 4C 5A C0  ENDIF1      JMP DOWHILE1
+C07A E8        ENDDO1      INX
+C07B D0 D3     UNTIL1      BNE REPEAT1
+C07D C6 FA                 DEC MAXBLK
+C07F F0 06     IF2         BEQ THEN2
+C081 EE 5C C0              INC DOWHILE1+2
+C084 4C 58 C0  GOTO1       JMP LOOP1 ;GOTO LOOP1
+C087 20 6C C8  THEN2       JSR KERIN
+C08A 20 5E C8              JSR BASIN
+C08D AD 11 D0              LDA VICREG+17
+C090 09 10                 ORA %00010000 ;TURN SCREEN ON
+C092 8D 11 D0              STA VICREG+17
+C095 A9 01                 LDA %00000001
+C097 8D 1A D0              STA VICREG+26 ;ENABLE RASTER IRQ
+C09A A9 FF                 LDA %11111111
+C09C 8D 15 D0              STA VICREG+21 ;ENABLE SPRITES
+C09F A9 00                 LDA #$00 ;BLACK
+C0A1 8D 20 D0              STA VICREG+32 ;BORDER COLOR
+C0A4 58                    CLI ;RESTORE IRQ INTERRUPT
+C0A5 60                    RTS ;RETURN
+     ;
+     ;LOAD ALL FILES
+     ;
+C0A6 A9 80     LOADAL      LDA <FNAME
+C0A8 85 B0                 STA GETTXT
+C0AA A9 C8                 LDA >FNAME
+C0AC 85 B1                 STA GETTXT+1 ;START OF FILE NAME
+C0AE A9 00                 LDA #$00
+C0B0 85 FB                 STA MS5 ;FILE COUNTER
+C0B2 A9 01     REPEAT21    LDA #$01 ;LOGICAL FILE #
+C0B4 AE 7F C8              LDX DEVICE ;DEVICE #
+C0B7 A0 01                 LDY #$01 ;LOAD FILE AT ORIGIN
+C0B9 20 BA FF              JSR SETLFS ;SET LOGICAL FILE #
+C0BC A9 10                 LDA #$10 ;FILE NAME LENGTH
+C0BE A6 B0                 LDX GETTXT ;FILE NAME LO BYTE
+C0C0 A4 B1                 LDY GETTXT+1 ;FILE NAME HI BYTE
+C0C2 20 BD FF              JSR SETNAM ;SET FILE NAME
+C0C5 A9 00                 LDA #$0 ;SET FLAG FOR LOAD
+C0C7 20 D5 FF              JSR LOAD ;LOAD FILE
+C0CA A5 B0                 LDA GETTXT
+C0CC 18                    CLC
+C0CD 69 10                 ADC #$10
+C0CF 85 B0                 STA GETTXT ;SET FOR NEXT NAME
+C0D1 A9 00                 LDA #$00
+C0D3 65 B1                 ADC GETTXT+1 ;ADD CARRY BIT
+C0D5 85 B1                 STA GETTXT+1
+C0D7 E6 FB                 INC MS5 ;MS5 = MS5+1
+C0D9 A5 FB                 LDA MS5
+C0DB C9 08                 CMP #$08
+C0DD D0 D3                 BNE REPEAT21 ;UNTIL MS5=8
+C0DF 60                    RTS
+     ;
+     ;SET VIC BANK AND SET BIT MAP MODE
+     ;
+C0E0 AD 02 DD  SETGR1      LDA DDRA2
+C0E3 09 03                 ORA %00000011
+C0E5 8D 02 DD              STA DDRA2 ;SET BITS 0 & 1 TO OUTPUTS ON PORTA2
+C0E8 AD 00 DD              LDA PORTA2
+C0EB 29 FC                 AND %11111100
+C0ED 09 02                 ORA %00000010
+C0EF 8D 00 DD              STA PORTA2 ;VIC BANK 1 ($4000-$7FFF)
+C0F2 A9 78                 LDA %01111000
+C0F4 8D 18 D0              STA VICREG+24 ;SCREEN BLOCK 7 ($5C00-$5FFF) & B
+IT MAP BLOCK 1 ($6000-$7FFF)
+C0F7 A9 08                 LDA %00001000
+C0F9 8D 16 D0              STA VICREG+22 ;40 COLUMNS
+C0FC AD 11 D0              LDA VICREG+17
+C0FF 09 38                 ORA %00111000
+C101 8D 11 D0              STA VICREG+17 ;ENABLE BIT MAP MODE
+C104 60                    RTS
+     ;
+     ;INITIALIZE SPRITE DIRECTION TOGGLES, COLORS AND FIRST FRAME
+     ;
+C105 A2 00     INITDT      LDX #$00 ;X=0
+C107 A9 00     REPEAT2     LDA #$00 ;REPEAT
+C109 9D 1F C9              STA XDIR,X ;0 X DIRECTIONS
+C10C 9D 27 C9              STA YDIR,X ;0 Y DIRECTIONS
+C10F 9D 16 C9              STA ROTDIR,X ;0 ROTATION DIRECTIONS
+C112 9D 2F C9              STA SPCOLOR,X ;0 COLOR SEQUENCE
+C115 A9 5C                 LDA #92 ;FIRST FRAME
+C117 9D F8 5F              STA SPPTR,X ;SET SPRITE POINTER
+C11A A9 02                 LDA #$02 ;RED
+C11C 9D 27 D0              STA VICREG+39,X ;SET BIT PAIR 10
+C11F E8                    INX ;X=X+1
+C120 E0 08                 CPX #$08
+C122 D0 E3     UNTIL2      BNE REPEAT2 ;UNTIL X = 8
+C124 60                    RTS
+     ;
+     ;INITIALIZE SPRITE X & Y DIRECTIONS
+     ;
+C125 A2 00     INITXY      LDX #$00
+C127 8E 10 D0              STX VICREG+16 ;SET MSB SPRITE X
+C12A A9 A0     REPEAT3     LDA #160 ;REPEAT
+C12C 9D 00 D0              STA VICREG,X ;INIT X DIR
+C12F E8                    INX ;X=X+1
+C130 A9 8C                 LDA #140
+C132 9D 00 D0              STA VICREG,X ;INIT Y DIR
+C135 E8                    INX ;X=X+1
+C136 E0 10                 CPX #$10
+C138 D0 F0     UNTIL3      BNE REPEAT3
+C13A 60                    RTS
+     ;
+     ;INITIALIZE VARIOUS SPRITE RELATED VARIABLES
+     ;
+C13B A9 06     INITSV      LDA #$06 ;BLUE
+C13D 8D 25 D0              STA VICREG+37 ;BIT PAIR 01 COLOR
+C140 A9 01                 LDA #$01 ;WHITE
+C142 8D 26 D0              STA VICREG+38 ;BIT PAIR 11 COLOR
+C145 A9 FF                 LDA %11111111
+C147 8D 1C D0              STA VICREG+28 ;SET MULTICOLOR MODE
+C14A 8D 15 D0              STA VICREG+21 ;TURN ON SPRITES
+C14D A9 AA                 LDA %10101010
+C14F 8D 1B D0              STA VICREG+27 ;BACK GRUOND PRIORITY
+C152 A9 00                 LDA #$00 ;BLACK
+C154 8D 20 D0              STA VICREG+32 ;BORDER COLOR
+C157 A9 00                 LDA #$00
+C159 8D 68 C9              STA COLSEQ
+C15C 8D 69 C9              STA COLSAV
+C15F A9 01                 LDA #$01
+C161 8D 39 C9              STA SNDTGL ;SET SOUND TOGGLE
+C164 A9 FF                 LDA #$FF
+C166 8D 15 C9              STA MTIMER ;SET MTIMER
+C169 A9 03                 LDA #$03
+C16B 8D 14 C9              STA RTIMER ;SET RTIMER
+C16E 60                    RTS
+     ;
+     ;INITIALIZE CIA #2 TIMER
+     ;
+C16F A9 7F     INITC2      LDA %01111111
+C171 8D 0D DD              STA ICR2 ;SHUT OFF CIA #2 IRQS
+C174 8D 0D DC              STA ICR1 ;SHUT OFF CIA #1 IRQS
+C177 A9 02                 LDA #$02
+C179 8D 05 DD              STA TIMEA2+1 ;SET TIMER A HI
+C17C A9 FF                 LDA #$FF
+C17E 8D 04 DD              STA TIMEA2 ;SET TIMER A LO
+C181 A9 11                 LDA %00010001
+C183 8D 0E DD              STA CRA2 ;START TIMER
+C186 60                    RTS ;RETURN
+     ;
+     ;SPRITE MOVEMENT MODULE
+     ;
+C187 AD 0D DD  SPMOVE      LDA ICR2
+C18A 8D 9B C9              STA TICR2 ;TEMP ICR2
+C18D 29 01                 AND %00000001
+C18F F0 13     IF4         BEQ THEN4
+C191 CE 15 C9              DEC MTIMER ;MTIMER=MTIMER-1
+C194 D0 06     IF5         BNE THEN5
+C196 20 A5 C1              JSR MOVALL ;MOVE ALL SPRITES
+C199 20 EE C1              JSR FSCRL ;FINE SCROLL DIGISOUND
+C19C CE 14 C9  THEN5       DEC RTIMER ;RTIMER=RTIMER-1
+C19F D0 03     IF6         BNE THEN4
+C1A1 20 CE C1              JSR ROTALL ;ROTATE ALL SPRITES
+C1A4 60        THEN4       RTS ;RETURN
+     ;
+     ;MOVE ALL 8 SPRITES AT ONCE
+     ;
+C1A5 A2 00     MOVALL      LDX #$00
+C1A7 8E 1E C9              STX SCOUNT
+C1AA AD 11 D0  REPEAT6     LDA VICREG+17
+C1AD 10 FB                 BPL REPEAT6
+C1AF 20 17 C2  REPEAT4     JSR MLEFT ;REPEAT
+C1B2 20 6E C2              JSR MRIGHT ;MOVE RIGHT
+C1B5 20 BF C2              JSR MUP
+C1B8 20 E5 C2              JSR MDOWN
+C1BB EE 1E C9              INC SCOUNT ;SCOUNT=SCOUNT+1
+C1BE AE 1E C9              LDX SCOUNT
+C1C1 E0 08                 CPX #$08
+C1C3 D0 EA     UNTIL4      BNE REPEAT4 ;UNTIL X=8
+C1C5 A9 02                 LDA #$02
+C1C7 8D 15 C9              STA MTIMER
+C1CA 20 1A C5              JSR COLLIN ;COLOR DIGISOUND
+C1CD 60                    RTS
+     ;
+     ;ROTATE ALL 8 SPRITES AT ONCE
+     ;
+C1CE A2 00     ROTALL      LDX #$00
+C1D0 8E 1E C9              STX SCOUNT
+C1D3 AD 11 D0  REPEAT7     LDA VICREG+17
+C1D6 10 FB                 BPL REPEAT7
+C1D8 20 13 C3  REPEAT5     JSR ROTSP ;REPEAT
+C1DB EE 1E C9              INC SCOUNT ;SCOUNT=SCOUNT+1
+C1DE AE 1E C9              LDX SCOUNT
+C1E1 E0 08                 CPX #$08
+C1E3 D0 F3     UNTIL5      BNE REPEAT5 ;UNTIL X=8
+C1E5 A9 07                 LDA #$07
+C1E7 8D 14 C9              STA RTIMER
+C1EA 20 DD C4              JSR SRLTXT ;SCROLL TEXT LINE
+C1ED 60                    RTS
+     ;
+     ;FINE SCROLL 'DIGISOUND'
+     ;
+C1EE AD 96 C9  FSCRL       LDA XSDIR
+C1F1 D0 0D                 BNE THEN49
+C1F3 EE 94 C9              INC XSCRL
+C1F6 AD 94 C9              LDA XSCRL
+C1F9 C9 07                 CMP #$07
+C1FB D0 0E     IF48        BNE THEN48
+C1FD 8D 96 C9              STA XSDIR ;TOGGLE DIRECTION
+C200 CE 94 C9  THEN49      DEC XSCRL
+C203 AD 94 C9              LDA XSCRL
+C206 D0 03                 BNE THEN48
+C208 8D 96 C9              STA XSDIR ;TOGGLE DIRECTION
+C20B 60        THEN48      RTS
+     ;
+     ; INITILIZE SPRITE BOUNDRIES
+     ;
+C20C A9 82     INITSB      LDA #130
+C20E 8D 37 C9              STA UBOUND
+C211 A9 96                 LDA #150
+C213 8D 38 C9              STA DBOUND
+C216 60                    RTS
+     ;
+     ;MOVE LEFT IF XDIR = 1
+     ;
+C217 AE 1E C9  MLEFT       LDX SCOUNT ;X=SCOUNT
+C21A BD 1F C9              LDA XDIR,X ;A=XDIR+X
+C21D F0 27     IF7         BEQ THEN7
+C21F A9 01                 LDA #$01 ;A=1
+C221 E0 00                 CPX #$00
+C223 F0 05     DOWHILE2    BEQ ENDDO2
+C225 0A                    ASL A ; A=A*2
+C226 CA                    DEX
+C227 4C 23 C2              JMP DOWHILE2
+C22A A8        ENDDO2      TAY ;SAVE SPRITE # BIT
+C22B 2D 10 D0              AND VICREG+16 ;TEST MSB SPRITE X
+C22E F0 17     IF8         BEQ THEN8
+C230 AD 1E C9              LDA SCOUNT
+C233 0A                    ASL A ;A=SCOUNT*2
+C234 AA                    TAX ;X=A
+C235 BD 00 D0              LDA VICREG,X
+C238 D0 09     IF9         BNE THEN9 ;IF SPRITE SEEM
+C23A 98                    TYA ;GET SPRITE # BIT
+C23B 49 FF                 EOR %11111111 ;REVERSE ALL BITS
+C23D 2D 10 D0              AND VICREG+16 ;TURN OFF MSB SPRITE X
+C240 8D 10 D0              STA VICREG+16
+C243 DE 00 D0  THEN9       DEC VICREG,X
+C246 60        THEN7       RTS
+C247 AD 1E C9  THEN8       LDA SCOUNT
+C24A 0A                    ASL A ;A=SCOUNT*2
+C24B AA                    TAX ;X=A
+C24C BD 00 D0              LDA VICREG,X
+C24F C9 14                 CMP #20 ;LEFT EDGE OF SCREEN
+C251 D0 17     IF10        BNE THEN10
+C253 A9 00                 LDA #$00
+C255 AE 1E C9              LDX SCOUNT ;X=SCOUNT
+C258 9D 1F C9              STA XDIR,X ;CHANGE DIR
+C25B 9D 16 C9              STA ROTDIR,X ;ROTDIR+X=0
+C25E 8D 39 C9              STA SNDTGL
+C261 AC 04 DD              LDY TIMEA2
+C264 10 03     IF22        BPL THEN22
+C266 9D 27 C9              STA YDIR,X
+C269 60        THEN22      RTS
+C26A DE 00 D0  THEN10      DEC VICREG,X
+C26D 60                    RTS
+     ;
+     ;MOVE RIGHT IF XDIR = 0
+     ;
+C26E AE 1E C9  MRIGHT      LDX SCOUNT
+C271 BD 1F C9              LDA XDIR,X ;A=XDIR+X
+C274 D0 27     IF11        BNE THEN11
+C276 A9 01                 LDA #$01 ;A=1
+C278 E0 00                 CPX #$00
+C27A F0 05     DOWHILE3    BEQ ENDDO3 ;DOWHILE X<>0
+C27C 0A                    ASL A ;A=A*2
+C27D CA                    DEX ;X=X-1
+C27E 4C 7A C2              JMP DOWHILE3
+C281 A8        ENDDO3      TAY ;SAVE SPRITE # BIT
+C282 2D 10 D0              AND VICREG+16 ;TEST MSB SPRITE X
+C285 D0 17     IF12        BNE THEN12
+C287 AD 1E C9              LDA SCOUNT
+C28A 0A                    ASL A ;A=SCOUNT*2
+C28B AA                    TAX ;X=A
+C28C BD 00 D0              LDA VICREG,X
+C28F C9 FF                 CMP #$FF ;SPRITE SEEM
+C291 D0 07     IF13        BNE THEN13 ;IF SPRITE SEEM
+C293 98                    TYA ;GET SPRITE # BIT
+C294 0D 10 D0              ORA VICREG+16 ;TURN ON MSB SPRITE X
+C297 8D 10 D0              STA VICREG+16
+C29A FE 00 D0  THEN13      INC VICREG,X
+C29D 60        THEN11      RTS
+C29E AD 1E C9  THEN12      LDA SCOUNT ;A=SCOUNT
+C2A1 0A                    ASL A ;A=A*2
+C2A2 AA                    TAX ;X=A
+C2A3 BD 00 D0              LDA VICREG,X ;A=VICREG+X
+C2A6 C9 42                 CMP #66 ;RIGHT EDGE OF SCREEN
+C2A8 D0 11     IF14        BNE THEN14
+C2AA A9 01                 LDA #$01 ;A=1
+C2AC AE 1E C9              LDX SCOUNT ;X=SCOUNT
+C2AF 9D 1F C9              STA XDIR,X ;XDIR+X=1
+C2B2 9D 16 C9              STA ROTDIR,X ;ROTDIR+X=1
+C2B5 A9 00                 LDA #$00
+C2B7 8D 39 C9              STA SNDTGL
+C2BA 60                    RTS
+C2BB FE 00 D0  THEN14      INC VICREG,X ;VICREG+X=VICREG+X+1
+C2BE 60                    RTS
+     ;
+     ;MOVE UP IF YDIR = 1
+     ;
+C2BF AE 1E C9  MUP         LDX SCOUNT ;X=SCOUNT
+C2C2 BD 27 C9              LDA YDIR,X ;A=YDIR+X
+C2C5 F0 19     IF15        BEQ THEN15
+C2C7 AD 1E C9              LDA SCOUNT
+C2CA 0A                    ASL A ;A=SCOUNT*2
+C2CB AA                    TAX ;X=A
+C2CC E8                    INX ;X=X+1
+C2CD BD 00 D0              LDA VICREG,X ;A=VICREG+X
+C2D0 CD 37 C9              CMP UBOUND
+C2D3 B0 0C     IF16        BCS THEN16
+C2D5 A9 00                 LDA #$00 ;A=0
+C2D7 AE 1E C9              LDX SCOUNT ;X=SCOUNT
+C2DA 9D 27 C9              STA YDIR,X ;YDIR+X=0
+C2DD 9D 16 C9              STA ROTDIR,X
+C2E0 60        THEN15      RTS
+C2E1 DE 00 D0  THEN16      DEC VICREG,X
+C2E4 60                    RTS
+     ;
+     ;MOVE DOWN IF YDIR = 0
+     ;
+C2E5 AE 1E C9  MDOWN       LDX SCOUNT ;X=SCOUNT
+C2E8 BD 27 C9              LDA YDIR,X ;A=YDIR+X
+C2EB D0 21     IF17        BNE THEN17
+C2ED AD 1E C9              LDA SCOUNT
+C2F0 0A                    ASL A ;A=SCOUNT*2
+C2F1 AA                    TAX ;X=A
+C2F2 E8                    INX ;X=X+1
+C2F3 BD 00 D0              LDA VICREG,X ;A=VICREG+X
+C2F6 CD 38 C9              CMP DBOUND
+C2F9 90 14     IF18        BCC THEN18
+C2FB A9 01                 LDA #$01 ;A=1
+C2FD AE 1E C9              LDX SCOUNT ;X=SCOUNT
+C300 9D 27 C9              STA YDIR,X ;YDIR+X=0
+C303 9D 16 C9              STA ROTDIR,X
+C306 AC 04 DD              LDY TIMEA2
+C309 10 03     IF25        BPL THEN25
+C30B 9D 1F C9              STA XDIR,X
+     THEN25 = *
+C30E 60        THEN17      RTS
+C30F FE 00 D0  THEN18      INC VICREG,X
+C312 60                    RTS
+     ;
+     ;ROTATE SPRITE: 1=LEFT, 0=RIGHT
+     ;
+C313 AE 1E C9  ROTSP       LDX SCOUNT ;X=SCOUNT
+C316 BD 16 C9              LDA ROTDIR,X ;A=ROTDIR+X
+C319 F0 23     IF19        BEQ THEN19
+C31B BD F8 5F              LDA SPPTR,X ;A=SPPTR+X
+C31E C9 5C                 CMP #92 ;FIRST SPRITE
+C320 D0 0B     IF20        BNE THEN20
+C322 A9 6F                 LDA #111
+C324 9D F8 5F              STA SPPTR,X
+C327 A9 13                 LDA #19
+C329 9D 2F C9              STA SPCOLOR,X
+C32C 60                    RTS
+C32D DE F8 5F  THEN20      DEC SPPTR,X
+C330 DE 2F C9              DEC SPCOLOR,X
+C333 BD 2F C9              LDA SPCOLOR,X
+C336 AA                    TAX
+C337 BD 00 C9              LDA SPCOL1,X
+C33A 8D 26 D0              STA VICREG+38
+C33D 60                    RTS
+C33E BD F8 5F  THEN19      LDA SPPTR,X
+C341 C9 6F                 CMP #111
+C343 D0 0B     IF21        BNE THEN21
+C345 A9 5C                 LDA #92
+C347 9D F8 5F              STA SPPTR,X
+C34A A9 00                 LDA #$00
+C34C 9D 2F C9              STA SPCOLOR,X
+C34F 60                    RTS
+C350 FE F8 5F  THEN21      INC SPPTR,X
+C353 FE 2F C9              INC SPCOLOR,X
+C356 BD 2F C9              LDA SPCOLOR,X
+C359 AA                    TAX
+C35A BD 00 C9              LDA SPCOL1,X
+C35D 8D 26 D0              STA VICREG+38
+C360 60                    RTS
+     ;
+     ;INCREASE VERTICAL SPRITE BOUNDRIES BY 7 PIXELS
+     ;
+C361 AD 37 C9  INCSPB      LDA UBOUND
+C364 38                    SEC
+C365 E9 07                 SBC #7
+C367 8D 37 C9              STA UBOUND
+C36A AD 38 C9              LDA DBOUND
+C36D 18                    CLC
+C36E 69 07                 ADC #7
+C370 8D 38 C9              STA DBOUND
+C373 60                    RTS
+     ;
+     ;SOUND EFFECT
+     ;
+C374 AD 39 C9  SOUND1      LDA SNDTGL
+C377 D0 22     IF23        BNE THEN23
+C379 A9 00                 LDA #$00
+C37B 8D 05 D4              STA SIDREG+5 ;SET ATTACK/DECAY
+C37E A9 98                 LDA #$98
+C380 8D 06 D4              STA SIDREG+6 ;SET SUSTAIN/RELEASE
+C383 AD 04 DD              LDA TIMEA2 ;PSUEDO RANDOM #
+C386 8D 00 D4              STA SIDREG ;SET LO FREQ
+C389 8D 01 D4              STA SIDREG+1 ;SET HI FREQ
+C38C A9 81                 LDA %10000001
+C38E 8D 04 D4              STA SIDREG+4 ;SET RANDOM NOISE AND GATE BIT
+C391 A9 08                 LDA #$08
+C393 8D 18 D4              STA VOLUME
+C396 A9 01                 LDA #$01
+C398 8D 39 C9              STA SNDTGL ;SET SOUND TOGGLE
+C39B AD 14 C9  THEN23      LDA RTIMER
+C39E C9 01                 CMP #$01
+C3A0 D0 05     IF24        BNE THEN24
+C3A2 A9 80                 LDA %10000000
+C3A4 8D 04 D4              STA SIDREG+4 ;START RELEASE
+C3A7 60        THEN24      RTS
+     ;
+     ;INITILIZE RASTER INTERRUPT
+     ;
+C3A8 78        INITRI      SEI
+C3A9 A9 7F                 LDA %01111111
+C3AB 8D 0D DC              STA ICR1 ;SHUT OFF CIA #1 IRQS
+C3AE A9 01                 LDA %00000001
+C3B0 8D 1A D0              STA VICREG+26 ;ENABLE RASTER IRQ
+C3B3 AD 11 D0              LDA VICREG+17
+C3B6 29 7F                 AND %01111111
+C3B8 8D 11 D0              STA VICREG+17 ;CLEAR RATSER BIT 8
+C3BB A9 31                 LDA #49
+C3BD 8D 12 D0              STA VICREG+18 ;SET LOW RASTER BYTE
+C3C0 A9 D4                 LDA <SETGR2
+C3C2 8D 14 03              STA IRQVEC ;SET IRQ LO
+C3C5 A9 C3                 LDA >SETGR2
+C3C7 8D 15 03              STA IRQVEC+1 ;SET IRQ HI
+C3CA A9 00                 LDA #$00
+C3CC 8D 94 C9              STA XSCRL ;0 X SCROLL REG
+C3CF 8D 96 C9              STA XSDIR ;0 DIR TOGGLE
+C3D2 58                    CLI ;ENABLE IRQ
+C3D3 60                    RTS ;RETURN
+     ;
+     ;RASTER GRAPHIC MODE CHANGE 2
+     ;
+C3D4 AD 11 D0  SETGR2      LDA VICREG+17
+C3D7 29 5F                 AND %01011111
+C3D9 8D 11 D0              STA VICREG+17 ;DISABLE BIT MAP MODE & 0 RASTER 
+BIT 8
+C3DC AD 00 DD              LDA PORTA2
+C3DF 29 FC                 AND %11111100
+C3E1 09 01                 ORA %00000001
+C3E3 8D 00 DD              STA PORTA2 ;VIC BANK 2 ($8000-$BFFF)
+C3E6 A9 02                 LDA %00000010
+C3E8 8D 18 D0              STA VICREG+24 ;SCREEN BLOCK 0 ($8000-$83FF) & C
+HARACTER SET ($8800-$89FF)
+C3EB A9 42                 LDA #66
+C3ED 8D 12 D0              STA VICREG+18 ;SET RASTER LO
+C3F0 A9 06                 LDA <SETGR3
+C3F2 8D 14 03              STA IRQVEC ;SET IRQ LO
+C3F5 A9 C4                 LDA >SETGR3
+C3F7 8D 15 03              STA IRQVEC+1 ;SET IRQ HI
+C3FA AD 19 D0              LDA VICREG+25
+C3FD 8D 19 D0              STA VICREG+25 ;CLEAR LATCH
+C400 68                    PLA ;
+C401 A8                    TAY  ;
+C402 68                    PLA   ;RESTORE REGISTERS
+C403 AA                    TAX  ;
+C404 68                    PLA ;
+C405 40                    RTI ;RETURN FROM INTERRUPT
+     ;
+     ;RASTER GRAPHIC MODE CHANGE 3
+     ;
+C406 AD 00 DD  SETGR3      LDA PORTA2
+C409 29 FC                 AND %11111100
+C40B 09 02                 ORA %00000010
+C40D 8D 00 DD              STA PORTA2 ;VIC BANK 1 ($4000-$7FFF)
+C410 A9 78                 LDA %01111000
+C412 8D 18 D0              STA VICREG+24 ;SCREEN BLOCK 7 ($5C00-$5FFF) & B
+IT MAP BLOCK 1 ($6000-$7FFF)
+C415 AD 11 D0              LDA VICREG+17
+C418 09 20                 ORA %00100000
+C41A 29 7F                 AND %01111111
+C41C 8D 11 D0              STA VICREG+17 ;ENABLE BIT MAP MODE & 0 RASTER B
+IT 8
+C41F A9 4A                 LDA #74
+C421 8D 12 D0              STA VICREG+18 ;SET RASTER LO
+C424 A9 3A                 LDA <SETGR4
+C426 8D 14 03              STA IRQVEC ;SET IRQ LO
+C429 A9 C4                 LDA >SETGR4
+C42B 8D 15 03              STA IRQVEC+1 ;SET IRQ HI
+C42E AD 19 D0              LDA VICREG+25
+C431 8D 19 D0              STA VICREG+25 ;CLEAR LATCH
+C434 68                    PLA ;
+C435 A8                    TAY  ;
+C436 68                    PLA   ;RESTORE REGISTERS
+C437 AA                    TAX  ;
+C438 68                    PLA ;
+C439 40                    RTI ;RETURN FROM INTERRUPT
+     ;
+     ;RASTER GRAPHIC MODE CHANGE 4
+     ;
+C43A AD 16 D0  SETGR4      LDA VICREG+22
+C43D 29 07                 AND %00000111
+C43F 8D 95 C9              STA XSTEMP ;SAVE CURRENT X SCROLL
+C442 AD 16 D0              LDA VICREG+22
+C445 29 F8                 AND %11111000
+C447 0D 94 C9              ORA XSCRL
+C44A 8D 16 D0              STA VICREG+22
+C44D AD 11 D0              LDA VICREG+17
+C450 29 7F                 AND %01111111
+C452 8D 11 D0              STA VICREG+17 ;0 RASTER BIT 8
+C455 A9 84                 LDA #132
+C457 8D 12 D0              STA VICREG+18 ;SET RASTER LO
+C45A A9 70                 LDA <SETGR5
+C45C 8D 14 03              STA IRQVEC ;SET IRQ LO
+C45F A9 C4                 LDA >SETGR5
+C461 8D 15 03              STA IRQVEC+1 ;SET IRQ HI
+C464 AD 19 D0              LDA VICREG+25
+C467 8D 19 D0              STA VICREG+25 ;CLEAR LATCH
+C46A 68                    PLA ;
+C46B A8                    TAY  ;
+C46C 68                    PLA   ;RESTORE REGISTERS
+C46D AA                    TAX  ;
+C46E 68                    PLA ;
+C46F 40                    RTI ;RETURN FROM INTERRUPT
+     ;
+     ;RASTER GRAPHIC MODE CHANGE 5
+     ;
+C470 AD 16 D0  SETGR5      LDA VICREG+22
+C473 29 F8                 AND %11111000
+C475 0D 95 C9              ORA XSTEMP ;RESTORE X SCROLL
+C478 8D 16 D0              STA VICREG+22
+C47B A9 31                 LDA #49
+C47D 8D 12 D0              STA VICREG+18 ;SET RASTER LO
+C480 A9 D4                 LDA <SETGR2
+C482 8D 14 03              STA IRQVEC ;SET IRQ LO
+C485 A9 C3                 LDA >SETGR2
+C487 8D 15 03              STA IRQVEC+1 ;SET IRQ HI
+C48A AD 19 D0              LDA VICREG+25
+C48D 8D 19 D0              STA VICREG+25 ;CLEAR LATCH
+C490 68                    PLA ;
+C491 A8                    TAY  ;
+C492 68                    PLA   ;RESTORE REGISTERS
+C493 AA                    TAX  ;
+C494 68                    PLA ;
+C495 40                    RTI ;RETURN FROM INTERRUPT
+     ;
+     ;INITILIZE TEXT SCREEN
+     ;
+C496 A9 00     INITTS      LDA #$00
+C498 8D 21 D0              STA VICREG+33 ;BLACK SCREEN
+C49B A9 00                 LDA #$00
+C49D 8D 20 D0              STA VICREG+32 ;BLACK BORDER
+C4A0 20 B1 C4              JSR CLRTS; CLEAR TEXT SCREEN
+C4A3 A9 00                 LDA <TXTDAT
+C4A5 85 B0                 STA GETTXT
+C4A7 A9 84                 LDA >TXTDAT
+C4A9 85 B1                 STA GETTXT+1
+C4AB A9 00                 LDA #$00
+C4AD 8D 3A C9              STA TCSEQ
+C4B0 60                    RTS
+     ;
+     ;CLEAR TEXT SCREEN
+     ;
+C4B1 A2 00     CLRTS       LDX #$00
+C4B3 A9 20     REPEAT8     LDA #32
+C4B5 9D 00 80              STA TEXTSC,X
+C4B8 A9 00                 LDA #$00 ;BLACK
+C4BA 9D 00 D8              STA COLORM,X
+C4BD E8                    INX
+C4BE E0 28                 CPX #40
+C4C0 D0 F1     UNTIL8      BNE REPEAT8
+C4C2 A9 20     REPEAT22    LDA #32
+C4C4 9D 00 80              STA TEXTSC,X
+C4C7 A9 00                 LDA #$00 ;BLACK
+C4C9 9D 00 D8              STA COLORM,X
+C4CC E8                    INX
+C4CD E0 50                 CPX #80
+C4CF D0 F1     UNTIL22     BNE REPEAT22
+C4D1 60                    RTS
+     ;
+     ;COLOR TEXT SCREEN
+     ;SET A TO COLOR BEFORE CALLING
+     ;
+C4D2 A2 00     COLTS       LDX #0
+C4D4 9D 00 D8  REPEAT23    STA COLORM,X
+C4D7 E8                    INX
+C4D8 E0 28                 CPX #40
+C4DA D0 F8     UNTIL23     BNE REPEAT23
+C4DC 60                    RTS
+     ;
+     ;SCROLL TEXT LINE
+     ;
+C4DD AD 00 80  SRLTXT      LDA TEXTSC
+C4E0 C9 20                 CMP #32
+C4E2 D0 2C                 BNE THEN26 ;IF A=SPACE THEN
+C4E4 A2 00                 LDX #00
+C4E6 BD 01 80  REPEAT9     LDA TEXTSC+1,X
+C4E9 9D 00 80              STA TEXTSC,X
+C4EC E8                    INX
+C4ED E0 28                 CPX #40
+C4EF D0 F5     UNTIL9      BNE REPEAT9
+C4F1 A0 00                 LDY #$00
+C4F3 B1 B0                 LDA (GETTXT),Y ;GET TEXT POINTER
+C4F5 F0 06     IF27        BEQ THEN28 ;IF A=0 THEN
+C4F7 8D 27 80              STA TEXTSC+39 ;DISPLAY 1 CHAR
+C4FA 20 11 C5              JSR INCSTR ;INCREMENT STRING POINTER
+C4FD AE 3A C9  THEN28      LDX TCSEQ
+C500 E0 2C                 CPX #44 ;LAST COLOR
+C502 D0 02                 BNE THEN41
+C504 A2 00                 LDX #$00 ;SET TO FIRST COLOR
+C506 BD 3B C9  THEN41      LDA LCOL2,X
+C509 E8                    INX
+C50A 8E 3A C9              STX TCSEQ
+C50D 20 D2 C4              JSR COLTS ;TEXT LINE COLOR
+C510 60        THEN26      RTS
+     ;
+     ;INCREMENT START OF STRING POINTER
+     ;
+C511 E6 B0     INCSTR      INC GETTXT ;GETTXT=GETTXT+1
+C513 A5 B0                 LDA GETTXT
+C515 D0 02     IF46        BNE THEN46
+C517 E6 B1                 INC GETTXT+1
+C519 60        THEN46      RTS
+     ;
+     ;SCROLL COLOR ON 'DIGISOUND'
+     ;
+C51A A0 00     COLLIN      LDY #$00 ;0 LINE COUNT
+C51C 8C 9C C9              STY TEMPMB ;0 MAX CHARS
+C51F AD 69 C9              LDA COLSAV
+C522 8D 68 C9              STA COLSEQ ;LINE COLOR SEQUENCE
+C525 AD 9C C9  REPEAT18    LDA TEMPMB
+C528 85 FB                 STA MS5 ;SAVE MAX CHARS
+C52A 18                    CLC
+C52B 69 28                 ADC #40
+C52D 8D 9C C9              STA TEMPMB ;MAX CHARS = MAX CHARS + 40
+C530 AE 68 C9              LDX COLSEQ
+C533 BD 6A C9              LDA LCOL1,X ;GET COLOR
+C536 A6 FB                 LDX MS5 ;GET MAX CHARS
+C538 9D 78 5C  REPEAT19    STA BITCOL+120,X
+C53B E8                    INX ;CHAR COUNT = CHAR COUNT+1
+C53C EC 9C C9              CPX TEMPMB
+C53F D0 F7                 BNE REPEAT19 ;UNTIL CHAR COUNT = MAX CHARS
+C541 EE 68 C9              INC COLSEQ ;GET NEXT LINE COLOR
+C544 AD 68 C9              LDA COLSEQ
+C547 C9 2A                 CMP #42
+C549 D0 05     IF42        BNE THEN42
+C54B A9 00                 LDA #$00
+C54D 8D 68 C9              STA COLSEQ
+C550 C8        THEN42      INY ;LINE COUNTER
+C551 C0 06                 CPY #$06
+C553 D0 D0                 BNE REPEAT18 ;UNTIL LINE COUNT = 6
+C555 EE 68 C9              INC COLSEQ
+C558 AD 68 C9              LDA COLSEQ
+C55B C9 2A                 CMP #42
+C55D D0 05     IF44        BNE THEN44
+C55F A9 00                 LDA #$00
+C561 8D 68 C9              STA COLSEQ
+C564 AE 68 C9  THEN44      LDX COLSEQ
+C567 BD 6A C9              LDA LCOL1,X
+C56A A2 00                 LDX #$00
+C56C 9D 68 5D  REPEAT20    STA BITCOL+360,X
+C56F E8                    INX
+C570 E0 28                 CPX #40
+C572 D0 F8                 BNE REPEAT20
+C574 AE 69 C9              LDX COLSAV
+C577 E8                    INX
+C578 E0 2A                 CPX #42
+C57A D0 02     IF43        BNE THEN43
+C57C A2 00                 LDX #$00
+C57E 8E 69 C9  THEN43      STX COLSAV
+C581 60                    RTS
+     ;
+     ;DISPLAY LOGO SPRITE
+     ;
+C582 A9 00     DISP1       LDA #$00
+C584 8D 97 C9              STA ETIMER ;0 EVENT TIMER
+C587 A9 05                 LDA #$05
+C589 8D 98 C9              STA ETIMER+1 ;0 EVENT TIMER HI
+C58C A9 DD                 LDA #$DD
+C58E 8D 05 D4              STA SIDREG+5 ;SET ATTACK/DECAY
+C591 A9 02                 LDA #$02
+C593 8D 06 D4              STA SIDREG+6 ;SET SUSTAIN/RELEASE
+C596 AD 04 DD              LDA TIMEA2 ;PSUEDO RANDOM #
+C599 8D 00 D4              STA SIDREG ;SET LO FREQ
+C59C 8D 01 D4              STA SIDREG+1 ;SET HI FREQ
+C59F A9 08                 LDA #$08
+C5A1 8D 18 D4              STA VOLUME
+C5A4 A9 21                 LDA %00100001
+C5A6 8D 04 D4              STA SIDREG+4 ;SET RANDOM NOISE AND GATE BIT
+C5A9 AD 0D DD  REPEAT10    LDA ICR2
+C5AC 29 01                 AND %00000001
+C5AE F0 F9                 BEQ REPEAT10
+C5B0 AD 11 D0  REPEAT14    LDA VICREG+17
+C5B3 10 FB                 BPL REPEAT14
+C5B5 AD 12 D0              LDA VICREG+18
+C5B8 8D 25 D0              STA VICREG+37
+C5BB AD 04 DD              LDA TIMEA2
+C5BE 09 AA                 ORA %10101010
+C5C0 8D 00 D4              STA SIDREG ;SET LO FREQ
+C5C3 8D 01 D4              STA SIDREG+1 ;SET HI FREQ
+C5C6 CE 97 C9              DEC ETIMER
+C5C9 D0 DE                 BNE REPEAT10
+C5CB CE 98 C9              DEC ETIMER+1
+C5CE D0 D9     UNTIL10     BNE REPEAT10
+C5D0 A9 06                 LDA #$06
+C5D2 8D 25 D0              STA VICREG+37
+C5D5 A9 20                 LDA %00100000
+C5D7 8D 04 D4              STA SIDREG+4 ;START RELEASE
+C5DA 60                    RTS
+     ;
+     ;EVENT DISPATCH INITILIZE
+     ;
+C5DB A9 00     INITED      LDA #$00
+C5DD 8D 9A C9              STA SEQ
+C5E0 A9 00                 LDA #0
+C5E2 8D 97 C9              STA ETIMER
+C5E5 A9 0A                 LDA #10
+C5E7 8D 98 C9              STA ETIMER+1
+C5EA A9 01                 LDA #1
+C5EC 8D 99 C9              STA ETIMER+2
+C5EF A9 00                 LDA #$00
+C5F1 8D 67 C9              STA LINCNT ;0 LINE COUNT
+C5F4 60                    RTS
+     ;
+     ;EVENT DISPATCH
+     ;
+C5F5 AD 9B C9  EVENT       LDA TICR2 ;TEMP ICR2
+C5F8 29 01                 AND %00000001
+C5FA F0 1B     IF29        BEQ THEN29
+C5FC CE 97 C9              DEC ETIMER
+C5FF AD 97 C9              LDA ETIMER
+C602 D0 13     IF30        BNE THEN29
+C604 CE 98 C9              DEC ETIMER+1
+C607 AD 98 C9              LDA ETIMER+1
+C60A D0 0B     IF31        BNE THEN29
+C60C CE 99 C9              DEC ETIMER+2
+C60F AD 99 C9              LDA ETIMER+2
+C612 D0 03     IF32        BNE THEN29
+C614 20 18 C6              JSR EXEPRT ;EXECUTE PARTS
+C617 60        THEN29      RTS
+     ;
+     ;EXECUTE INDIVIDUAL PARTS
+     ;
+C618 EE 9A C9  EXEPRT      INC SEQ ;SEQ=SEQ+1
+C61B AD 9A C9              LDA SEQ ;A=SEQ
+C61E C9 01                 CMP #1
+C620 D0 06     IF33        BNE THEN33
+C622 20 92 C6              JSR PART1
+C625 4C 75 C6              JMP THEN45
+C628 C9 02     THEN33      CMP #2
+C62A D0 06     IF34        BNE THEN34
+C62C 20 A8 C6              JSR PART2
+C62F 4C 75 C6              JMP THEN45
+C632 C9 03     THEN34      CMP #3
+C634 D0 06     IF35        BNE THEN35
+C636 20 E8 C6              JSR PART3
+C639 4C 75 C6              JMP THEN45
+C63C C9 04     THEN35      CMP #4
+C63E D0 06     IF36        BNE THEN36
+C640 20 28 C7              JSR PART4
+C643 4C 75 C6              JMP THEN45
+C646 C9 05     THEN36      CMP #5
+C648 D0 06     IF37        BNE THEN37
+C64A 20 81 C7              JSR PART5
+C64D 4C 75 C6              JMP THEN45
+C650 C9 06     THEN37      CMP #6
+C652 D0 06     IF38        BNE THEN38
+C654 20 C7 C7              JSR PART6
+C657 4C 75 C6              JMP THEN45
+C65A C9 07     THEN38      CMP #7
+C65C D0 06     IF39        BNE THEN39
+C65E 20 F6 C7              JSR PART7
+C661 4C 75 C6              JMP THEN45
+C664 C9 08     THEN39      CMP #8
+C666 D0 06     IF40        BNE THEN40
+C668 20 25 C8              JSR PART8
+C66B 4C 75 C6              JMP THEN45
+C66E C9 09     THEN40      CMP #9
+C670 D0 03     IF45        BNE THEN45
+C672 20 76 C6              JSR PART9
+C675 60        THEN45      RTS
+     ;
+     ;PLAY PART9 OF DEMO
+     ;
+C676 20 B1 C4  PART9       JSR CLRTS ;CLEAR TEXT SCREEN
+C679 20 11 C5              JSR INCSTR ;START SCROLL
+C67C A9 00                 LDA #0
+C67E 8D 97 C9              STA ETIMER
+C681 A9 03                 LDA #3
+C683 8D 98 C9              STA ETIMER+1
+C686 A9 01                 LDA #1
+C688 8D 99 C9              STA ETIMER+2
+C68B CE 9A C9              DEC SEQ ;RESET SEQ TO KEEP LOOPING HERE
+C68E EE 67 C9              INC LINCNT ;LINCNT=LINCNT+1
+C691 60                    RTS
+     ;
+     ;PLAY PART1 OF DEMO
+     ;
+C692 20 11 C5  PART1       JSR INCSTR ;SCROLL WELCOME
+C695 A9 00                 LDA #0
+C697 8D 97 C9              STA ETIMER
+C69A A9 05                 LDA #5
+C69C 8D 98 C9              STA ETIMER+1
+C69F A9 01                 LDA #1
+C6A1 8D 99 C9              STA ETIMER+2
+C6A4 20 61 C3              JSR INCSPB
+C6A7 60                    RTS
+     ;
+     ;PLAY PART 2 OF DEMO
+     ;
+C6A8 20 B1 C4  PART2       JSR CLRTS ;CLEAR TEXT SCREEN
+C6AB 20 11 C5              JSR INCSTR ;SCROLL TO
+C6AE 20 57 C8              JSR BASOUT
+C6B1 A9 00                 LDA #0
+C6B3 8D 97 C9              STA ETIMER
+C6B6 A9 02                 LDA #2
+C6B8 8D 98 C9              STA ETIMER+1
+C6BB A9 01                 LDA #1
+C6BD 8D 99 C9              STA ETIMER+2
+C6C0 A9 01                 LDA #$01
+C6C2 8D 9C C9              STA TEMPMB ;TEMP MAXREC
+C6C5 A9 00     REPEAT12    LDA #$00
+C6C7 8D 5B C0              STA DOWHILE1+1
+C6CA A9 A0                 LDA #$A0
+C6CC 8D 5C C0              STA DOWHILE1+2
+C6CF AD 9C C9              LDA TEMPMB
+C6D2 85 FA                 STA MAXBLK
+C6D4 20 3A C0              JSR PLAY
+C6D7 20 57 C8              JSR BASOUT
+C6DA EE 9C C9              INC TEMPMB
+C6DD AD 9C C9              LDA TEMPMB
+C6E0 C9 09                 CMP #$09
+C6E2 D0 E1                 BNE REPEAT12
+C6E4 20 61 C3              JSR INCSPB
+C6E7 60                    RTS
+     ;
+     ;PLAY PART 3 OF DEMO
+     ;
+C6E8 20 B1 C4  PART3       JSR CLRTS ;CLEAR TEXT SCREEN
+C6EB 20 11 C5              JSR INCSTR ;DIGISOUND
+C6EE 20 57 C8              JSR BASOUT
+C6F1 A9 00                 LDA #0
+C6F3 8D 97 C9              STA ETIMER
+C6F6 A9 02                 LDA #2
+C6F8 8D 98 C9              STA ETIMER+1
+C6FB A9 01                 LDA #1
+C6FD 8D 99 C9              STA ETIMER+2
+C700 A9 0F                 LDA #$0F
+C702 8D 9C C9              STA TEMPMB
+C705 A9 00     REPEAT16    LDA #$00
+C707 8D 5B C0              STA DOWHILE1+1
+C70A A9 A8                 LDA #$A8
+C70C 8D 5C C0              STA DOWHILE1+2
+C70F A9 03                 LDA #$03
+C711 85 FA                 STA MAXBLK
+C713 AD 9C C9              LDA TEMPMB
+C716 8D 60 C0              STA AMP+1
+C719 20 3A C0              JSR PLAY
+C71C 20 57 C8              JSR BASOUT
+C71F CE 9C C9              DEC TEMPMB
+C722 D0 E1     UNTIL16     BNE REPEAT16
+C724 20 61 C3              JSR INCSPB
+C727 60                    RTS
+     ;
+     ;PLAY PART 4 OF DEMO
+     ;
+C728 20 B1 C4  PART4       JSR CLRTS ;CLEAR TEXT SCREEN
+C72B 20 11 C5              JSR INCSTR ;SCROLL COPYRIGHT
+C72E 20 57 C8              JSR BASOUT
+C731 A9 00                 LDA #0
+C733 8D 97 C9              STA ETIMER
+C736 A9 03                 LDA #3
+C738 8D 98 C9              STA ETIMER+1
+C73B A9 01                 LDA #1
+C73D 8D 99 C9              STA ETIMER+2
+C740 A9 00                 LDA #$00
+C742 8D 5B C0              STA DOWHILE1+1
+C745 A9 AB                 LDA #$AB
+C747 8D 5C C0              STA DOWHILE1+2
+C74A A9 0A                 LDA #$0A
+C74C 85 FA                 STA MAXBLK
+C74E A9 0F                 LDA #$0F
+C750 8D 60 C0              STA AMP+1
+C753 20 3A C0              JSR PLAY
+C756 20 57 C8              JSR BASOUT
+C759 A9 0F                 LDA #$0F
+C75B 8D 9C C9              STA TEMPMB
+C75E A9 00     REPEAT17    LDA #$00
+C760 8D 5B C0              STA DOWHILE1+1
+C763 A9 B3                 LDA #$B3
+C765 8D 5C C0              STA DOWHILE1+2
+C768 A9 02                 LDA #$02
+C76A 85 FA                 STA MAXBLK
+C76C AD 9C C9              LDA TEMPMB
+C76F 8D 60 C0              STA AMP+1
+C772 20 3A C0              JSR PLAY
+C775 20 57 C8              JSR BASOUT
+C778 CE 9C C9              DEC TEMPMB
+C77B D0 E1                 BNE REPEAT17
+C77D 20 61 C3              JSR INCSPB
+C780 60                    RTS
+     ;
+     ;PLAY PART 5 OF DEMO
+     ;
+C781 20 B1 C4  PART5       JSR CLRTS ;CLEAR TEXT SCREEN
+C784 20 11 C5              JSR INCSTR ;SCROLL SLAMMING SAMMY
+C787 20 57 C8              JSR BASOUT
+C78A A9 00                 LDA #0
+C78C 8D 97 C9              STA ETIMER
+C78F A9 04                 LDA #4
+C791 8D 98 C9              STA ETIMER+1
+C794 A9 01                 LDA #1
+C796 8D 99 C9              STA ETIMER+2
+C799 A9 01                 LDA #$01
+C79B 8D 9C C9              STA TEMPMB
+C79E A9 00     REPEAT15    LDA #$00
+C7A0 8D 5B C0              STA DOWHILE1+1
+C7A3 A9 B5                 LDA #$B5
+C7A5 8D 5C C0              STA DOWHILE1+2
+C7A8 AD 9C C9              LDA TEMPMB
+C7AB 85 FA                 STA MAXBLK
+C7AD 18                    CLC
+C7AE 69 04                 ADC #$04
+C7B0 8D 60 C0              STA AMP+1
+C7B3 20 3A C0              JSR PLAY
+C7B6 20 57 C8              JSR BASOUT
+C7B9 EE 9C C9              INC TEMPMB
+C7BC AD 9C C9              LDA TEMPMB
+C7BF C9 0B                 CMP #$0B
+C7C1 D0 DB                 BNE REPEAT15
+C7C3 20 61 C3              JSR INCSPB
+C7C6 60                    RTS
+     ;
+     ;PLAY PART 6 OF DEMO
+     ;
+C7C7 20 B1 C4  PART6       JSR CLRTS ;CLEAR TEXT SCREEN
+C7CA 20 11 C5              JSR INCSTR ;SCROLL YNGWIE
+C7CD A9 00                 LDA #0
+C7CF 8D 97 C9              STA ETIMER
+C7D2 A9 04                 LDA #4
+C7D4 8D 98 C9              STA ETIMER+1
+C7D7 A9 01                 LDA #1
+C7D9 8D 99 C9              STA ETIMER+2
+C7DC A9 00                 LDA #$00
+C7DE 8D 5B C0              STA DOWHILE1+1
+C7E1 A9 04                 LDA #$04
+C7E3 8D 5C C0              STA DOWHILE1+2
+C7E6 A9 32                 LDA #$32
+C7E8 85 FA                 STA MAXBLK
+C7EA A9 0F                 LDA #$0F
+C7EC 8D 60 C0              STA AMP+1
+C7EF 20 3A C0              JSR PLAY
+C7F2 20 61 C3              JSR INCSPB
+C7F5 60                    RTS
+     ;
+     ;PLAY PART 7 OF DEMO
+     ;
+C7F6 20 B1 C4  PART7       JSR CLRTS ;CLEAR TEXT SCREEN
+C7F9 20 11 C5              JSR INCSTR ;SCROLL GOOD BYE
+C7FC A9 00                 LDA #0
+C7FE 8D 97 C9              STA ETIMER
+C801 A9 04                 LDA #4
+C803 8D 98 C9              STA ETIMER+1
+C806 A9 01                 LDA #1
+C808 8D 99 C9              STA ETIMER+2
+C80B A9 00                 LDA #$00
+C80D 8D 5B C0              STA DOWHILE1+1
+C810 A9 36                 LDA #$36
+C812 8D 5C C0              STA DOWHILE1+2
+C815 A9 21                 LDA #$21
+C817 85 FA                 STA MAXBLK
+C819 A9 0F                 LDA #$0F
+C81B 8D 60 C0              STA AMP+1
+C81E 20 3A C0              JSR PLAY
+C821 20 61 C3              JSR INCSPB
+C824 60                    RTS
+     ;
+     ;PLAY PART 8 OF DEMO
+     ;
+C825 20 B1 C4  PART8       JSR CLRTS ;CLEAR TEXT SCREEN
+C828 20 11 C5              JSR INCSTR ;SCROLL TEST
+C82B 20 65 C8              JSR KEROUT
+C82E A9 00                 LDA #0
+C830 8D 97 C9              STA ETIMER
+C833 A9 04                 LDA #4
+C835 8D 98 C9              STA ETIMER+1
+C838 A9 01                 LDA #1
+C83A 8D 99 C9              STA ETIMER+2
+C83D A9 00                 LDA #$00
+C83F 8D 5B C0              STA DOWHILE1+1
+C842 A9 E0                 LDA #$E0
+C844 8D 5C C0              STA DOWHILE1+2
+C847 A9 20                 LDA #$20
+C849 85 FA                 STA MAXBLK
+C84B A9 0F                 LDA #$0F
+C84D 8D 60 C0              STA AMP+1
+C850 20 3A C0              JSR PLAY
+C853 20 61 C3              JSR INCSPB
+C856 60                    RTS
+     ;
+     ;FLIP OUT BASIC ROM
+     ;
+C857 A5 01     BASOUT      LDA R6510
+C859 29 FE                 AND %11111110
+C85B 85 01                 STA R6510
+C85D 60                    RTS
+     ;
+     ;FLIP IN BASIC ROM
+     ;
+C85E A5 01     BASIN       LDA R6510
+C860 09 01                 ORA %00000001
+C862 85 01                 STA R6510
+C864 60                    RTS
+     ;
+     ;FLIP OUT KERNAL ROM
+     ;
+C865 A5 01     KEROUT      LDA R6510
+C867 29 FD                 AND %11111101
+C869 85 01                 STA R6510
+C86B 60                    RTS
+     ;
+     ;FLIP IN KERNAL ROM
+     ;
+C86C A5 01     KERIN       LDA R6510
+C86E 09 02                 ORA %00000010
+C870 85 01                 STA R6510
+C872 60                    RTS
+     ;
+     ;CLEAR SID CHIP
+     ;
+C873 A2 00     CLRSID      LDX #$00
+C875 8A                    TXA
+C876 9D 00 D4  REPEAT13    STA SIDREG,X
+C879 E8                    INX
+C87A E0 1C                 CPX #$1C
+C87C D0 F8     UNTIL13     BNE REPEAT13
+C87E 60                    RTS
+     ;
+     ;VARIABLES AND DATA
+     ;
+     ;
+     ;FILE VARIABLES
+     ;
+     DEVICE :B $08 ;LOAD DEVICE #
+     FNAME :B "MESSAGE.DAT*????" ;8400-87FF
+     :B "OLDTIME.FNT*????" ;8800-89FF
+     :B "DEMO.PAL*???????" ;5C00-5FFF
+     :B "COMMLOGO.MOB*???" ;5700-5BFF
+     :B "DEMO.BMP*???????" ;6000-7FFF
+     :B "WELCOME.SAM*????" ;A000-BFFF
+     :B "GOODBYE.SAM*????" ;E000-FFFF
+     :B "SAMMY.SAM*??????" ;0400-56FF
+     ;
+     ;SPRITE AND GRAPHICS VARIABLES
+     ;
+     SPCOL1 :B #11,#11,#11,#12,#15,#15,#15,#12,#11,#11,#11,#11,#11,#12,#15
+,#15
+     :B #15,#12,#11,#11
+     RTIMER :B $00 ;ROTATION TIMER
+     MTIMER :B $00 ;MOVEMENT TIMER
+     ROTDIR :B $00,$00,$00,$00,$00,$00,$00,$00 ;ROTATION DIRECTIONS
+     SCOUNT :B $00 ;SPRITE COUNTER
+     XDIR :B $00,$00,$00,$00,$00,$00,$00,$00 ;SPRITE X DIRECTIONS
+     YDIR :B $00,$00,$00,$00,$00,$00,$00,$00 ;SPRITE Y DIRECTIONS
+     SPCOLOR :B $00,$00,$00,$00,$00,$00,$00,$00
+     UBOUND :B $00 ;UP BOUNDRY
+     DBOUND :B $00 ;DOWN BOUNDRY
+     SNDTGL :B $01 ;SOUND1 TOGGLE
+     TCSEQ :B $00 ;TEXT COLOR SEQUENCE
+     LCOL2 :B #11,#11,#11,#11,#12,#12,#12,#12,#15,#15,#15,#15,#12,#12,#12,
+#12
+     :B #11,#11,#11,#11
+     :B #12,#12,#12,#12,#15,#15,#15,#15,#12,#12,#12,#12,#11,#11,#11,#11
+     :B #12,#12,#12,#12,#15,#15,#15,#15
+     LINCNT :B $00 ;LINE COUNT
+     COLSEQ :B $00 ;BITMAP LINE COL. SEQUENCE
+     COLSAV :B $00 ;. COL. SEQUENCE
+     LCOL1 :B $30,$30,$30,$30,$30,$30,$E0,$E0,$E0,$E0,$E0,$E0
+     :B $60,$60,$60,$60,$60,$60,$90,$90,$90,$90,$90,$90
+     :B $20,$20,$20,$20,$20,$20,$80,$80,$80,$80,$80,$80
+     :B $A0,$A0,$A0,$A0,$A0,$A0
+     ;
+     ;RASTER VARIABLES
+     ;
+     XSCRL :B $00 ;FINE SCROLL X POSITION
+     XSTEMP :B $00 ;X SCROLL TEMP
+     XSDIR :B $00 ;X SCROLL DIRECTION
+     ;
+     ;EVENT DISPATCH VARIABLES
+     ;
+     ETIMER :B $00,$00,$00 ;EVENT TIMER
+     SEQ :B $00 ;EVENT SEQUENCER
+     TICR2 :B $00 ;TEMP ICR #2
+     ;
+     ;PLAY BACK VARIABLES
+     ;
+     TEMPMB :B $00 ;TEMP MAX PLAY BLOCKS
+     :E
+$C000-C99D

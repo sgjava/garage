@@ -1,0 +1,7 @@
+c -o -x savechrs.c -lc128
+c -o -x loadchrs.c -lc128
+c -o -x ilace.c -lc128
+c -o -x pcxem.c -lc128
+c -o -x zbraw.c -lc128
+c -o -x zbcnv.c -lc128
+c -o -x demo.c -lc128

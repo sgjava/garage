@@ -1,0 +1,121 @@
+     ;***********************
+     ;* 26K BITS PER SECOND *
+     ;* SAMPLER FOR THE     *
+     ;* COVOX VOICE MASTER  *
+     ;* BY STEVE GOLDSMITH  *
+     ;* (C) 1988            *
+     ;***********************
+     ;
+     PORTA1 = $DC00 ;CIA #1 DATA PORT REGISTER A
+     DDRA1 = $DC02 ;CIA #1 DATA DIRECTION REGISTER PORT A
+     VIC2CR = $D011 ; VIC 2 CONTROL REGISTER
+     VOLUME = $D418 ;SID MASTER VOLUME CONTROL
+     SAMPLE = $F7 ;WHERE SOUND IS RECORDED TO OR PLAYED FROM
+     FBYTE = $F9 ;FREQ BYTE
+     MAXREC = $FA ;MAX # OF BLOCKS YOU CAN RECORD
+     MS5 = $FB ;5 MICRO SEC DELAY       NUMBER
+     BITCNT = $FC ;BIT COUNT
+     ;
+     * = $C000 ;START OF PROGRAM
+     ;
+C000 A9 00                 LDA #$00 ;RECORD SOUND
+C002 85 F7                 STA SAMPLE
+C004 A9 08                 LDA #$08
+C006 85 F8                 STA SAMPLE+1 ;SAMPLE STARTS AT $0800
+C008 A9 80                 LDA #$80 ;RECORD $80 BLOCKS
+C00A 85 FA                 STA MAXREC
+C00C 20 22 C0              JSR RECORD
+C00F 60                    RTS
+C010 A9 00                 LDA #$00 ;PLAY SOUND THROUGH SID
+C012 8D 8A C0              STA LOOP9+1
+C015 A9 08                 LDA #$08
+C017 8D 8B C0              STA LOOP9+2 ;SAMPLE STARTS AT $0800
+C01A A9 80                 LDA #$80
+C01C 85 FA                 STA MAXREC ;PLAY $80 BLOCKS
+C01E 20 78 C0              JSR PLAY
+C021 60                    RTS
+     ;
+     ;RECORD SOUND FROM DIGITIZER
+     ;
+C022 78        RECORD      SEI ;DISABLE IRQ INTERRUPT
+C023 A9 88                 LDA %10001000
+C025 8D 02 DC              STA DDRA1 ;SET BITS 3&7 TO OUTPUTS AND THE REST TO INPUTS
+C028 A9 00                 LDA #$00
+C02A AA                    TAX ;INITILIZE FREQ BYTE
+C02B A8                    TAY ;INITILIZE BYTE COUNTER
+C02C 8D 00 DC              STA PORTA1 ;INITILIZE DIGITIZER
+C02F AD 00 DC  LOOP1       LDA PORTA1
+C032 29 10                 AND %00010000 ;WAIT FOR AMPLE VOLUME TO START RECORDING
+C034 D0 F9                 BNE LOOP1
+C036 AD 11 D0              LDA VIC2CR
+C039 29 EF                 AND %11101111 ;BLANK SCREEN
+C03B 8D 11 D0              STA VIC2CR
+C03E A9 08                 LDA #$08
+C040 85 FC                 STA BITCNT
+C042 C6 FB     LOOP4       DEC MS5 ;- 7 MICRO SEC DELAY
+C044 EA                    NOP ;-
+C045 86 F9     LOOP6       STX FBYTE ;0 FREQ BYTE
+C047 A6 FC                 LDX BITCNT ;# OF BITS TO COUNT
+C049 AD 00 DC  LOOP3       LDA PORTA1 ;READ DATA PORT
+C04C 29 01                 AND #$01 ;GET FREQ BIT
+C04E 05 F9                 ORA FBYTE ;ADD IT TO FREQ BYTE
+C050 CA                    DEX ;COUNT DOWN # OF BITS LEFT
+C051 F0 0D                 BEQ LOOP2
+C053 0A                    ASL A ;MAKE ROOM FOR NEXT FREQ BIT
+C054 85 F9                 STA FBYTE
+C056 C6 FB                 DEC MS5 ;-
+C058 C6 FB                 DEC MS5 ; -
+C05A C6 FB                 DEC MS5 ; - 17 MICRO SEC DELAY
+C05C EA                    NOP ;-
+C05D 4C 49 C0              JMP LOOP3
+C060 91 F7     LOOP2       STA (SAMPLE),Y
+C062 C8                    INY ;SEE IF AT END OF MEM PAGE
+C063 D0 DD                 BNE LOOP4
+C065 E6 F8                 INC SAMPLE+1 ;SET UP FOR NEXT PAGE
+C067 10 DC                 BPL LOOP6
+C069 AD 11 D0              LDA VIC2CR
+C06C 09 10                 ORA %00010000 ;TURN SCREEN ON
+C06E 8D 11 D0              STA VIC2CR
+C071 A9 FF                 LDA #$FF
+C073 8D 02 DC              STA DDRA1 ;RESTORE TO KEYBOARD OUTPUT
+C076 58                    CLI ;RESTORE IRQ INTERRUPT
+C077 60                    RTS
+     ;
+     ;PLAY SOUND FROM MEMORY
+     ;
+C078 78        PLAY        SEI ;DISABLE IRQ INTERRUPT
+C079 AD 11 D0              LDA VIC2CR
+C07C 29 EF                 AND %11101111 ;BLANK SCREEN
+C07E 8D 11 D0              STA VIC2CR
+C081 A2 00                 LDX #$00 ;BYTE COUNTER
+C083 EA        LOOP7       NOP ;-
+C084 EA                    NOP ; -
+C085 EA                    NOP ; - 8 MICRO SEC TIME DELAY
+C086 EA                    NOP ;-
+C087 A0 08     LOOP8       LDY #$08 ;BIT COUNTER
+C089 3E FF FF  LOOP9       ROL $FFFF,X ;THIS HAS A SELF MODIFING ADDRESS
+C08C 90 05                 BCC LOOP13
+C08E A9 0F                 LDA #$0F
+C090 4C 96 C0              JMP LOOP10
+C093 EA        LOOP13      NOP ;2 MICRO SEC DELAY
+C094 A9 00                 LDA #$00
+C096 8D 18 D4  LOOP10      STA VOLUME
+C099 88                    DEY
+C09A F0 09                 BEQ LOOP11
+C09C C6 FB                 DEC MS5 ;-
+C09E EA                    NOP ; -
+C09F EA                    NOP ;  - 13 MICRO SEC DELAY
+C0A0 EA                    NOP ; -
+C0A1 EA                    NOP ;-
+C0A2 4C 89 C0              JMP LOOP9
+C0A5 E8        LOOP11      INX
+C0A6 D0 DB                 BNE LOOP7
+C0A8 EE 8B C0              INC LOOP9+2
+C0AB 10 DA                 BPL LOOP8
+C0AD AD 11 D0              LDA VIC2CR
+C0B0 09 10                 ORA %00010000 ;TURN SCREEN ON
+C0B2 8D 11 D0              STA VIC2CR
+C0B5 58                    CLI ;RESTORE IRQ INTERRUPT
+C0B6 60                    RTS
+     :E
+$C000-C0B7
