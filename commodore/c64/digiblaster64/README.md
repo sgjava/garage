@@ -5,7 +5,7 @@
 All of my digital sound worked started on the C64. This project includes the original variable rate code plus dedicated 22 and 26 KHz routines! If you have a Covox Voice Master then you can record as well. As far as I know this is the highest sample rate for the C64. Pretty impressive for a 1 MHz CPU! The play routines work with any 1 bit PCM encoded audio data.
 
 This demo shows off digital sound on the C64. Here's how to run the demo:
-* Download [d64](https://github.com/sgjava/garage/raw/master/commodore/c64/digiblaster64/digiblaster.d64.zip) and run in VICE or transfer to 1541 floppy.
+* Download [d64](https://github.com/sgjava/garage/raw/master/commodore/c64/digiblaster64/digiblaster64.d64.zip) and run in VICE or transfer to 1541 floppy.
 * `load "db64.bas",8`
 * `run`
     * Disk drive device number: `8`
