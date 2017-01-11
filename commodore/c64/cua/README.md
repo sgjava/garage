@@ -2,7 +2,7 @@
 
 ![Commie UFO Attack](images/cua1.png) ![Commie UFO Attack](images/cua2.png)
 
-Ah yes, [Tesla's Modern Day Cowboy](https://www.youtube.com/watch?v=avAvkdYa3qM) + the Cold War + my first C64 100% Assembler game can mean only one thing, Commie UFO Attack! Commie UFO Attack is a shoot'em up I wrote back in 1986. The objective is kill or be killed. A new tank is awarded at each new level completed. The UFOs and bombs are worth more points on each level and the overall speed of the game increases.  
+Ah yes, [Tesla's Modern Day Cowboy](https://www.youtube.com/watch?v=avAvkdYa3qM) was on the radio + the Cold War + my first C64 100% Assembler game can mean only one thing, Commie UFO Attack! Commie UFO Attack is a shoot'em up I wrote back in 1986. The objective is kill or be killed. A new tank is awarded at each new level completed. The UFOs and bombs are worth more points on each level and the overall speed of the game increases.  
 
 Tank versus UFO was one of the first games I typed in on the VIC 20, so my thinking was kick it up a notch with hardware sprites, a ground scroller and two UFOs dropping bombs. The SID was used of course for sound. I never tested it past a certain level, so it will speed up pretty fast maybe even beyond control. The game play is a lot more interesting than the VIC 20 original :) I wrote this using the Commodore Macro Assembler Development System. To run game:
 
