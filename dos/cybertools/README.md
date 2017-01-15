@@ -10,6 +10,19 @@ Turbo Vision (tm) is a great object-oriented framework for building DOS applicat
 
 CyberFont (tm) provides fonts, graphics, PCX images, sprites, bitmap animation and DAC palettes. CyberFont is simply the fastest and easiest to use Turbo Vision graphics enhancement around. Now with new Windows (tm) look for CyberFont apps!
 
+### CyberAnimation
+
+ ![Cyani](images/cyani.png)
+
+CyberAnimation is a fast 256 color animation player, creator and PCX importer/exporter. Animation format faster and smaller than FLI format! Great for multimedia or game applications.
+
+### CyberBase
+
+![Cybase](images/cybase.png)
+
+CyberBase for Paradox Engine 3.x includes a new generic table editor window, generic table and index create, memo editor,
+cut and paste fields, easy engine configuration, automatic locks and validation. Windows and DOS based network sharing also supported.
+
 ### FreeBSD License
 Copyright (c) Steven P. Goldsmith
 
