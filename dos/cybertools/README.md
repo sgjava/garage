@@ -1,3 +1,12 @@
+<head>
+<meta http-equiv="Content-Type"  content="text/html charset=IBM437" />
+</head>
+
+ÄObjects
+ ÃÄÄRoot
+ ³  ÃÄÄAbstractPort
+
+
 #Turbo Vision CyberTools                                                
 
 Turbo Vision (tm) is a great object-oriented framework for building DOS applications. Unfortunately, fonts, graphics, 256 color animation, ANSI terminals, generic database browsers and other 'drop-in' tools are not included. You could spend a small fortune on commercial or Shareware libraries just to find out you bought a disjointed set of TV gizmos and gadgets in beta testing. Your DOS Real and DPMI applications need a competitive edge to be successful. Turbo Vision CyberTools gives you that edge by creating professional applications with a flexible set of tools. Powerful tools are important, but applications that show you how to use the library are equally important. All too often you get a 'powerful' commercial library with 100 line demo programs that barely scratch the surface (or gasp, have error handling). With CyberTools you get full blown applications and not empty skeleton code.
@@ -52,12 +61,6 @@ Using Borland Pascal under dosemu is going to be the most efficient way to work 
 * Add c:\bp\bin to path in ~/.dosemu/drive_c/autoexec.bat
 * `dosemu`
 * `bp`
-
-<meta http-equiv="Content-Type"  content="text/html charset=IBM437" />
-
-ÄObjects
- ÃÄÄRoot
- ³  ÃÄÄAbstractPort
 
 ### FreeBSD License
 Copyright (c) Steven P. Goldsmith
