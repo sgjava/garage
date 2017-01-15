@@ -51,8 +51,7 @@ CyberFont takes advantage of the VGA's ability to redefine character sets, displ
 ####Accessing font memory
 
 Read/write access to font memory is provided by AccessFontMem in the VGA.PAS unit. AccessFontMem switches in bit plane 2 which is addressed at A000:0000.  During font memory access you must not access screen memory at B800:0000 or the display will freeze.  This is a limitation of the VGA's memory addressing scheme and not CyberFont. Use TV's HideMouse to prevent the mouse cursor from writing to the screen. Each character takes up 32 bytes in the table regardless of actual size and starts with the first row of 8 pixels defining the character. To find the first byte of any character use A000:???? + character code * 32.  The ???? represents the character table offset in memory. Each byte makes up a row of pixels with 1 bits being foreground color and 0 bit being background color.  AccessScreenMem switches the VGA back to access screen memory with ASCII codes in bit plane 0 and attributes in bit plane 1.
-```
-         Byte
+```         Byte
 
 ........  0
 ........  1
@@ -70,8 +69,7 @@ Read/write access to font memory is provided by AccessFontMem in the VGA.PAS uni
 ........ 13
 ........ 14
 ........ 15
-         16-31 unused for 8 X 16 fonts
-```
+         16-31 unused for 8 X 16 fonts```
 
 Sample 8 X 16 letter 'A' is formed by setting bits for foreground color and clearing bits for background color.  Notice bytes 16 - 31 are unused.
 
