@@ -23,6 +23,13 @@ CyberAnimation is a fast 256 color animation player, creator and PCX importer/ex
 CyberBase for Paradox Engine 3.x includes a new generic table editor window, generic table and index create, memo editor,
 cut and paste fields, easy engine configuration, automatic locks and validation. Windows and DOS based network sharing also supported.
 
+### CyberTerm
+
+![Cyterm](images/cyterm.png)
+
+CyberTerm for Async Professional 2.x is a professional multi-session async communications application with CyberScript
+(tm) script language, IDE and supporting tools.  If you were disappointed with other Turbo Vision terminals then CyberTerm is for you!
+
 ### FreeBSD License
 Copyright (c) Steven P. Goldsmith
 
