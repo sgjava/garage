@@ -31,8 +31,8 @@ Using Borland Pascal under dosemu is going to be the most efficient way to work 
 * Low level access to the VGA's CRT, attribute, graphics and sequencer controllers is provided for VGA hackers who like to
 tinker.  All assembler code is in BASM (Built in Assembler), so no external assembly is needed. BIOS routines are also included for the highest level of compatibility.
 * Fast graphics primitives included for pixels, lines and ellipses. Do graphic pie charts, bar graphs, line graphs, etc.
-* Load, modify and save fonts.  Allows unlimited selection of fonts for text mode. Create graphic radio buttons, check boxes and other graphic controls like Nortons (tm) and Central point (tm) DOS products use.
  ![Cygraph](images/cygraph.png)
+* Load, modify and save fonts.  Allows unlimited selection of fonts for text mode. Create graphic radio buttons, check boxes and other graphic controls like Nortons (tm) and Central point (tm) DOS products use.
 * Load, modify, save and view .PCX images in text mode! Use your favorite paint program or CyberEdit to edit fonts.
 * 640 X 400 pixel resolution in text mode to eliminate gaps between characters. This allows uniform backgrounds, sprite animation, bit maps and graphics not possible in standard text mode.
  ![Cygame](images/cygame.png)
