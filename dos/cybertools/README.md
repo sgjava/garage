@@ -4,9 +4,9 @@ Turbo Vision (tm) is a great object-oriented framework for building DOS applicat
 
 ### CyberFont
 
- ![CIA](images/cyedit.png)
- ![CIA](images/cygraph.png)
- ![CIA](images/cygame.png)
+ ![Cyedit](images/cyedit.png)
+ ![Cygraph](images/cygraph.png)
+ ![Cygame](images/cygame.png)
 
 CyberFont (tm) provides fonts, graphics, PCX images, sprites, bitmap animation and DAC palettes. CyberFont is simply the fastest and easiest to use Turbo Vision graphics enhancement around. Now with new Windows (tm) look for CyberFont apps!
 
