@@ -13,7 +13,7 @@ CyberTools was used all over the world in everything from embedded systems to fo
 * Turbo Power Async Professional 2.x for CyberTerm app
 * Working knowledge of Pascal, OOP and Turbo Vision
 
-### Using Borland Pascal under dosemu
+###Using Borland Pascal under dosemu
 
 Using Borland Pascal under dosemu is going to be the most efficient way to work on code. I'm providing you my development environment from the 90s since it was already configured and has all the required tools. I've updated it to work on fast CPUs (fixed runtime 200 errors), but there could be other issues. It looks like everything is Y2K compliant including Paradox Engine! See application source for IDE paths.  Help files (??HELP.TXT) need to be compiled with Turbo Vision Help Compiler 1.1 (\BP\EXAMPLES\DOS\TVDEMO\TVHC.PAS) that comes with TVDEMO.
 * Install dosemu `sudo apt-get install dosemu`
@@ -44,96 +44,36 @@ tinker.  All assembler code is in BASM (Built in Assembler), so no external asse
 * New CYBERAPI shows you an example of overlaying VGA primitives in a DLL.
 * CyberFont (tm) provides fonts, graphics, PCX images, sprites, bitmap animation and DAC palettes. CyberFont is simply the fastest and easiest to use Turbo Vision graphics enhancement around. Now with new Windows (tm) look for CyberFont apps!
 
-###CyberAnimation
-
- ![Cyani](images/cyani.png)
-
-CyberAnimation is a fast 256 color animation player, creator and PCX importer/exporter. Animation format faster and smaller than FLI format! Great for multimedia or game applications.
-
-###CyberBase
-
-![Cybase](images/cybase.png)
-
-CyberBase for Paradox Engine 3.x includes a new generic table editor window, generic table and index create, memo editor,
-cut and paste fields, easy engine configuration, automatic locks and validation. Windows and DOS based network sharing also supported.
-
-###CyberTerm
-
-![Cyterm](images/cyterm.png)
-
-CyberTerm for Async Professional 2.x is a professional multi-session async communications application with CyberScript
-(tm) script language, IDE and supporting tools.  If you were disappointed with other Turbo Vision terminals then CyberTerm is for you!
-
-### Critical error handler
-
-I have installed a new critical error handler in all apps.  All apps will now pop up a message box with the error message and allow idle processing to continue.  This is a must for CyberTerm which can have multiple communication processes running at the same time.
-
-CyberFont apps use page flipping for animation. If the error pops up when the screen is not on page 0 then you will not see the standard message line.  All that it takes to use the CyberTools error handler is the following in your main program:
-
-```
-{
-Main app.
-}
-
-var
-
-  MyApp : TSomeApp;
-
-begin
-  MyApp.Init;
-  SysErrorFunc := AppSystemError; { <== add this for new handler}
-  MyApp.Run;
-  MyApp.Done
-end.
-```
-
-The issue of being in a non-reentrant state when the handler is called has been raised. I have not had any problems accessing empty floppy drives, locked files on a net work, printer turned off, etc. You can remove my SysErrorFunc if you wish to use the default handler in DRIVERS.PAS.  If you do find a way to crash it let me know! The only way I know would be in a TSR or ISR, but who is going to use TV for a TSR?
-
-###How does CyberFont?
+####How does CyberFont work?
 
 CyberFont takes advantage of the VGA's ability to redefine character sets, display 512 characters at the same time and display 640 pixels per line in text mode. The VGA BIOS can manipulate fonts, but is limited by slow speed, screen flicker, 720 pixels per line and write only font memory.
 
-###Accessing font memory
+####Accessing font memory
 
-Read/write access to font memory is provided by AccessFontMem in
-the VGA.PAS unit.  AccessFontMem switches in bit plane 2 which is
-addressed at A000:0000.  During font memory access you must not
-access screen memory at B800:0000 or the display will freeze.  This
-is a limitation of the VGA's memory addressing scheme and not
-CyberFont.  Use TV's HideMouse to prevent the mouse cursor from
-writing to the screen.  Each character takes up 32 bytes in the
-table regardless of actual size and starts with the first row of 8
-pixels defining the character.  To find the first byte of any
-character use A000:???? + character code * 32.  The ???? represents
-the character table offset in memory.  Each byte makes up a row of
-pixels with 1 bits being foreground color and 0 bit being
-background color.  AccessScreenMem switches the VGA back to
-access screen memory with ASCII codes in bit plane 0 and attributes
-in bit plane 1.
-
+Read/write access to font memory is provided by AccessFontMem in the VGA.PAS unit. AccessFontMem switches in bit plane 2 which is addressed at A000:0000.  During font memory access you must not access screen memory at B800:0000 or the display will freeze.  This is a limitation of the VGA's memory addressing scheme and not CyberFont. Use TV's HideMouse to prevent the mouse cursor from writing to the screen. Each character takes up 32 bytes in the table regardless of actual size and starts with the first row of 8 pixels defining the character. To find the first byte of any character use A000:???? + character code * 32.  The ???? represents the character table offset in memory. Each byte makes up a row of pixels with 1 bits being foreground color and 0 bit being background color.  AccessScreenMem switches the VGA back to access screen memory with ASCII codes in bit plane 0 and attributes in bit plane 1.
+```
          Byte
 
-ùùùùùùùù  0
-ùùùùùùùù  1
-ùùù²ùùùù  2
-ùù²²²ùùù  3
-ù²²ù²²ùù  4
-²²ùùù²²ù  5
-²²ùùù²²ù  6
-²²²²²²²ù  7
-²²ùùù²²ù  8
-²²ùùù²²ù  9
-²²ùùù²²ù 10
-²²ùùù²²ù 11
-ùùùùùùùù 12
-ùùùùùùùù 13
-ùùùùùùùù 14
-ùùùùùùùù 15
+........  0
+........  1
+...█....  2
+..███...  3
+.██.██..  4
+██...██.  5
+██...██.  6
+███████.  7
+██...██.  8
+██...██.  9
+██...██. 10
+██...██. 11
+........ 12
+........ 13
+........ 14
+........ 15
          16-31 unused for 8 X 16 fonts
+```
 
-Sample 8 X 16 letter 'A' is formed by setting bits for foreground
-color and clearing bits for background color.  Notice bytes 16 - 31
-are unused.
+Sample 8 X 16 letter 'A' is formed by setting bits for foreground color and clearing bits for background color.  Notice bytes 16 - 31 are unused.
 
          Table        Offset
  ÚÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ¿
@@ -152,7 +92,7 @@ are unused.
  ³ Character table 4 ³ 2000
  ÃÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄŽ
  ³ Character table 0 ³ 0000
- ÀÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÙ
+ ÀÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ.
 Character table locations at segment A000 while accessing bit plane
 2.
 
@@ -218,22 +158,22 @@ For example, you can create a bomb like the one in CyberGame with
 four characters:
 
    1        2        3        4
-ù²²²²²²ù ùùùùùùùù ùùùùùùùù ùùùùùùùù
-ùù²²²²ùù ùùùùùùùù ùùùùùùùù ùùùùùùùù
-ùù²²²²ùù ùùùùùùùù ùùùùùùùù ùùùùùùùù
-ùùù²²ùùù ùùùùùùùù ùùùùùùùù ùùùùùùùù
-ùùùùùùùù ù²²²²²²ù ùùùùùùùù ùùùùùùùù
-ùùùùùùùù ùù²²²²ùù ùùùùùùùù ùùùùùùùù
-ùùùùùùùù ùù²²²²ùù ùùùùùùùù ùùùùùùùù
-ùùùùùùùù ùùù²²ùùù ùùùùùùùù ùùùùùùùù
-ùùùùùùùù ùùùùùùùù ù²²²²²²ù ùùùùùùùù
-ùùùùùùùù ùùùùùùùù ùù²²²²ùù ùùùùùùùù
-ùùùùùùùù ùùùùùùùù ùù²²²²ùù ùùùùùùùù
-ùùùùùùùù ùùùùùùùù ùùù²²ùùù ùùùùùùùù
-ùùùùùùùù ùùùùùùùù ùùùùùùùù ù²²²²²²ù
-ùùùùùùùù ùùùùùùùù ùùùùùùùù ùù²²²²ùù
-ùùùùùùùù ùùùùùùùù ùùùùùùùù ùù²²²²ùù
-ùùùùùùùù ùùùùùùùù ùùùùùùùù ùùù²²ùùù
+.██████. ........ ........ ........
+..████.. ........ ........ ........
+..████.. ........ ........ ........
+...██... ........ ........ ........
+........ .██████. ........ ........
+........ ..████.. ........ ........
+........ ..████.. ........ ........
+........ ...██... ........ ........
+........ ........ .██████. ........
+........ ........ ..████.. ........
+........ ........ ..████.. ........
+........ ........ ...██... ........
+........ ........ ........ .██████.
+........ ........ ........ ..████..
+........ ........ ........ ..████..
+........ ........ ........ ...██...
 
 You display characters one at a time in the same screen location.
 When the 4th frame is finished being displayed you move one
@@ -264,6 +204,52 @@ sprites, bit map animation, PC speaker sound and custom game
 controls.  Turn page mode on in Options|Screen if the game
 animation runs too fast on your machine.  Uses custom configuration
 file to save control settings along with standard app data.
+
+###CyberAnimation
+
+ ![Cyani](images/cyani.png)
+
+CyberAnimation is a fast 256 color animation player, creator and PCX importer/exporter. Animation format faster and smaller than FLI format! Great for multimedia or game applications.
+
+###CyberBase
+
+![Cybase](images/cybase.png)
+
+CyberBase for Paradox Engine 3.x includes a new generic table editor window, generic table and index create, memo editor,
+cut and paste fields, easy engine configuration, automatic locks and validation. Windows and DOS based network sharing also supported.
+
+###CyberTerm
+
+![Cyterm](images/cyterm.png)
+
+CyberTerm for Async Professional 2.x is a professional multi-session async communications application with CyberScript
+(tm) script language, IDE and supporting tools.  If you were disappointed with other Turbo Vision terminals then CyberTerm is for you!
+
+### Critical error handler
+
+I have installed a new critical error handler in all apps.  All apps will now pop up a message box with the error message and allow idle processing to continue.  This is a must for CyberTerm which can have multiple communication processes running at the same time.
+
+CyberFont apps use page flipping for animation. If the error pops up when the screen is not on page 0 then you will not see the standard message line.  All that it takes to use the CyberTools error handler is the following in your main program:
+
+```
+{
+Main app.
+}
+
+var
+
+  MyApp : TSomeApp;
+
+begin
+  MyApp.Init;
+  SysErrorFunc := AppSystemError; { <== add this for new handler}
+  MyApp.Run;
+  MyApp.Done
+end.
+```
+
+The issue of being in a non-reentrant state when the handler is called has been raised. I have not had any problems accessing empty floppy drives, locked files on a net work, printer turned off, etc. You can remove my SysErrorFunc if you wish to use the default handler in DRIVERS.PAS.  If you do find a way to crash it let me know! The only way I know would be in a TSR or ISR, but who is going to use TV for a TSR?
+
 
 
 CYBERANIMATE FEATURES
@@ -572,7 +558,7 @@ character.  Numeric constants can also be used:
              ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 ÚÄÄÄÄÄÄÄÄÄÄÄÄÄÄ¿ÚÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ¿ÚÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ¿
 ³COMMAND       ³³PARAM TYPE      ³³VAR TYPE       ³
-ÀÄÄÄÄÄÄÄÄÄÄÄÄÄÄÙÀÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÙÀÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÙ
+ÀÄÄÄÄÄÄÄÄÄÄÄÄÄÄ.ÀÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ.ÀÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ.
 ÚÄÄÄÄÄÄÄÄÄÄÄÄÄÄ¿ÚÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ¿ÚÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ¿
 ³WAITFOR       ³³constant/var    ³³all            ³
 ³SEND          ³³constant/var    ³³all            ³
@@ -608,7 +594,7 @@ character.  Numeric constants can also be used:
 ³LOGON         ³³                ³³               ³
 ³LOGOFF        ³³                ³³               ³
 ³END           ³³                ³³               ³
-ÀÄÄÄÄÄÄÄÄÄÄÄÄÄÄÙÀÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÙÀÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÙ
+ÀÄÄÄÄÄÄÄÄÄÄÄÄÄÄ.ÀÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ.ÀÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ.
 
 HOW DOES CYBERTERM WORK?
 
