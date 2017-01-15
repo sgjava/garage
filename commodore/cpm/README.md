@@ -2,8 +2,6 @@
 
 I lot of the code I developed for the C128 was specifically for CP/M 80 column mode. This was more interesting to me than what native mode had to offer. I could use high level languages like Pascal and C and easily integrate Z80 Assembler or in line machine code to speed things up when needed. The Turbo Pascal editor was excellent for its time and offered an easy way to edit text files.
 
-You may see some of my stuff floating around the Internet from my SG Tools and SG C Tools libraries for C128 CP/M. I even found a [You tube video](https://www.youtube.com/watch?v=z2yxf9bZxEo) of one of my libraries :) This repo will be the definitive depository for my CP/M work.
-
 Categories
 * [SG C Tools](https://github.com/sgjava/garage/tree/master/commodore/cpm/sgctools) - C API for C128 in CPM with low level access to VDC, CIA and SID, fast high resolution graphics, digitized sound player, etc.
 * [Blue Bastards from Outer Space](https://github.com/sgjava/garage/tree/master/commodore/cpm/bbfos) - Graphic game for C128 CP/M that utilizes digitized guitar chords to compose a intro song, voice for game actions and intro. This was written in Turbo Pascal 3.01 using SG C Tools for Pascal.
@@ -17,8 +15,7 @@ Character definitions 2000h
 ```
 * This includes restoring character definitions if you use memory at 2000h for bit maps, etc. Setting the VDC to 64K mode wipes out memory used in 16K mode, so be sure to save the character definitions to a memory buffer or file before using 64K mode. The VDC remains in 64K mode until you do a cold boot or warm boot with the C128's reset button.
 
-* Most of the VDC functions do not check parameters for range violations. Range checking should be performed at the application
-level. There are times when you may want to write to a off screen memory location. For this reason there is no need to waste time and code doing range checks. Just be aware of the implications. A renegade program may accidentally wipe out character definitions or other important memory regions forcing you to reboot. Basically, just return to CP/M the way it was before your program ran. See DEMO.C for a complete example of setting various VDC modes and exiting back to CP/M correctly.
+* Most of the VDC functions do not check parameters for range violations. Range checking should be performed at the application level. There are times when you may want to write to a off screen memory location. For this reason there is no need to waste time and code doing range checks. Just be aware of the implications. A renegade program may accidentally wipe out character definitions or other important memory regions forcing you to reboot. Basically, just return to CP/M the way it was before your program ran. See DEMO.C for a complete example of setting various VDC modes and exiting back to CP/M correctly.
 
 * CP/M relies on the CIAs for communication to the outside world just like in native 64/128 modes. With this in mind it is best not to change certain registers. I have found it safe to use CIA #2's TOD clock, timers A and B and disable all interrupt sources. You can also safely read the keyboard and joy sticks via CIA #1 if you disable interrupts. My low level key scan function reads all key positions into an array of 11 bytes. See page 642 of the [Commodore 128 Programmer's Reference](http://www.pagetable.com/docs/Commodore%20128%20Programmer's%20Reference%20Guide.pdf) for the key positions in the matrix. You can tell joy stick signals from a key short because the joy stick shorts a whole row in the matrix instead of one bit like a key press. See page 32 of the [1351 Mouse User's manual](http://www.commodore.ca/manuals/funet/cbm/manuals/1351-mouse.txt) for more info.
 

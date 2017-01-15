@@ -15,6 +15,8 @@ As part of my garage cleaning project I sold my C128D, 1581 and 1571 to a lady w
 
 I'm going through and making sure everything compiles and runs, so you will get a fully working development environment for the various projects. All the compilers, etc. have been released to the public domain as far as I can tell. You will need the original hardware or an emulator to compile and execute the code. As I have time I'll add and document more projects.
 
+You may see some of my stuff floating around the Internet. I even found a [You tube video](https://www.youtube.com/watch?v=z2yxf9bZxEo) of one of my CP/M libraries :) This repo will be the definitive depository for my legacy work.
+
 ### FreeBSD License
 Copyright (c) Steven P. Goldsmith
 
