@@ -23,6 +23,137 @@ Using Borland Pascal under dosemu is going to be the most efficient way to work 
 * `dosemu`
 * `bp`
 
+###CyberTools object graph
+
+CyberTools takes advantage of OOP programming techniques to create reusable modular code.  Take some time and study the tree to give you an overview of the CyberTools object hierarchy. This was the 2.5 graph. I've added stuff in the unreleased 2.6 :)
+
+─Objects
+ ├──Root
+ │  ├──AbstractPort
+ │  │  └──UartPort
+ │  │     └──ctUartPort
+ │  └──AbstractProtocol
+ │     ├──AsciiProtocol
+ │     │  └──ctAsciiProtocol
+ │     ├──KermitProtocol
+ │     │  └──ctKermitProtocol
+ │     ├──XmodemProtocol
+ │     │  ├──ctXmodemProtocol
+ │     │  └──YmodemProtocol
+ │     │     └──ctYmodemProtocol
+ │     └──ZmodemProtocol
+ │        └──ctZmodemProtocol
+ └──TObject
+    ├──TAnsiEmu
+    ├──TChrGenFile
+    ├──TCollection
+    │  └──TSortedCollection
+    │     └──TPhoneCollection
+    ├──TLabelNode
+    ├──TpxeField
+    ├──TpxeFieldDesc
+    ├──TpxeRecord
+    ├──TReadPCXFile
+    │  ├──TDecodePCXFile2
+    │  │  └──TPCXToChrTable
+    │  └──TDecodePCXFile256
+    ├──TReadSnpFile
+    │  ├──TDecodeSnpFile
+    │  └──TDecodeSnpScr
+    ├──TScriptCompile
+    ├──TScriptEng
+    ├──TScriptNode
+    ├──TStackNode
+    ├──TTermRec
+    ├──TVarNode
+    ├──TView
+    │  ├──TBackView
+    │  ├──TChrEditView
+    │  ├──TChrSetEditView
+    │  ├──TChrSetView
+    │  ├──TCluster
+    │  │  ├──TCheckBoxes
+    │  │  │  └──TCheckBoxesCF
+    │  │  ├──TMultiCheckBoxes
+    │  │  └──TRadioButtons
+    │  │     ├──TMsgButtons
+    │  │     └──TRadioButtonsCF
+    │  │        └──TMsgButtonsCF
+    │  ├──TColPalView
+    │  ├──TEditor
+    │  │  └──TFileEditor
+    │  │     └──TCyFileEditor
+    │  ├──TFileInfoPane
+    │  │  └──TInfoPane
+    │  ├──TGroup
+    │  │  ├──TDesktop
+    │  │  ├──TProgram
+    │  │  │  └──TApplication
+    │  │  │     ├──TCyberAni
+    │  │  │     ├──TCyberBase
+    │  │  │     ├──TCyberEdit
+    │  │  │     ├──TCyberGame
+    │  │  │     └──TCyberTerm
+    │  │  └──TWindow
+    │  │     ├──TDialog
+    │  │     │  ├──TChrEditDlg
+    │  │     │  ├──TChrSetDlg
+    │  │     │  ├──TChrSetEditDlg
+    │  │     │  ├──TDirWindow
+    │  │     │  ├──TDriveDlg
+    │  │     │  ├──TGameDlg
+    │  │     │  ├──TGameOptsDlg
+    │  │     │  ├──TPalDlg
+    │  │     │  ├──TPCXSNP
+    │  │     │  ├──TpxeCreateDialog
+    │  │     │  ├──TpxeEngineCfg
+    │  │     │  ├──TpxeIndexDialog
+    │  │     │  ├──TpxeKeyDialog
+    │  │     │  ├──TpxeMemoEdit
+    │  │     │  ├──TpxeTableWin
+    │  │     │  ├──TScrOptsDlg
+    │  │     │  ├──TSnipDialog
+    │  │     │  ├──TStrListDlg
+    │  │     │  ├──TTermConfigDlg
+    │  │     │  ├──TTermGenDlg
+    │  │     │  ├──TToolBarDlg
+    │  │     │  └──TWinSizeDlg
+    │  │     ├──TEditWindow
+    │  │     │  └──TCyEditWindow
+    │  │     ├──TLogWin
+    │  │     └──TTermWin
+    │  ├──TIconView
+    │  ├──TInputLine
+    │  │  ├──TDirWinLine
+    │  │  └──TpxeTableLine
+    │  ├──TListViewer
+    │  │  └──TListBox
+    │  │     ├──TpxeFieldListBox
+    │  │     └──TSortedListBox
+    │  │        └──TTermListBox
+    │  ├──TpxeTableView
+    │  ├──TScroller
+    │  │  ├──TAnsiTerm
+    │  │  ├──TOutlineViewer
+    │  │  │  └──TDirectoryViewer
+    │  │  │     └──TDirViewer
+    │  │  └──TTextDevice
+    │  │     └──TTerminal
+    │  │        └──TLogTerm
+    │  ├──TSpriteView
+    │  │  ├──TBombView
+    │  │  ├──TExpView
+    │  │  ├──THeadView
+    │  │  ├──TShipView
+    │  │  ├──TShotView
+    │  │  └──TUfoView
+    │  └──TStaticText
+    ├──TWritePCXFile
+    │  ├──TEncodePCXFile2
+    │  │  └──TChrTableToPCX
+    │  └──TEncodePCXFile256
+    └──TWriteSnpFile
+
 ###CyberFont
 
  ![Cyedit](images/cyedit.png)
@@ -74,23 +205,23 @@ Read/write access to font memory is provided by AccessFontMem in the VGA.PAS uni
 Sample 8 X 16 letter 'A' is formed by setting bits for foreground color and clearing bits for background color.  Notice bytes 16 - 31 are unused.
 
          Table        Offset
- ÚÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ¿
- ³ Character table 7 ³ E000
- ÃÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄŽ
- ³ Character table 3 ³ C000
- ÃÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄŽ
- ³ Character table 6 ³ A000
- ÃÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄŽ
- ³ Character table 2 ³ 8000
- ÃÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄŽ
- ³ Character table 5 ³ 6000
- ÃÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄŽ
- ³ Character table 1 ³ 4000
- ÃÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄŽ
- ³ Character table 4 ³ 2000
- ÃÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄŽ
- ³ Character table 0 ³ 0000
- ÀÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ.
+ ┌───────────────────┐
+ │ Character table 7 │ E000
+ ├───────────────────Ž
+ │ Character table 3 │ C000
+ ├───────────────────Ž
+ │ Character table 6 │ A000
+ ├───────────────────Ž
+ │ Character table 2 │ 8000
+ ├───────────────────Ž
+ │ Character table 5 │ 6000
+ ├───────────────────Ž
+ │ Character table 1 │ 4000
+ ├───────────────────Ž
+ │ Character table 4 │ 2000
+ ├───────────────────Ž
+ │ Character table 0 │ 0000
+ └───────────────────.
 Character table locations at segment A000 while accessing bit plane
 2.
 
@@ -553,46 +684,46 @@ character.  Numeric constants can also be used:
  Mul Tax,.05
 
              CyberScript command table
-             ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
-ÚÄÄÄÄÄÄÄÄÄÄÄÄÄÄ¿ÚÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ¿ÚÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ¿
-³COMMAND       ³³PARAM TYPE      ³³VAR TYPE       ³
-ÀÄÄÄÄÄÄÄÄÄÄÄÄÄÄ.ÀÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ.ÀÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ.
-ÚÄÄÄÄÄÄÄÄÄÄÄÄÄÄ¿ÚÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ¿ÚÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ¿
-³WAITFOR       ³³constant/var    ³³all            ³
-³SEND          ³³constant/var    ³³all            ³
-³GETRESP       ³³var             ³³string         ³
-³GETBLOCK      ³³constant/var    ³³string         ³
-³IF=           ³³var,constant/var³³all            ³
-³IF<>          ³³var,constant/var³³all            ³
-³IF<           ³³var,constant/var³³all            ³
-³IF>           ³³var,constant/var³³all            ³
-³IF<=          ³³var,constant/var³³all            ³
-³IF>=          ³³var,constant/var³³all            ³
-³ASSIGN        ³³var,constant/var³³all            ³
-³ADD           ³³var,constant/var³³all            ³
-³SUB           ³³var,constant/var³³longint,double ³
-³MUL           ³³var,constant/var³³longint,double ³
-³DIV           ³³var,constant/var³³longint,double ³
-³WAITFORSECS   ³³constant/var    ³³longint        ³
-³CALL          ³³label           ³³               ³
-³RETURN        ³³                ³³               ³
-³GOTO          ³³label           ³³               ³
-³LABEL         ³³label name      ³³               ³
-³CAPTUREAPP    ³³constant/var    ³³string         ³
-³CAPTURENEW    ³³constant/var    ³³string         ³
-³DOWNLOADZMODEM³³constant/var    ³³string         ³
-³STRING        ³³var name        ³³               ³
-³LONGINT       ³³var name        ³³               ³
-³DOUBLE        ³³var name        ³³               ³
-³WAITFORSEPCHAR³³constant/var    ³³string         ³
-³ADDGETDELIM   ³³constant/var    ³³string         ³
-³INIT          ³³                ³³               ³
-³DIAL          ³³                ³³               ³
-³HANGUP        ³³                ³³               ³
-³LOGON         ³³                ³³               ³
-³LOGOFF        ³³                ³³               ³
-³END           ³³                ³³               ³
-ÀÄÄÄÄÄÄÄÄÄÄÄÄÄÄ.ÀÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ.ÀÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ.
+             ─────────────────────────
+┌──────────────┐┌────────────────┐┌───────────────┐
+│COMMAND       ││PARAM TYPE      ││VAR TYPE       │
+└──────────────.└────────────────.└───────────────.
+┌──────────────┐┌────────────────┐┌───────────────┐
+│WAITFOR       ││constant/var    ││all            │
+│SEND          ││constant/var    ││all            │
+│GETRESP       ││var             ││string         │
+│GETBLOCK      ││constant/var    ││string         │
+│IF=           ││var,constant/var││all            │
+│IF<>          ││var,constant/var││all            │
+│IF<           ││var,constant/var││all            │
+│IF>           ││var,constant/var││all            │
+│IF<=          ││var,constant/var││all            │
+│IF>=          ││var,constant/var││all            │
+│ASSIGN        ││var,constant/var││all            │
+│ADD           ││var,constant/var││all            │
+│SUB           ││var,constant/var││longint,double │
+│MUL           ││var,constant/var││longint,double │
+│DIV           ││var,constant/var││longint,double │
+│WAITFORSECS   ││constant/var    ││longint        │
+│CALL          ││label           ││               │
+│RETURN        ││                ││               │
+│GOTO          ││label           ││               │
+│LABEL         ││label name      ││               │
+│CAPTUREAPP    ││constant/var    ││string         │
+│CAPTURENEW    ││constant/var    ││string         │
+│DOWNLOADZMODEM││constant/var    ││string         │
+│STRING        ││var name        ││               │
+│LONGINT       ││var name        ││               │
+│DOUBLE        ││var name        ││               │
+│WAITFORSEPCHAR││constant/var    ││string         │
+│ADDGETDELIM   ││constant/var    ││string         │
+│INIT          ││                ││               │
+│DIAL          ││                ││               │
+│HANGUP        ││                ││               │
+│LOGON         ││                ││               │
+│LOGOFF        ││                ││               │
+│END           ││                ││               │
+└──────────────.└────────────────.└───────────────.
 
 HOW DOES CYBERTERM WORK?
 
