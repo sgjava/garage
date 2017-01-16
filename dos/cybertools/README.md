@@ -208,53 +208,43 @@ Read/write access to font memory is provided by AccessFontMem in the VGA.PAS uni
 
 Sample 8 X 16 letter 'A' is formed by setting bits for foreground color and clearing bits for background color.  Notice bytes 16 - 31 are unused.
 
+```
          Table        Offset
  ┌───────────────────┐
  │ Character table 7 │ E000
- ├───────────────────┘
+ ├───────────────────┤
  │ Character table 3 │ C000
- ├───────────────────┘
+ ├───────────────────┤
  │ Character table 6 │ A000
- ├───────────────────┘
+ ├───────────────────┤
  │ Character table 2 │ 8000
- ├───────────────────┘
+ ├───────────────────┤
  │ Character table 5 │ 6000
- ├───────────────────┘
+ ├───────────────────┤
  │ Character table 1 │ 4000
- ├───────────────────┘
+ ├───────────────────┤
  │ Character table 4 │ 2000
- ├───────────────────┘
+ ├───────────────────┤
  │ Character table 0 │ 0000
  └───────────────────┘
-Character table locations at segment A000 while accessing bit plane
-2.
+ ```
+ 
+Character table locations at segment A000 while accessing bit plane 2.
 
-DISPLAYING 512 CHARACTERS ON THE SCREEN
+####Displaying 512 characters on the screen
 
-To get 512 characters on the screen you need to change the
-character map select register of the sequencer controller with
-FontMapSelect.  The 256 characters from the first font are selected
-by using foreground colors 0 - 7.  The second 256 characters are
-selected by using colors 8 - 15 or setting bit 3 of the attribute
-byte.  This allows you to use the first font for the TV desk top
-and the second font for graphics, sprites, etc.  You can use any of
-the 8 tables from above for either font.
+To get 512 characters on the screen you need to change the character map select register of the sequencer controller with
+FontMapSelect.  The 256 characters from the first font are selected by using foreground colors 0 - 7. The second 256 characters are selected by using colors 8 - 15 or setting bit 3 of the attribute byte. This allows you to use the first font for the TV desk top and the second font for graphics, sprites, etc. You can use any of the 8 tables from above for either font.
 
-SETTING TEXT SCREEN TO 640 X 200 PIXELS
+####Setting text screen to 640 x 200 pixels
 
-To change the screen from 720 X 400 pixels to 640 X 400 pixels use
-SetChrWidth8.  This reprograms the VGA clock to 25.175 MHz and
-makes each character 8 pixels wide instead of 9 pixels.
-SetChrWidth9 or setting the video mode with a BIOS function sets
-the screen back to 720 X 400.
+To change the screen from 720 X 400 pixels to 640 X 400 pixels use SetChrWidth8.  This reprograms the VGA clock to 25.175 MHz and makes each character 8 pixels wide instead of 9 pixels. SetChrWidth9 or setting the video mode with a BIOS function sets the screen back to 720 X 400.
 
-CHARACTER GENERATOR FILE (CGF) FILE FORMAT
+####Character generator file (CGF) file format
 
-CGF files are quite simple to decode and use on any system using
-character generators or bit map graphics.  CGF files can be used on
-EGA, VGA, Windows apps and other hardware platforms.  The 128 byte
-header is as follows:
+CGF files are quite simple to decode and use on any system using character generators or bit map graphics. CGF files can be used on EGA, VGA, Windows apps and other hardware platforms. The 128 byte header is as follows:
 
+```
   cgfHeader = record
     Version,
     Height,
@@ -262,34 +252,21 @@ header is as follows:
     TotalChrs : word;
     Filler : array[0..119] of byte;
   end;
+```
 
-Version is at $0100 for 1.00.
+* Version is at $0100 for 1.00.
+* Height can be 8, 14, 16 or 32.  CyberFont uses 16 currently, but I have also used 8 (8 X 8 fonts) in VGA 80 X 50 text mode and on other platforms.
+* StartChr is the starting ASCII code 0 - 255.
+* TotalChrs is the total number of chars to load or save 1 - 256.
+* Filler is not used in 1.00, but could be utilized by your apps. Keep in mind that CyberTools may update this format in the future and may not be compatible with your custom format.
+* After the header is TotalChrs characters starting with StartChr.
+* Each character is Height bytes long in the file.
 
-Height can be 8, 14, 16 or 32.  CyberFont uses 16 currently, but I
-have also used 8 (8 X 8 fonts) in VGA 80 X 50 text mode and on
-other platforms.
+####Character sprites
 
-StartChr is the starting ASCII code 0 - 255.
+Character sprites like to ones in CyberGame use a technique that has been around for years.  I first used it in 1981 on a Commodore VIC 20. Use CyberEdit or any paint program that supports PCX files to create your sprite using one or more characters. Copy that sprite to adjacent characters and modify it to create movement. For example, you can create a bomb like the one in CyberGame with four characters:
 
-TotalChrs is the total number of chars to load or save 1 - 256.
-
-Filler is not used in 1.00, but could be utilized by your apps.
-Keep in mind that CyberTools may update this format in the future
-and may not be compatible with your custom format.
-
-After the header is TotalChrs characters starting with StartChr.
-Each character is Height bytes long in the file.
-
-CHARACTER SPRITES
-
-Character sprites like to ones in CyberGame use a technique that
-has been around for years.  I first used it in 1981 on a Commodore
-VIC 20.  Use CyberEdit or any paint program that supports PCX files
-to create your sprite using one or more characters.  Copy that
-sprite to adjacent characters and modify it to create movement.
-For example, you can create a bomb like the one in CyberGame with
-four characters:
-
+```
    1        2        3        4
 .██████. ........ ........ ........
 ..████.. ........ ........ ........
@@ -307,36 +284,17 @@ four characters:
 ........ ........ ........ ..████..
 ........ ........ ........ ..████..
 ........ ........ ........ ...██...
+```
 
-You display characters one at a time in the same screen location.
-When the 4th frame is finished being displayed you move one
-character down and start over with 1.  I do not OR the sprite with
-any background character patterns, but that logic could be added
-at a loss of performance.  CyberGame implements sprites descended
-from TView and is the best example of using character sprites in a
-CyberFont app.
+You display characters one at a time in the same screen location. When the 4th frame is finished being displayed you move one character down and start over with 1.  I do not OR the sprite with any background character patterns, but that logic could be added at a loss of performance. CyberGame implements sprites descended from TView and is the best example of using character sprites in a CyberFont app.
 
+####CyberFont applications
 
-CYBERFONT APPLICATIONS
+All CyberFont applications include a graphic desk top, load and/or save fonts and PCX images, configuration streams and context sensitive help.
 
-All CyberFont applications include a graphic desk top, load and/or
-save fonts and PCX images, configuration streams and context
-sensitive help.
-
-CYEDIT.PAS is a powerful 8 X 16 font editor.  Edit multiple fonts
-from multiple font tables at the same time.  Uses graphic tool bar
-and custom character selector.
-
-CYGRAPH.PAS is a graphics application utilizing a resizable
-graphics window for lines, ellipses, rectangles, business X,Y type
-line graphs and a star field simulation.  Configuration file
-compatible with CyberEdit 2.0.
-
-CYGAME.PAS is a multi-level 'Invaders' type arcade game using
-sprites, bit map animation, PC speaker sound and custom game
-controls.  Turn page mode on in Options|Screen if the game
-animation runs too fast on your machine.  Uses custom configuration
-file to save control settings along with standard app data.
+* CYEDIT.PAS is a powerful 8 X 16 font editor. Edit multiple fonts from multiple font tables at the same time.  Uses graphic tool bar and custom character selector.
+* CYGRAPH.PAS is a graphics application utilizing a resizable graphics window for lines, ellipses, rectangles, business X,Y type line graphs and a star field simulation. Configuration file compatible with CyberEdit 2.0.
+* CYGAME.PAS is a multi-level 'Invaders' type arcade game using sprites, bit map animation, PC speaker sound and custom game controls. Turn page mode on in Options|Screen if the game animation runs too fast on your machine.  Uses custom configuration file to save control settings along with standard app data.
 
 ###CyberAnimation
 
