@@ -1,6 +1,6 @@
 #Turbo Vision CyberTools                                                
 
-Turbo Vision (tm) is a great object-oriented framework for building DOS applications. Unfortunately, fonts, graphics, 256 color animation, ANSI terminals, generic database browsers and other 'drop-in' tools are not included. You could spend a lot of time on looking at libraries just to find out you have a disjointed set of TV gizmos and gadgets. Turbo Vision CyberTools gives you the edge by creating professional applications with a flexible set of tools. Powerful tools are important, but applications that show you how to use the library are equally important. All too often you get a 'powerful' library with 100 line demo programs that barely scratch the surface (or gasp, have error handling). With CyberTools you get full blown applications and not empty skeleton code.
+Turbo Vision (tm) is a great object-oriented framework for building DOS applications. Unfortunately, fonts, graphics, 256 color animation, ANSI terminals, generic database browsers and other 'drop-in' tools are not included. You could spend a lot of time looking at libraries just to find out you have a disjointed set of TV gizmos and gadgets. Turbo Vision CyberTools gives you the edge by creating professional applications with a flexible set of tools. Powerful tools are important, but applications that show you how to use the library are equally important. All too often you get a 'powerful' library with 100 line demo programs that barely scratch the surface (or gasp, have error handling). With CyberTools you get full blown applications and not empty skeleton code.
 
 CyberTools was used all over the world in everything from embedded systems to foreign language products.
 
@@ -15,9 +15,9 @@ CyberTools was used all over the world in everything from embedded systems to fo
 
 ###Using Borland Pascal under dosemu
 
-Using Borland Pascal under dosemu is going to be the most efficient way to work on code. I'm providing you my development environment from the 90s since it was already configured and has all the required tools and patches. I've updated it to work on fast CPUs (fixed runtime 200 errors), but there could be other issues. It looks like everything is Y2K compliant including Paradox Engine! See application source for IDE paths.  Help files (??HELP.TXT) need to be compiled with Turbo Vision Help Compiler 1.1 (\BP\EXAMPLES\DOS\TVDEMO\TVHC.PAS) that comes with TVDEMO.
+Using Borland Pascal under dosemu is going to be the most efficient way to work on code. I'm providing you my development environment from the 90s since it was already configured and has all the required tools and patches. I've updated it to work on fast CPUs (fixed runtime 200 errors), but there could be other issues. It looks like everything is Y2K compliant including Paradox Engine! See application source for IDE paths. Help files (??HELP.TXT) need to be compiled with Turbo Vision Help Compiler 1.1 (\BP\EXAMPLES\DOS\TVDEMO\TVHC.PAS) that comes with TVDEMO.
 * Install dosemu `sudo apt-get install dosemu`
-* Download [bp.zip](https://github.com/sgjava/garage/raw/master/commodore/dos/cybertools/bp.zip)
+* Download [bp.zip](https://github.com/sgjava/garage/raw/master/dos/cybertools/bp.zip)
 * Extract zip to ~/.dosemu/drive_c
 * Add c:\bp\bin to path in ~/.dosemu/drive_c/autoexec.bat
 * `dosemu`
