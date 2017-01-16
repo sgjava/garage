@@ -22,10 +22,11 @@ Using Borland Pascal under dosemu is going to be the most efficient way to work 
 * Add c:\bp\bin to path in ~/.dosemu/drive_c/autoexec.bat
 * `dosemu`
 * `bp`
+* Under Options|Directories... `\BP\UNITS;\BP\EXAMPLES\DOS\TVDEMO;\BP\EXAMPLES\DOS\TVFM;\BP\APRO;\BP\CYBER\COMMON;\BP\PXENGINE\PASCAL\SOURCE;\BP\PXENGINE\PASCAL` for Include, Object and Unit.
 
 ###CyberTools object graph
 
-CyberTools takes advantage of OOP programming techniques to create reusable modular code.  Take some time and study the tree to give you an overview of the CyberTools object hierarchy. This was the 2.5 graph. I've added stuff in the unreleased 2.6 :)
+CyberTools takes advantage of OOP programming techniques to create reusable modular code.  Take some time and study the tree to give you an overview of the CyberTools object hierarchy. This was the 2.5 object graph. I've added stuff in the unreleased 2.6, but it's not documented yet :)
 
 ```
 ─Objects
