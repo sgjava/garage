@@ -361,138 +361,65 @@ CYANI.PAS allows you to play Snips, export current frame as a PCX or create a Sn
 CyberBase for Paradox Engine 3.x includes a new generic table editor window, generic table and index create, memo editor,
 cut and paste fields, easy engine configuration, automatic locks and validation. Windows and DOS based network sharing also supported.
 
+A powerful new Paradox table editor allows you to easily create single and multi-user database applications.  Just open a table cursor on any index and let the editor do the rest.  No need to hard-code table structures or use error prone scripts like many other database libraries.
+* Create Paradox tables in minutes without writing any code!
+* Add or delete indexes on the fly.
+* Fields are validated to insure database integrity. Use your own validators by overriding the method that creates basic validators.
+* Memo editor is included with provisions for other custom blob editors.
+* Cut and paste from the standard clip board!  Use it to import or export memo BLOBs and all standard field types.
+* Explicit record locking with retry is automatically used if the engine is initialized for network use.
+* Full control of engine configuration allows you to make changes without recompiling application.
+* Use CyberFont to add graphics or charts to your database applications!
+
+####How does CyberBase work?
+
+CyberBase uses a powerful Paradox table editor which is basically composed of a record collection of field collections (a dynamic 2 dimension array). The records are translated and stored in a viewable format which accounts for its responsiveness.  A special input line is used as a table cursor to edit and browse. When editing a field you cannot resize the window. Also if you try to leave focus in edit mode that field will be validated and written. Basic validation is provided by field type and can be easily modified to handle custom validation.
+
+As with any database API you should understand how Paradox Engine's API and Database Framework operates before modifying the PXEDIT unit for your own needs.  The PXE manuals Borland provides and CyberBase are a good source of information.
+
+IMPORTANT:
+
+Remember to add TCursor.getTableHandle method to the Data Base Framework in \BP\PXENGINE\PASCAL\SOURCE\OOPXENG.PAS. This allows PX Browse access to TCursor's private table handle tabH.  PX Browse can then search on the primary index regardless of what index the table is opened on.
+
+SEARCH OOPXENG.PAS FOR 'searchIndex'
+
+RIGHT AFTER:
+```
+  function searchIndex(keyRec: PRecord; mode: PXSearchMode;
+    fldCnt: Integer): Retcode; virtual;
+```
+ADD:
+```
+  function getTableHandle : TableHandle;
+```
+
+SEARCH OOPXENG.PAS FOR 'TRecord methods'
+
+RIGHT BEFORE:
+```
+ **************************************************************************
+                          TRecord methods
+ **************************************************************************
+```
+ADD:
+```
+function TCursor.getTableHandle : TableHandle;
+
+begin
+  getTableHandle := tabH
+end;
+```
+
+#### CyberBase application
+
+CYBASE.PAS is a full featured generic data base application using PX Edit unit to edit multiple Paradox tables on single user or network systems. Generic table and index creation fully supported. Add a report generator and you will have one powerful generic data base tool!
+
 ###CyberTerm
 
 ![Cyterm](images/cyterm.png)
 
 CyberTerm for Async Professional 2.x is a professional multi-session async communications application with CyberScript
 (tm) script language, IDE and supporting tools.  If you were disappointed with other Turbo Vision terminals then CyberTerm is for you!
-
-### Critical error handler
-
-I have installed a new critical error handler in all apps.  All apps will now pop up a message box with the error message and allow idle processing to continue.  This is a must for CyberTerm which can have multiple communication processes running at the same time.
-
-CyberFont apps use page flipping for animation. If the error pops up when the screen is not on page 0 then you will not see the standard message line.  All that it takes to use the CyberTools error handler is the following in your main program:
-
-```
-{
-Main app.
-}
-
-var
-
-  MyApp : TSomeApp;
-
-begin
-  MyApp.Init;
-  SysErrorFunc := AppSystemError; { <== add this for new handler}
-  MyApp.Run;
-  MyApp.Done
-end.
-```
-
-The issue of being in a non-reentrant state when the handler is called has been raised. I have not had any problems accessing empty floppy drives, locked files on a net work, printer turned off, etc. You can remove my SysErrorFunc if you wish to use the default handler in DRIVERS.PAS.  If you do find a way to crash it let me know! The only way I know would be in a TSR or ISR, but who is going to use TV for a TSR?
-
-
-
-CYBERANIMATE FEATURES
-
-
-
-CYBERBASE FEATURES
-
-A powerful new Paradox table editor allows you to easily create
-single and multi-user database applications.  Just open a table
-cursor on any index and let the editor do the rest.  No need to
-hard-code table structures or use error prone scripts like many
-other database libraries.
-
-Create Paradox tables in minutes without writing any code!
-
-Add or delete indexes on the fly.
-
-Fields are validated to insure database integrity.  Use your own
-validators by overriding the method that creates basic validators.
-
-Memo editor is included with provisions for other custom blob
-editors.
-
-Cut and paste from the standard clip board!  Use it to import or
-export memo BLOBs and all standard field types.
-
-Explicit record locking with retry is automatically used if the
-engine is initialized for network use.
-
-Full control of engine configuration allows you to make changes
-without recompiling application.
-
-Use CyberFont to add graphics or charts to your database
-applications!
-
-
-HOW DOES CYBERBASE WORK?
-
-CyberBase uses a powerful Paradox table editor which is basically
-composed of a record collection of field collections (a dynamic 2
-dimension array).  The records are translated and stored in a
-viewable format which accounts for its responsiveness.  A
-special input line is used as a table cursor to edit and browse.
-When editing a field you cannot resize the window.  Also if you try
-to leave focus in edit mode that field will be validated and
-written.  Basic validation is provided by field type and can be
-easily modified to handle custom validation.
-
-As with any database API you should understand how Paradox Engine's
-API and Database Framework operates before modifying the PXEDIT
-unit for your own needs.  The PXE manuals Borland provides and
-CyberBase are a good source of information.
-
-IMPORTANT:
-
-Remember to add TCursor.getTableHandle method to the Data Base
-Framework in \BP\PXENGINE\PASCAL\SOURCE\OOPXENG.PAS.  This allows
-PX Browse access to TCursor's private table handle tabH.  PX Browse
-can then search on the primary index regardless of what index the
-table is opened on.
-
-SEARCH OOPXENG.PAS FOR 'searchIndex'
-
-RIGHT AFTER:
-
-  function searchIndex(keyRec: PRecord; mode: PXSearchMode;
-    fldCnt: Integer): Retcode; virtual;
-
-ADD:
-
-  function getTableHandle : TableHandle;
-
-
-SEARCH OOPXENG.PAS FOR 'TRecord methods'
-
-RIGHT BEFORE:
-
-*****************************************************************
-*********
-                          TRecord methods
-*****************************************************************
-*********
-
-ADD:
-
-function TCursor.getTableHandle : TableHandle;
-
-begin
-  getTableHandle := tabH
-end;
-
-CYBERBASE APPLICATION
-
-CYBASE.PAS is a full featured generic data base application using
-PX Edit unit to edit multiple Paradox tables on single user or
-network systems.  Generic table and index creation fully supported.
-Add a report generator and you will have one powerful generic data
-base tool!
-
 
 CYBERTERM FEATURES
 
@@ -694,6 +621,31 @@ systems, Internet and other services are just ripe for a CyberTerm
 app.  You could also parse input directly into a Paradox table
 instead of parsing a capture file.  Drop in a Paradox browser and
 view/edit the data real-time!
+
+### Critical error handler
+
+I have installed a new critical error handler in all apps.  All apps will now pop up a message box with the error message and allow idle processing to continue.  This is a must for CyberTerm which can have multiple communication processes running at the same time.
+
+CyberFont apps use page flipping for animation. If the error pops up when the screen is not on page 0 then you will not see the standard message line.  All that it takes to use the CyberTools error handler is the following in your main program:
+
+```
+{
+Main app.
+}
+
+var
+
+  MyApp : TSomeApp;
+
+begin
+  MyApp.Init;
+  SysErrorFunc := AppSystemError; { <== add this for new handler}
+  MyApp.Run;
+  MyApp.Done
+end.
+```
+
+The issue of being in a non-reentrant state when the handler is called has been raised. I have not had any problems accessing empty floppy drives, locked files on a net work, printer turned off, etc. You can remove my SysErrorFunc if you wish to use the default handler in DRIVERS.PAS.  If you do find a way to crash it let me know! The only way I know would be in a TSR or ISR, but who is going to use TV for a TSR?
 
 ### FreeBSD License
 Copyright (c) Steven P. Goldsmith
