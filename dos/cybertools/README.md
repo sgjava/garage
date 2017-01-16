@@ -302,6 +302,58 @@ All CyberFont applications include a graphic desk top, load and/or save fonts an
 
 CyberAnimation is a fast 256 color animation player, creator and PCX importer/exporter. Animation format faster and smaller than FLI format! Great for multimedia or game applications.
 
+*Play 256 color Snip (.SNP) animation files created with a ComputerEyes/RT frame grabber, PCX files or other 256 color
+animation formats that can be decoded to screen or memory.
+* Export single movie frames as PCX files.
+* Import a group of PCX files to create a Snip movie file.
+* Decoding and play back faster than many commercial software schemes used under DOS and Windows. This allows slower 286 and 386 machines to enjoy animation that could only be played on newer/faster machines before.
+* Snip files are typically 30% smaller than the same FLI encoded file.
+* Snip files will appeal to multimedia and game programmers.
+
+####How does CyberAnimate work
+
+CyberAnimate decodes Snip files in real-time and does not require a decoded work file like CineMaker. You can decode to a mode 13H VGA screen or memory. Unchained mode 13H (mode x) can be implemented with many mode x libraries. I converted the original Michael Abrash articles from DDJ to TP6 BASM in 1991 before many of the mode x libraries appeared. Study the mode 13H BIOS decoder before writing your own mode x decoder.
+
+####Snip file format
+
+A Snip file contains a moving image.  The bytes in the file that make up word and longword values are all stored in low-to-high sequential (Intel) order.  First comes the 16 byte header:
+
+```
+  snpHeader = record
+    Version,
+    Frames,
+    HorzRes,
+    VertRes,
+    Reserved1,
+    Delay,
+    Reserved2,
+    Reserved3 : word;
+  end;
+```
+
+* Version is at $0001 and is controlled by Digital Vision not CyberTools.
+* Frames is the total number of frames.
+* HorzRes can be 64, 128 or 256.  CyberTools supports up to 320 which is now supported by CineMaker too.
+* VertRes can be 50, 100 or 200.  CineMaker now supports other resolutions besides  64 X 50, 128 X 100 and 256 X 200.
+* Reserved1 is HorzRes*VertRes. Not documented in SNIPSPEC.DOC.
+* Delay is 1/18 seconds delay.
+* Reserved2 is 64 (DAC palette start).  Not documented in SNIPSPEC.DOC.
+* Reserved3 is 255 (DAC palette end). Not documented in SNIPSPEC.DOC
+
+I figured out the Reserved fields with a binary file viewer and experimentation!
+
+* The 16 byte header is followed by a 768 byte calculated or fixed DAC palette. The palette contains all 256 colors, although only registers 64 to 255 are used for frame data.
+* The frame table follows the DAC palette and is organized as follows:
+    * Number of frames + 1 longwords of frame's seek position in the file.
+    * The extra frame location is used to calculate the size of the last encoded frame.
+    * Following the frame table is the encoded image data. Images are stored starting in the upper left corner, proceeding left to right for HorzRes pixels, then top to bottom for VertRes lines. If an image data value is 64 or greater, it is interpreted simply as a palette pointer and written to the screen at the current pixel location, which is incremented. If an image datavalue is > 0 and < 64 then it is interpreted instead as the number of pixels to skip. An image data value of 0 is interpreted as an end-of-frame flag.
+    * The first frame in a Snip is considered all new so that there would be exactly HorzRes*VertRes bytes in the range 64 to 255. The amount of change from one frame to the next determines the amount of compression. Rapidly changing backgrounds will yield less compression as in side scrolling cartoons.
+
+
+####CyberAnimate application
+
+CYANI.PAS allows you to play Snips, export current frame as a PCX or create a Snip from PCX files. You can also view 256 and 2 color PCX files. Includes CyberFont desk top and smooth video mode changes.
+
 ###CyberBase
 
 ![Cybase](images/cybase.png)
@@ -345,109 +397,6 @@ The issue of being in a non-reentrant state when the handler is called has been 
 
 CYBERANIMATE FEATURES
 
-Play 256 color Snip (.SNP) animation files created with a
-ComputerEyes/RT frame grabber, PCX files or other 256 color
-animation formats that can be decoded to screen or memory.
-
-Export single movie frames as PCX files.
-
-Import a group of PCX files to create a Snip movie file.
-
-Decoding and play back faster than many commercial software schemes
-used under DOS and Windows.  This allows slower 286 and 386
-machines to enjoy animation that could only be played on
-newer/faster machines before.
-
-Snip files are typically 30% smaller than the same FLI encoded
-file.
-
-Snip files will appeal to multimedia and game programmers.
-
-HOW DOES CYBERANIMATE WORK?
-
-CyberAnimate decodes Snip files in real-time and does not require
-a decoded work file like CineMaker.  You can decode to a mode 13H
-VGA screen or memory.  Unchained mode 13H (mode x) can be
-implemented with many mode x libraries.  I converted the original
-Michael Abrash articles from DDJ to TP6 BASM in 1991 before many of
-the mode x libraries appeared.  Study the mode 13H BIOS decoder
-before writing your own mode x decoder.
-
-SNIP FILE FORMAT
-
-A Snip file contains a moving image.  The bytes in the file that
-make up word and longword values are all stored in low-to-high
-sequential (Intel) order.  First comes the 16 byte header:
-
-  snpHeader = record
-    Version,
-    Frames,
-    HorzRes,
-    VertRes,
-    Reserved1,
-    Delay,
-    Reserved2,
-    Reserved3 : word;
-  end;
-
-Version is at $0001 and is controlled by Digital Vision not
-CyberTools.
-
-Frames is the total number of frames.
-
-HorzRes can be 64, 128 or 256.  CyberTools supports up to 320 which
-is now supported by CineMaker too.
-
-VertRes can be 50, 100 or 200.  CineMaker now supports other
-resolutions besides  64 X 50, 128 X 100 and 256 X 200.
-
-Reserved1 is HorzRes*VertRes.  Not documented in SNIPSPEC.DOC.
-
-Delay is 1/18 seconds delay.
-
-Reserved2 is 64 (DAC palette start).  Not documented in
-SNIPSPEC.DOC.
-
-Reserved3 is 255 (DAC palette end). Not documented in SNIPSPEC.DOC
-
-I figured out the Reserved fields with a binary file viewer and
-experimentation!
-
-The 16 byte header is followed by a 768 byte calculated or fixed
-DAC palette.  The palette contains all 256 colors, although only
-registers 64 to 255 are used for frame data.
-
-The frame table follows the DAC palette and is organized as
-follows:
-
-Number of frames + 1 longwords of frame's seek position in the
-file.
-
-The extra frame location is used to calculate the size of the last
-encoded frame.
-
-Following the frame table is the encoded image data.  Images are
-stored starting in the upper left corner, proceeding
-left to right for HorzRes pixels, then top to bottom for VertRes
-lines.  If an image data value is 64 or greater, it is interpreted
-simply as a palette pointer and written to the screen at the
-current pixel location, which is incremented.  If an image data
-value is > 0 and < 64 then it is interpreted instead as the number
-of pixels to skip.  An image data value of 0 is interpreted as an
-end-of-frame flag.
-
-The first frame in a Snip is considered all new so that there would
-be exactly HorzRes*VertRes bytes in the range 64 to 255.  The
-amount of change from one frame to the next determines the amount
-of compression.  Rapidly changing backgrounds will yield less
-compression as in side scrolling cartoons.
-
-CYBERANIMATE APPLICATION
-
-CYANI.PAS allows you to play Snips, export current frame as a PCX
-or create a Snip from PCX files.  You can also view 256 and 2 color
-PCX files.  Includes CyberFont desk top and smooth video mode
-changes.
 
 
 CYBERBASE FEATURES
