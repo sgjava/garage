@@ -310,7 +310,7 @@ animation formats that can be decoded to screen or memory.
 * Snip files are typically 30% smaller than the same FLI encoded file.
 * Snip files will appeal to multimedia and game programmers.
 
-####How does CyberAnimate work
+####How does CyberAnimate work?
 
 CyberAnimate decodes Snip files in real-time and does not require a decoded work file like CineMaker. You can decode to a mode 13H VGA screen or memory. Unchained mode 13H (mode x) can be implemented with many mode x libraries. I converted the original Michael Abrash articles from DDJ to TP6 BASM in 1991 before many of the mode x libraries appeared. Study the mode 13H BIOS decoder before writing your own mode x decoder.
 
