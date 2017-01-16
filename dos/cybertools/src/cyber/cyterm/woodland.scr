@@ -1,0 +1,191 @@
+;
+;CyberScript to download mail from Woodland BBS using Wildcat! v4 wcMail
+;door.  DOWNLOADZMODEM not supported in Demoware version.
+;
+
+;Declare vars
+
+String RespStr
+String CapName
+String Command
+String Name
+String Password
+String Birthday
+String Phone
+
+LogOn
+
+;Initilize vars
+
+Assign CapName,  'WOODLAND.CAP'
+Assign Command,  '>>,command?,packet?' 
+Assign Name,     'your name'
+Assign Password, 'password'
+Assign Birthday, '010101'
+Assign Phone,    '111-111-1111'
+
+WaitForSepChar ','
+WaitForSecs 60
+
+CaptureNew CapName
+Init
+Dial
+Call       Login
+Call       SkipIntro
+Call       MainMenu
+Call       GetMail
+CaptureNew CapName
+End
+
+Label Login
+
+;What is your first name?
+
+WaitFor 'twice for WILDCAT,name?'
+GetResp RespStr
+If<>    RespStr,'name?'
+  Call  SendEsc
+Send    Name
+Send    #13
+
+;Password? [              ]
+
+WaitFor 'Password?'
+Send    Password
+Send    #13
+
+;Please enter your BIRTH DATE? [  /  /  ]
+
+WaitFor 'DATE,top?'
+GetResp RespStr
+If=     RespStr,'DATE'
+  Call  Verify
+Send    #13
+Return
+
+;Escape twice 
+
+Label SendEsc
+
+Send    #27
+Send    #27
+WaitFor 'name?'
+Return
+
+;Handle verfication
+
+Label Verify
+
+Send Birthday
+Send #13
+
+;Please enter your VOICE phone number? [   -   -    ]
+
+WaitFor 'number,top?,uit?'
+GetResp RespStr
+If=     RespStr,'number'
+  Call  SendPhone
+Return
+
+;Send phone number
+
+Label SendPhone
+
+Send    Phone
+Send    #13
+WaitFor 'top?,uit?'
+Return
+
+;Slam Enter through opening messages
+
+Label SkipIntro
+
+;[C]ontinue, [N]onStop, [S]top? [C]
+
+WaitFor 'top?,uit?'
+GetResp RespStr
+Send    #13
+If=     RespStr,'top?'
+  Goto  SkipIntro
+Return
+
+;Get to the main menu after skipping log in messages
+
+Label MainMenu
+
+;Press [ENTER] to continue?
+
+WaitFor 'continue?,ist mail'
+GetResp RespStr
+If=     RespStr,'continue?'
+  Send  #13
+
+;Skip listing mail since we are goind to download it
+
+If= RespStr,'ist mail'
+  Send 'c'
+
+;    Main Menu Command >>
+
+WaitFor Command
+Return
+
+;Log off BBS
+
+Label LogOff
+
+Send 'g'
+
+;Are you sure you wish to logoff [Y/n]? [Y]
+
+WaitFor     'logoff'
+Send        #13
+WaitForSecs 10
+WaitFor     'NO CARRIER'
+GetResp     RespStr
+If<>        RespStr,'NO CARRIER'
+  HangUp
+Return
+
+;Download mail from wcMail
+
+Label GetMail
+
+Send 'm'
+
+;    Message Menu Command >>
+
+WaitFor Command
+Send    't'
+
+;[C]ontinue, [N]onStop, [S]top? [C]
+
+WaitFor 'top?'
+Send    #13
+
+;     Main Menu Command >>[ ]
+
+WaitFor Command
+Send    'd'
+
+;     Main Menu Command >>[ ]
+
+WaitForSecs 240
+WaitFor Command
+GetResp RespStr
+
+;See if we have any mail to download
+
+If<>            RespStr,'packet?'
+  Goto         LogOff
+Send           'g'
+WaitFor        'now...'
+DownloadZmodem
+WaitFor        'online...'
+Send           'h'
+WaitForSecs    10
+WaitFor        'NO CARRIER'
+GetResp        RespStr
+If<>           RespStr,'NO CARRIER'
+  HangUp
+Return

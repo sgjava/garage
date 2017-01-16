@@ -1,0 +1,1001 @@
+;
+; CyberBase help text
+;
+; This file must be compiled with the Version 1.1 of TVHC.EXE.
+;
+
+.topic NoContext=0
+ ±±±±±±±±±±±±±±±±±±±±±±±±±±±±
+ ±        CyberBase         ±Û
+ ± (C) 1994 Steve Goldsmith ±Û
+ ±   All Rights Reserved    ±Û
+ ±±±±±±±±±±±±±±±±±±±±±±±±±±±±Û
+   ßßßßßßßßßßßßßßßßßßßßßßßßßßß
+CyberBase is a Paradox 3.x - 5.x compatible data base tool.  All menus
+are accessed by pressing Alt+highlighted letter.  For example, the
+"File" menu is pulled down by Alt+F.  You can also access the menu
+by pressing F10 or clicking the mouse on the desired menu item.
+
+ {Desk top:DeskTop} ³ {Menu} ³ {Status line:StatusLine}
+
+Press [Esc] to put this help screen away.
+
+.topic DeskTop
+The desk top contains a {menu}, background and
+{status line:StatusLine}.  All work takes place on the desk top.
+
+.topic Menu
+The menu is accessed by pressing F10 or Alt+highlighted letter.
+For example, the File menu is pulled down by Alt+F.  Use cursor
+keys to move and Enter to select.  A mouse can be used by clicking
+on the desired item.
+
+.topic StatusLine
+Status line items are accessed by pressing Alt+highlighted letter
+or function key.  For example, to exit press Alt+X.  A mouse can be
+used by clicking on the desired item.
+
+.topic File
+ File Ü (Alt+F)
+  ßßßßß
+The File menu includes choices for {tables:Table}, {indexes:Index},
+{text:ASCII} files, table {security}, file {lists:List},
+{configuration:Config} files, {version:About} information
+and {exiting:Exit} the program.
+
+.topic Table
+ File³Table Ü
+  ßßßßßßßßßßß
+The Table menu includes choices for {opening:Open}, {creating:New},
+{appending:Append}, {copying:CopyTable}, {renaming:Rename},
+{emptying:Empty}, {deleting:Delete} and {upgrading:Upgrade} tables.
+
+.topic Open
+ File³Table³Open... Ü (F3)
+  ßßßßßßßßßßßßßßßßßßß
+Open allows you to {select:TreeWindow} and {edit:TableEditor} a
+table.  Prevent full lock mode is used if the {engine} is
+initialized for network use.
+
+.topic New
+ File³Table³New... Ü (F4)
+  ßßßßßßßßßßßßßßßßßß
+New allows you to create an empty table.  If the table exists, but
+is not open, it and all family members are deleted first.  A full
+lock is placed on the table if the {engine} is initialized for
+network use.
+
+.topic Append
+ File³Table³Append... Ü
+  ßßßßßßßßßßßßßßßßßßßßß
+Append adds records from one table to another table if both have the same
+record structure.  The source table is write locked and the
+destination table is full locked if the {engine} is initialized for
+network use.
+
+.topic CopyTable
+ File³Table³Copy... Ü
+  ßßßßßßßßßßßßßßßßßßß
+Copy copies records from one table to another table.  If the destination
+table exists then it is overwritten.  The source table is write locked and
+the destination table is full locked if the {engine} is initialized for
+network use.
+
+.topic Rename
+ File³Table³Rename... Ü
+  ßßßßßßßßßßßßßßßßßßßßß
+Renames table in top {file list:NewFileList} to table in
+{tree window:TreeWindow}.  Both tables are full write locked if
+the {engine} is initialized for network use.
+
+.topic Empty
+ File³Table³Empty... Ü
+  ßßßßßßßßßßßßßßßßßßßß
+Empty removes all records from table.  A full lock is placed on the
+table if the {engine} is initialized for network use.
+
+.topic Delete
+ File³Table³Delete... Ü
+  ßßßßßßßßßßßßßßßßßßßßß
+Delete erases table and all family members.  A full lock is placed
+on the table if the {engine} is initialized for network use.
+
+.topic Upgrade
+ File³Table³Upgrade... Ü
+  ßßßßßßßßßßßßßßßßßßßßßß
+Upgrade a 3.5 or later Paradox table.  Use this to add composite or
+case-insensitive secondary indexes, BLOBs or other 4.x and later
+features to 3.5 tables.
+
+.topic Index
+ File³Index Ü
+  ßßßßßßßßßßß
+The Index menu includes choices for {creating:NewIndex} and
+{deleting:DeleteIndex} indexes.
+
+.topic NewIndex
+ File³Index³New... Ü
+  ßßßßßßßßßßßßßßßßßß
+New creates a new index.  A full lock is placed on the table if the
+{engine} is initialized for network use.
+
+.topic DeleteIndex
+ File³Index³Delete... Ü
+  ßßßßßßßßßßßßßßßßßßßßß
+Delete drops existing index.  A full lock is placed on the table if the
+{engine} is initialized for network use.
+
+.topic ASCII
+ File³ASCII Ü
+  ßßßßßßßßßßß
+The ASCII menu includes choices for {opening:OpenText}, {creating:NewText},
+{saving:SaveText}, {saving as:SaveAsText} and {saving all:SaveAllText} text
+files.
+
+.topic OpenText
+ File³ASCII³Open... Ü
+  ßßßßßßßßßßßßßßßßßßß
+Open allows editing of existing text files up to 64K in length.
+
+.topic NewText
+ File³ASCII³New Ü
+  ßßßßßßßßßßßßßßß
+New creates a new editor window.  The window's name is "Untitled" and is
+empty.
+
+.topic SaveText
+ File³ASCII³Save Ü
+  ßßßßßßßßßßßßßßßß
+Save allows you to save the current editor window to a disk
+file.  If the window already has a name, the file will be saved under
+this same name.  If you wish to save the file under a new name, select
+{Save As:SaveAsText} instead.
+
+.topic SaveAsText
+ File³ASCII³Save As... Ü
+  ßßßßßßßßßßßßßßßßßßßßßß
+Save As allows you to save the current editor window to a new file name.  If
+an editor window does not have a name it is called "Untitled".
+
+.topic SaveAllText
+ File³ASCII³Save all Ü
+  ßßßßßßßßßßßßßßßßßßßß
+Save all saves all editor windows (if any) to disk.
+
+.topic Security
+ File³Security Ü
+  ßßßßßßßßßßßßßß
+The Security menu includes choices for {adding:AddPassword} passwords,
+{encrypting:Encrypt} and {decrypting:Decrypt} tables.
+
+.topic AddPassword
+ File³Security³Add password Ü
+  ßßßßßßßßßßßßßßßßßßßßßßßßßßß
+Add enters specified password into the system.  A maximum of 50
+passwords can be stored at one time.
+
+.topic Encrypt
+ File³Security³Encrypt Ü
+  ßßßßßßßßßßßßßßßßßßßßßß
+Encrypt password protects table.  A full lock is placed on the
+table if the {engine} is initialized for network use.
+
+.topic Decrypt
+ File³Security³Decrypt Ü
+  ßßßßßßßßßßßßßßßßßßßßßß
+Decrypt reverses previous table encryption.  A full lock is placed
+on the table if the {engine} is initialized for network use.
+
+.topic List
+ File³List Ü
+  ßßßßßßßßßß
+The List menu includes choices for opening a new
+{file list:NewFileList} and opening a file list {builder:FileListBuild}.
+
+.topic NewFileList
+ File³List³New Ü
+  ßßßßßßßßßßßßßß
+Opens a new {file list:FileList}.
+
+.topic FileListBuild
+ File³List³Builder...Ü
+  ßßßßßßßßßßßßßßßßßßßß
+Opens a {tree window:TreeWindow} which allows you to add files to a
+{file list:FileList}.
+
+.topic Config
+ File³Config Ü
+  ßßßßßßßßßßßß
+The Config menu includes choices for {saving:SaveFile} and
+{loading:LoadFile} a configuration file.
+
+.topic LoadFile
+ File³Config³Load... Ü
+  ßßßßßßßßßßßßßßßßßßßß
+Configuration .CFG (Ctrl+F3) files contain {engine}
+and {color:OColors} options.
+
+.topic SaveFile
+ File³Config³Save... Ü
+  ßßßßßßßßßßßßßßßßßßßß
+Configuration .CFG (Ctrl+F2) files contain {engine}
+and {color:OColors} options.
+
+.topic About
+ File³About Ü
+  ßßßßßßßßßßß
+Displays version, copyright and mode information.  Press [Esc] or
+[Enter] to close box.
+
+.topic Exit
+ File³Exit Ü (Alt+X)
+  ßßßßßßßßßß
+Terminates program.
+
+.topic Edit
+ Edit Ü (Alt+E)
+  ßßßßß
+The Edit menu includes choices for {undoing:undo}, {cutting:cut},
+{coping:copy}, {pasting:paste} and {clearing:clear} text in the editor
+and clipboard.  Copy and Paste also work with the table editor.
+
+.topic Undo
+ Edit³Undo Ü
+  ßßßßßßßßßß
+Undo allows you to revert back to the last editor action you performed.  For
+example, if the line:
+
+  This is an editor test
+
+is changed to:
+
+  This was an editor test
+
+the Undo command will become active.  Executing the Undo command will
+cause the line to revert back to its original version.  Note that
+changes which can be undone are grouped into similar actions, such as
+typing, or deleting characters.  Any action type you perform that is
+different than the last action type will cause the Undo information to
+be lost.
+
+.topic Cut
+ Edit³Cut Ü
+  ßßßßßßßßß
+Cut removes the selected text and places it on the
+Clipboard.  Any information previously on the clipboard is lost.  Text
+cut from the editor may be immediately replaced by selecting the
+{Undo} command before moving the cursor.
+
+.topic Copy
+ Edit³Copy Ü
+  ßßßßßßßßßß
+Copy places a copy of the selected text on the Clipboard.  The selected
+information is left unchanged, but any information previously on the
+clipboard is lost.
+
+.topic Paste
+ Edit³Paste Ü
+  ßßßßßßßßßßß
+Paste inserts the contents of the clipboard into the current editor window
+at the cursor position.  The contents of the clipboard remain unchanged.  If
+any text is selected in the current editor window, the highlighted text is
+replaced by the text coming from the clipboard.  Information pasted into an
+editor may be removed immediately by using the {Undo} command before moving
+the cursor.
+
+.topic Clear
+ Edit³Clear Ü
+  ßßßßßßßßßßß
+Clear removes any selected text from the current editor without placing a
+copy of the text on the clipboard.  The effects of this command may be
+reversed by selecting {Undo} before moving the cursor.
+
+.topic ShowClip
+ Edit³Show clipboard Ü
+  ßßßßßßßßßßßßßßßßßßßß
+Show clipboard will display the Clipboard contents is an ordinary editor
+window.  Note that {Cut} and {Paste} commands are not enabled while the
+clipboard is the focused window.
+
+
+.topic Search
+ Search Ü (Alt+S)
+  ßßßßßßß
+The Search menu includes choices for {finding:Find} and
+{replacing:Replace} text in the topmost edit
+window.  {Search again:SearchAgain} repeats last Find or Replace.
+
+.topic Find
+ Search³Find Ü
+  ßßßßßßßßßßßß
+Find performs a text search in the editor.
+
+.topic Replace
+ Search³Replace Ü
+  ßßßßßßßßßßßßßßß
+Replace performs a text search and replace in the editor.
+
+.topic SearchAgain
+ Search³Search again Ü
+  ßßßßßßßßßßßßßßßßßßßß
+Search again repeats the last {Find} or {Replace}.
+
+.topic Tools
+ Tools Ü (Alt+T)
+  ßßßßßß
+The Tools menu includes choices for {calendars:SCalendar},
+{calculators:SCalculator} and {viewing:ViewDoc} CYBER.DOC.
+
+.topic SCalendar
+ Tools³Calendar Ü
+  ßßßßßßßßßßßßßßß
+Calendar opens a small {calendar} which displays the current month.  It
+also allows you to view other months.
+
+.topic SCalculator
+ Tools³Calculator Ü
+  ßßßßßßßßßßßßßßßßß
+Calculator opens a four-function {calculator}.
+
+.topic ViewDoc
+ Tools³View doc Ü
+  ßßßßßßßßßßßßßßß
+View doc loads CYBER.DOC into a scrolling {window:Windows} for viewing.
+CYBER.DOC contains information about CyberTools.  See ORDER.DOC or
+ORDER.TXT for ordering information.
+
+.topic Options
+ Options Ü (Alt+O)
+  ßßßßßßßß
+The Options menu contains commands that let you
+change the {engine}, {colors:OColors} and
+{toggle video:VideoToggle}.
+
+.topic Engine
+ Options³Engine... Ü
+  ßßßßßßßßßßßßßßßßßß
+Engine brings up the {Engine:EngineDialog} dialog box,
+where you can customize the Paradox Engine.
+
+.topic OColors
+ Options³Colors... Ü
+  ßßßßßßßßßßßßßßßßßß
+Colors brings up the {Colors:ColorDialog} dialog box,
+where you can customize the colors of the desk top.
+
+.topic VideoToggle
+ Options³Video toggle Ü
+  ßßßßßßßßßßßßßßßßßßßßß
+Video toggle allows you to switch between 43/50 line mode and 25
+line mode on EGA/VGA displays.
+
+.topic Windows
+ Window Ü (Alt+W)
+  ßßßßßßß
+The Window menu contains commands to close, move and perform
+other window-management commands.
+
+Most of the windows in this program have all the standard window
+elements, including scroll bars, a close box, and zoom icons.
+
+.topic Tile
+ Window³Tile Ü
+  ßßßßßßßßßßßß
+Choose Window³Tile to tile all file viewers on the desk top.
+
+ ÚÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ¿
+ ³ ÉÍÍÍÍÍÍÍÍÍÍÍÍ1ÍÍ»ÚÄÄÄÄÄÄÄÄÄÄÄÄ2ÄÄ¿ ³
+ ³ º               º³               ³ ³
+ ³ º               º³               ³ ³
+ ³ º               º³               ³ ³
+ ³ º               º³               ³ ³
+ ³ ÈÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍ¼ÀÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÙ ³
+ ³ ÚÄÄÄÄÄÄÄÄÄÄÄÄ3ÄÄ¿ÚÄÄÄÄÄÄÄÄÄÄÄÄ4ÄÄ¿ ³
+ ³ ³               ³³               ³ ³
+ ³ ³               ³³               ³ ³
+ ³ ³               ³³               ³ ³
+ ³ ³               ³³               ³ ³
+ ³ ÀÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÙÀÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÙ ³
+ ÀÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÙ
+             Tiled Windows
+
+.topic Cascade
+ Window³Cascade Ü
+  ßßßßßßßßßßßßßßß
+Choose Window³Cascade to stack all file viewers on the desk top.
+
+ ÚÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ1Ä¿
+ ³ÚÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ2Ä¿
+ ³³ÚÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ3Ä¿
+ ³³³ÉÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍ4Í»
+ ³³³º                         º
+ ³³³º                         º
+ ³³³º                         º
+ ³³³º                         º
+ ³³³º                         º
+ ÀÀÀÈÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍ¼
+
+        Cascaded Windows
+
+.topic Resize
+ Window³Size/Move Ü (Ctrl+F5)
+  ßßßßßßßßßßßßßßßßß
+Choose this command to change the size or position of the active
+window.
+
+ ÜÜÜÜÜÜ
+  Size
+ ßßßßßß
+If you press Shift while you use the arrow keys, you can change
+the size of the active window.  Once you've adjusted its size or
+position, press Enter.
+
+If a window has a Resize corner, you can drag that corner to
+resize the window.
+
+ ÜÜÜÜÜÜ
+  Move
+ ßßßßßß
+When you choose Window³Size/Move, the active window moves in
+response to the arrow keys.  Once you've moved the window to where
+you want it, press Enter.
+
+You can also move a window by dragging its title bar with the
+mouse.
+
+.topic Zoom
+ Window³Zoom Ü (F5)
+  ßßßßßßßßßßßß
+Choose Zoom to resize the active window to the maximum size.  If
+the window is already zoomed, you can choose this command to
+restore it to its previous size.
+
+You can also double-click anywhere on the window's title bar
+(except where an icon appears) to zoom or unzoom the window.
+
+.topic Next
+ Window³Next Ü (F6)
+  ßßßßßßßßßßßß
+Choose Next to cycle forwards through the windows on the desk top.
+
+.topic Close
+ Window³Close Ü (Alt+F3)
+  ßßßßßßßßßßßßß
+Choose Close to close the active window.
+
+You can also click the Close box in the upper right corner to
+close a window.
+
+.topic TableEditor
+ Table editor window Ü
+  ßßßßßßßßßßßßßßßßßßßß
+
+The Table editor window is a generic Paradox table editor with two distinct
+modes of operation: browse and edit.  Enter toggles which mode
+is in effect.  Each field modification is posted on field exit,
+window exit or editor close.  Records are automatically locked
+if the {engine} is initialized for network use.  The record is unlocked
+when you move to another record.  Non-keyed tables use record numbers
+for fast searches, so non-keyed tables should only be edited in
+full lock mode.
+
+ ÉÍ[ş]ÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍ H:\BP\CYBER\CYBASE\CUSTOMER.DB ÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍ»
+ º Cust ID             Last Name         Ini Street                 City   º
+ ºÚÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÂÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÂÄÄÄÂÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÂÄÄÄÄÄÄÄº
+ º³           1386.00 ³ Aberdeen        ³ F ³ 45 Utah Street       ³ Washinº
+ º³           1388.00 ³ Svenvald        ³ I ³ Gouvernment House    ³ Reykjaº
+ º³           1784.00 ³ McDougal        ³ L ³ 4950 Pullman Ave NE  ³ Seattlº
+ º³           2177.00 ³ Bonnefemme      ³ S ³ 128 University Drive ³ Stanfoº
+ ºÀÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÁÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÁÄÄÄÁÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÁÄÄÄÄÄÄÄº
+ ÈÍ±±±±ş±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±ÄÙ
+
+ Enter on non-BLOB ³ toggles edit/browse mode
+ Enter on BLOB     ³ opens BLOB memo editor
+ Home              ³ moves to left most field or character
+ End               ³ moves to right most field or character
+ Left Arrow        ³ moves one field or character left
+ Right Arrow       ³ moves one field or character right
+ Down Arrow        ³ moves one record down
+ Up Arrow          ³ moves one record up
+ Tab               ³ moves one field right
+ Shift Tab         ³ moves one field left
+ Page Up           ³ moves one editor page up
+ Page Down         ³ moves one editor page down
+ Control Page Up   ³ moves to first record
+ Control Page Down ³ moves to last record
+ Insert            ³ toggles insert/overwrite for field editor
+ Control Insert    ³ copies selected portion to clipboard
+ Shift Insert      ³ copies selected portion to field
+ Control+Y         ³ deletes current record
+
+The unformatted memo BLOB editor allows you to edit unformatted
+memo blobs with a Wordstar style editor.
+
+.topic EngineDialog
+ Engine dialog box Ü
+  ßßßßßßßßßßßßßßßßßß
+The Engine dialog box allows you to configure Paradox Engine for
+various multi-user and single-user environments.
+
+Set Engine type to:
+
+ (ù) Local   DOS single user.
+ (ù) Network Multi-user network or Windows share.
+ (ù) Windows Reserved for future use.
+
+  Engine type
+ ÚÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ¿
+ ³  (ù) Local    ³
+ ³  ( ) Network  ³
+ ³  ( ) Windows  ³
+ ÀÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÙ
+
+Set DOS share to:
+
+ (ù) Local   Share local and network tables.
+ (ù) Network Share only network tables.   Local tables are treated
+             as private.
+ (ù) None    All tables are treated as private.
+
+SHARE.EXE must be loaded to use (ù) Local or (ù) Network.
+
+  DOS share
+ ÚÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ¿
+ ³  (ù) Local    ³
+ ³  ( ) Network  ³
+ ³  ( ) None     ³
+ ÀÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÙ
+
+Set Windows share to:
+
+Reserved for future use.
+
+  Windows share
+ ÚÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ¿
+ ³  (ù) Shared         ³
+ ³  ( ) Single client  ³
+ ³  ( ) Exclusive      ³
+ ÀÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÙ
+
+Set Create format to:
+
+ (ù) 4.0 Create tables compatible with Paradox 4.x for higher
+     performance.
+ (ù) 3.5 Create tables compatible with Paradox 3.x and earlier.
+
+  Create format
+ ÚÄÄÄÄÄÄÄÄÄÄÄ¿
+ ³  (ù) 4.0  ³
+ ³  ( ) 3.5  ³
+ ÀÄÄÄÄÄÄÄÄÄÄÄÙ
+
+Set Lock mode to:
+
+ (ù) 4.0 Locks compatible with Paradox 4.x for higher performance.
+ (ù) 3.5 Locks compatible with Paradox 3.x and earlier.
+
+  Lock mode
+ ÚÄÄÄÄÄÄÄÄÄÄÄ¿
+ ³  (ù) 4.0  ³
+ ³  ( ) 3.5  ³
+ ÀÄÄÄÄÄÄÄÄÄÄÄÙ
+
+Set Sort order to:
+
+ (ù) ASCII         Numbers, uppercase letters, lowercase letters
+                   and accented letters.
+ (ù) International Characters sorted irrespective of uppercase,
+                   lowercase and special accents.
+ (ù) Norwegian 3.5 Norwegian/Danish order compatible with Paradox
+                   3.x.
+ (ù) Norwegian 4.0 Norwegian/Danish order compatible with Paradox
+                   4.x.
+ (ù) Swedish       Swedish/Finnish order.
+
+  Sort order
+ ÚÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ¿
+ ³  (ù) ASCII          ³
+ ³  ( ) International  ³
+ ³  ( ) Norwegian 3.5  ³
+ ³  ( ) Norwegian 4.0  ³
+ ³  ( ) Swedish        ³
+ ÀÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÙ
+
+Internal engine defaults:
+
+ Swap size (8-256) internal swap buffer size.
+ Tables    (1-64)  maximum number of tables open.
+ Records   (1-512) maximum record transfer buffers.
+ Locks     (1-128) maximum number of record locks.
+ Files     (3-255) maximum number of file handles.
+
+
+ Swap size ÛÛÛÛÛÛÛÛ
+ Tables    ÛÛÛÛÛÛÛÛ
+ Records   ÛÛÛÛÛÛÛÛ
+ Locks     ÛÛÛÛÛÛÛÛ
+ Files     ÛÛÛÛÛÛÛÛ
+
+ Net path  PDOXUSRS.NET network control file location.  This must
+           be in a common network directory accessible by all users
+           on network.
+ Name      User name stored in network control file.
+ Client    Reserved for future use.
+
+ Net path  ÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛ
+ Name      ÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛ
+ Client    ÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛ
+
+.topic CreateDialog
+ Create dialog box Ü
+  ßßßßßßßßßßßßßßßßßß
+The Create dialog box allows you to easily create Paradox tables.
+
+Field names:
+
+ ø Can be up to 25 characters long
+ ø Can contain spaces, but cannot begin with one
+ ø Can contain any printable character except " [ ] ( ) # ->
+ ø Cannot duplicate another field name
+
+ Name
+ ÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛ
+
+Field length:
+
+ Alhpa       (1-255)
+ Short       (0)
+ Double      (0)
+ Date        (0)
+ Currency    (0)
+ Memo        (1-240)
+ Binary      (0-240)
+ Fmt Memo    (0-240)
+ Windows OLE (0-240)
+ Graphic     (0-240)
+
+ Length
+ ÛÛÛÛÛ
+
+Select field type:
+
+  Type
+ ÚÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ¿
+ ³  (ù) Alhpa        ³
+ ³  ( ) Short        ³
+ ³  ( ) Double       ³
+ ³  ( ) Date         ³
+ ³  ( ) Currency     ³
+ ³  ( ) Memo         ³
+ ³  ( ) Binary       ³
+ ³  ( ) Fmt Memo     ³
+ ³  ( ) Windows OLE  ³
+ ³  ( ) Graphic      ³
+ ÀÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÙ
+
+Field list:
+
+ [   OK   ] creates table
+ [   Add  ] adds field to list at current cursor position
+ [ Delete ] deletes field at current cursor position
+ [  Edit  ] allows you to edit field at current cursor position
+ [ Cancel ] exits create dialog without creating table
+
+ Field Typ Len   Name
+ ÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛ
+ ÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛş
+ ÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛ°
+ ÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛ°
+ ÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛ
+
+.topic CreateIndexDialog
+ Create index dialog box Ü
+  ßßßßßßßßßßßßßßßßßßßßßßßß
+The Create index dialog box allows you to easily create primary,
+simple secondary, composite and case insensitive indexes.  Select
+fields from the Field box with Enter or mouse double-click.  To
+create a primary key use the last consecutive field only
+(i.e. use field 3 to make index composed of fields
+1-3).  Case-sensitive single field secondary indexes are
+created if there is only one field in the Secondary box,
+Secondary or Incremental is selected and Case sensitive is On.  If
+more than one field is selected or Case sensitive is Off then
+a composite index is created with a field number > 255.
+
+ ÉÍ[ş]ÍÍÍ H:\BP\CYBER\CYBASE\BOOKORD.DB ÍÍÍÍÍÍÍÍ»
+ º                                              º
+ º Field Typ Len   Name                         º
+ º ÚÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ¿ º
+ º ³  1 ³ N ³   0 ³ Cust                       º
+ º ³  4 ³ A ³   3 ³ Vol                       ş º
+ º ³  5 ³ N ³   0 ³ Quant                     ± º
+ º ³  6 ³ N ³   0 ³ Emp #                      º
+ º ÀÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÙ º
+ º Secondary key fields                         º
+ º ÚÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ¿ º
+ º ³  3 ³ S ³   0 ³ Item #                     º
+ º ³  2 ³ D ³   0 ³ Date                      ş º
+ º ³                                          ± º
+ º ³                                           º
+ º ÀÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÙ º
+ º Type              Case sensitive             º
+ º ÚÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ¿ ÚÄÄÄÄÄÄÄÄÄÄÄÄÄÄ¿           º
+ º ³( ) Primary    ³ ³(ù) On        ³    OK   Ü º
+ º ³( ) Secondary  ³ ³( ) Off       ³  ßßßßßßßß º
+ º ³(ù) Incremental³ ÀÄÄÄÄÄÄÄÄÄÄÄÄÄÄÙ           º
+ º ³               ³ Name              Cancel Ü º
+ º ÀÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÙ ÛItem_DateÛÛÛÛÛÛ  ßßßßßßßß º
+ º                                              º
+ ÈÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍ¼
+
+.topic DeleteIndexDialog
+ Delete index dialog box Ü
+  ßßßßßßßßßßßßßßßßßßßßßßßß
+The Delete index dialog box allows you to remove any index in the
+Field box with Enter or mouse double-click.
+
+ ÉÍ[ş]ÍÍÍ H:\BP\CYBER\CYBASE\BOOKORD.DB ÍÍÍÍÍÍÍÍ»
+ º                                              º
+ º Field Typ Len   Name                         º
+ º ÚÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ¿ º
+ º ³  0 ³ P ³   1 ³ Primary                    º
+ º ³256 ³ C ³   2 ³ Item_Date                 ş º
+ º ³                                          ± º
+ º ³                                           º
+ º ÀÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÙ º
+ º                                              º
+ º                            OK   Ü   Cancel Ü º
+ º                          ßßßßßßßß   ßßßßßßßß º
+ ÈÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍ¼
+
+.topic OpenIndexDialog
+ Open index dialog box Ü
+  ßßßßßßßßßßßßßßßßßßßßßß
+The Open index dialog box allows you to open table on any index in
+the Field box with Enter or mouse double-click.
+
+ ÉÍ[ş]ÍÍÍ H:\BP\CYBER\CYBASE\BOOKORD.DB ÍÍÍÍÍÍÍÍ»
+ º                                              º
+ º Field Typ Len   Name                         º
+ º ÚÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ¿ º
+ º ³  0 ³ P ³   1 ³ Primary                    º
+ º ³256 ³ C ³   2 ³ Item_Date                 ş º
+ º ³                                          ± º
+ º ³                                           º
+ º ÀÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÙ º
+ º                                              º
+ º                            OK   Ü   Cancel Ü º
+ º                          ßßßßßßßß   ßßßßßßßß º
+ ÈÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍ¼
+
+.topic PasswordDialog
+ Password dialog box Ü
+  ßßßßßßßßßßßßßßßßßßßß
+The Password dialog box allows you to add a password to the engine.  The
+password can be up to 25 characters and a maximum of 50 passwords can be
+stored at one time.
+
+ ÉÍ[ş]ÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍ»
+ º                                                          º
+ º  Password ÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛ  º
+ º                                                          º
+ º                                       OK   Ü    Cancel Ü º
+ º                                     ßßßßßßßß    ßßßßßßßß º
+ º                                                          º
+ ÈÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍ¼
+
+.topic TextEditor
+ Text file editor Ü
+  ßßßßßßßßßßßßßßßßß
+The Text file editor allows you to edit the contents of a text file.  You
+can use the arrow keys to move about in the file.
+
+.topic Calculator
+ Calculator Ü
+  ßßßßßßßßßßß
+The calculator is a simple four-function calculator with add,
+subtract, multiply, and divide.  To operate the calculator you can
+either use the keyboard or press the buttons on the calculator with
+the mouse.  The 'C' key clears the calculator, the '' key erases
+the last character typed, and the 'ñ' key toggles the value from
+positive to negative (the keyboard equivalent of 'ñ' is '_').
+
+.topic Calendar
+ Calendar Ü
+  ßßßßßßßßß
+The calendar displays the current month, highlighting today's date.
+The next and previous months can be viewed using the '+' or '-'
+keys respectively.  The mouse can also be used to change the month
+by pressing the  or  icons.
+
+.topic FileList
+
+The file list holds names sent by a {Tree window:TreeWindow} called
+File List Builder.  Various functions require a file list to complete
+their tasks.
+
+ ÉÍ[ş]ÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍ File List ÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍ»
+ º                                                                         º
+ º  H:\BP\CYBER\CYBASE\ALLTYPES.DB                                        º
+ º  H:\BP\CYBER\CYBASE\NUMTEST.DB                                        ş º
+ º  H:\BP\CYBER\CYBASE\SMASTER.DB                                        ± º
+ º  H:\BP\CYBER\CYBASE\SYM2.DB                                           ± º
+ º  H:\BP\CYBER\CYBASE\SYMBOLS.DB                                        ± º
+ º  H:\BP\CYBER\CYBASE\TEST.DB                                            º
+ º                                                                         º
+ ÈÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍ¼
+
+
+.topic TreeWindow
+ Tree window Ü
+  ßßßßßßßßßßßß
+The Tree window contains a directory tree, name input line, file list and
+file information panel.
+
+ ÉÍ[ş]ÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍ»
+ º                                                                 º
+ º Dir                   Name                               OK   Ü º
+ º ÚÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ¿ ÛALLTYPES.DBÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛ  ßßßßßßßß º
+ º ³ÄCYBASE            ³ Files                             Root  Ü º
+ º ³                   ³ ÛALLTYPES.DBÛÛÛ³ÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛ  ßßßßßßßß º
+ º ³                   ³ ÛNUMTEST.DBÛÛÛÛ³ÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛ  Expand Ü º
+ º ³                   ³ ÛSMASTER.DBÛÛÛÛ³ÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛ  ßßßßßßßß º
+ º ³                   ³ ÛSYM2.DBÛÛÛÛÛÛÛ³ÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛ   Mask  Ü º
+ º ³                   ³ ÛSYMBOLS.DBÛÛÛÛ³ÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛ  ßßßßßßßß º
+ º ³                   ³ ÛTEST.DBÛÛÛÛÛÛÛ³ÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛ  Drive  Ü º
+ º ³                   ³ Û..\ÛÛÛÛÛÛÛÛÛÛÛ³ÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛ  ßßßßßßßß º
+ º ÀÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÙ ±±±ş±±±±±±±±±±±±±±±±±±±±±±±±±  Update Ü º
+ º                                                        ßßßßßßßß º
+ º ÛH:\BP\CYBER\CYBASE\*.DBÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛ   All   Ü º
+ º ÛALLTYPES.DB  26624     Jun 16, 1994   2:33amÛÛÛÛÛÛÛÛ  ßßßßßßßß º
+ ÈÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍ¼
+
+ Dir
+ ÚÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ¿
+ ³ÄCYBASE            ³
+ ³                   ³
+ ³                   ³
+ ³                   ³
+ ³                   ³
+ ³                   ³
+ ³                   ³
+ ³                   ³
+ ÀÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÙ
+
+The directory tree window allows you browse through directories on the
+current drive.  Use [*] to expand all child nodes and [-] to retract all
+child nodes.
+
+ Name
+ ÛALLTYPES.DBÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛ
+
+The Name input line is where you enter the name of the file.  Filtering
+is used to insure only valid characters are accepted.
+
+ Files
+ ÛALLTYPES.DBÛÛÛ³ÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛ
+ ÛNUMTEST.DBÛÛÛÛ³ÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛ
+ ÛSMASTER.DBÛÛÛÛ³ÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛ
+ ÛSYM2.DBÛÛÛÛÛÛÛ³ÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛ
+ ÛSYMBOLS.DBÛÛÛÛ³ÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛ
+ ÛTEST.DBÛÛÛÛÛÛÛ³ÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛ
+ Û..\ÛÛÛÛÛÛÛÛÛÛÛ³ÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛ
+ ±±±ş±±±±±±±±±±±±±±±±±±±±±±±±±
+
+The Files list box lists the names of files in the current directory that
+match the file-name mask.
+
+ ÛH:\BP\CYBER\CYBASE\*.DBÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛ
+ ÛALLTYPES.DB  26624     Jun 16, 1994   2:33amÛÛÛÛÛÛÛÛ
+
+The File information panel shows the path name, file name, date,
+time, and size of the selected file.
+
+None of the items on this information panel are selectable.
+
+ Button functions
+ ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
+
+ [   OK   ]
+
+Preforms assigned action on file in name line.
+
+ [  Root  ]
+
+Reads root directory of current drive and the first level of child
+directories.
+
+ [ Expand ]
+
+Expand node toggle.
+
+ [  Mask  ]
+
+ ÉÍ[ş]ÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍ»
+ º                                                          º
+ º  File mask Û*.DBÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛ  º
+ º                                                          º
+ º                                       OK   Ü    Cancel Ü º
+ º                                     ßßßßßßßß    ßßßßßßßß º
+ º                                                          º
+ ÈÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍ¼
+
+Use any valid DOS file mask to filter what files are displayed in the Files
+list box.
+
+ [ Drive  ]
+
+ ÉÍ[ş]ÍÍÍ»
+ º       º
+ º ÛA:Û º
+ º ÛB:Ûş º
+ º ÛC:Û± º
+ º ÛH:Û º
+ º       º
+ ÈÍÍÍÍÍÍÍ¼
+
+Select any valid DOS drive on the system with [Enter] or double-click
+mouse.
+
+ [ Update ]
+
+Refresh Files list box to reflect any changes to current directory.
+
+ [  All   ]
+
+Preforms assigned action on ALL files in Files list box.  Use with caution!
+
+.topic ColorDialog
+ Colors dialog box Ü
+  ßßßßßßßßßßßßßßßßßß
+This dialog box is where you can change the colors of different
+parts of this program.
+
+ ÚÄ Group ÄÄÄÄÄÄÄÄÄÄÄÄÄ¿
+ ³   Desktop          ³
+ ³   Menus            ş³
+ ³   Help             ±³
+ ³   Gray Windows     ±³
+ ³   Blue Windows     ±³
+ ³   Cyan Windows     ±³
+ ³                    ³
+ ÀÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÙ
+The Group list box contains the names of the different regions of
+the program that you can customize.
+
+ ÚÄ Item ÄÄÄÄÄÄÄÄÄÄÄÄÄÄ¿
+ ³   Color            ³
+ ³                    ş³
+
+When you select a group from the Group list, the Item list box
+displays the names of the different views in that region.
+
+ Ú Foreground ¿   Ú Background ¿
+ ³ °±²°±²°±²° ³   ³ ²°±²°±²°±² ³
+ ³ ²°±²°±²°±² ³   ³ °±²°±²°±²° ³
+ ³ ±²°±²°±²°± ³   ÀÄÄÄÄÄÄÄÄÄÄÄÄÙ
+ ÀÄÄÄÄÄÄÄÄÄÄÄÄÙ
+
+ ÚÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ¿
+ ³ Text Text Text ³
+ ³ Text Text Text ³
+ ÀÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÙ
+The display text shows the current color or attribute settings.
+
+Changes do not take effect on the desktop until you close the
+Colors dialog box by choosing OK.
+
+;
+; Place all such manually declared help contexts at end of file.
+;
+
+.topic CloseAll=65314
+ Window³Close all Ü
+  ßßßßßßßßßßßßßßßßß
+Choose Close all to remove all windows from the desk top.
+
+.topic Previous=65318
+ Window³Previous Ü (Shift+F6)
+  ßßßßßßßßßßßßßßßß
+Choose Previous to cycle backwards through the windows on the desk
+top.

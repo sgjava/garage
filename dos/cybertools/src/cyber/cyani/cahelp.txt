@@ -1,0 +1,592 @@
+;
+; CyberAnimate help text
+;
+; This file must be compiled with the Version 1.1 of TVHC.EXE.
+;
+
+.topic NoContext=0
+ ±±±±±±±±±±±±±±±±±±±±±±±±±±±±
+ ±       CyberAnimate       ±Û
+ ± (C) 1994 Steve Goldsmith ±Û
+ ±   All Rights Reserved    ±Û
+ ±±±±±±±±±±±±±±±±±±±±±±±±±±±±Û
+   ßßßßßßßßßßßßßßßßßßßßßßßßßßß
+CyberAnimate is a 256 color real-time animation player,
+animation maker, PCX exporter and viewer.  All menus
+are accessed by pressing Alt+highlighted letter.  For example,
+the "File" menu is pulled down by Alt+F.  You can also access
+the menu by pressing F10 or clicking the mouse on the desired
+menu item.
+
+ {Desk top:DeskTop} ³ {Menu} ³ {Status line:StatusLine}
+
+Press [Esc] to put this help screen away.
+
+.topic DeskTop
+The desk top contains a {menu:Menu}, background and
+{status line:StatusLine}.  All work takes place on the desk top.
+
+.topic Menu
+The menu is accessed by pressing F10 or Alt+highlighted letter.
+For example, the File menu is pulled down by Alt+F.  Use cursor
+keys to move and Enter to select.  A mouse can be used by clicking
+on the desired item.
+
+.topic StatusLine
+Status line items are accessed by pressing Alt+highlighted letter
+or function key.  For example, to exit press Alt+X.  A mouse can be
+used by clicking on the desired item.
+
+.topic File
+ File Ü (Alt+F)
+  ßßßßß
+The File menu includes choices for {loading:LoadFile} font, PCX and
+configuration files, {saving:SaveFile} configuration files,
+{playing:PlaySnip} Snips, {making:MakeSnip} Snips,
+new {file list:NewFileList} and {building:FileListBuild} file lists,
+viewing the {document:ViewDoc}, file {version:About} information and
+{exiting:Exit} the program.
+
+.topic LoadFile
+ File³Load Ü
+  ßßßßßßßßßß
+You can load Character Generator Files .CGF (F3), 2 color
+PC Paintbrush .PCX (Shift+F3) or 256 color .PCX.
+
+Configuration .CFG (Ctrl+F3) files contain VGA font tables 0 - 7,
+{screen:Screen} options, {colors:OColors} and the DAC palette.
+
+.topic PlaySnip
+ File³Play Snip... Ü
+  ßßßßßßßßßßßßßßßßßß
+Play Snip (.SNP) animation file on 256 color mode 13h screen.  Player
+comes up is single step mode and displays first frame.  Once in player
+use [P] to play, [S] to single step and [X] to make a PCX file from
+the current frame.  [Esc] or [Enter] to exit player.
+
+.topic MakeSnip
+ File³Make Snip... Ü
+  ßßßßßßßßßßßßßßßßßß
+Make Snip converts all PCX files in the current
+{file list:FileList} to a Snip animation file.
+
+.topic SaveFile
+ File³Save Ü
+  ßßßßßßßßßß
+Configuration .CFG (Ctrl+F2) files contain VGA font tables 0 - 7,
+{screen:Screen} options, {colors:OColors} and the DAC palette.
+
+.topic NewFileList
+ File³New file list Ü
+  ßßßßßßßßßßßßßßßßßßß
+Open a new {file list:FileList}.
+
+.topic FileListBuild
+ File³File list builderÜ
+  ßßßßßßßßßßßßßßßßßßßßßß
+Opens a {tree window:TreeWindow} which allows you to add files to a
+{file list:FileList}.
+
+.topic ChangeDir
+ File³Change dir... Ü
+  ßßßßßßßßßßßßßßßßßßß
+File³Change dir brings up the Change {directory:ChDirDialog} dialog
+box, in which you can change the current directory.
+
+.topic ViewDoc
+ File³View doc Ü
+  ßßßßßßßßßßßßßß
+Loads CYBER.DOC into a scrolling {window:Windows} for viewing.
+CYBER.DOC contains information about CyberTools.  See ORDER.DOC or
+ORDER.TXT for ordering information.
+
+.topic About
+ File³About Ü
+  ßßßßßßßßßßß
+Displays version, copyright and mode information.  Press [Esc] or
+[Enter] to close box.
+
+.topic Exit
+ File³Exit Ü (Alt+X)
+  ßßßßßßßßßß
+Terminates program.
+
+
+.topic Windows
+ Window Ü (Alt+W)
+  ßßßßßßß
+The Window menu contains commands to close, move and perform
+other window-management commands.
+
+Most of the windows in this program have all the standard window
+elements, including scroll bars, a close box, and zoom icons.
+
+.topic Tile
+ Window³Tile Ü
+  ßßßßßßßßßßßß
+Choose Window³Tile to tile all file viewers on the desk top.
+
+ ÚÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ¿
+ ³ ÉÍÍÍÍÍÍÍÍÍÍÍÍ1ÍÍ»ÚÄÄÄÄÄÄÄÄÄÄÄÄ2ÄÄ¿ ³
+ ³ º               º³               ³ ³
+ ³ º               º³               ³ ³
+ ³ º               º³               ³ ³
+ ³ º               º³               ³ ³
+ ³ ÈÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍ¼ÀÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÙ ³
+ ³ ÚÄÄÄÄÄÄÄÄÄÄÄÄ3ÄÄ¿ÚÄÄÄÄÄÄÄÄÄÄÄÄ4ÄÄ¿ ³
+ ³ ³               ³³               ³ ³
+ ³ ³               ³³               ³ ³
+ ³ ³               ³³               ³ ³
+ ³ ³               ³³               ³ ³
+ ³ ÀÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÙÀÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÙ ³
+ ÀÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÙ
+             Tiled Windows
+
+.topic Cascade
+ Window³Cascade Ü
+  ßßßßßßßßßßßßßßß
+Choose Window³Cascade to stack all file viewers on the desk top.
+
+ ÚÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ1Ä¿
+ ³ÚÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ2Ä¿
+ ³³ÚÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ3Ä¿
+ ³³³ÉÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍ4Í»
+ ³³³º                         º
+ ³³³º                         º
+ ³³³º                         º
+ ³³³º                         º
+ ³³³º                         º
+ ÀÀÀÈÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍ¼
+
+        Cascaded Windows
+
+.topic Resize
+ Window³Size/Move Ü (Ctrl+F5)
+  ßßßßßßßßßßßßßßßßß
+Choose this command to change the size or position of the active
+window.
+
+ ÜÜÜÜÜÜ
+  Size
+ ßßßßßß
+If you press Shift while you use the arrow keys, you can change
+the size of the active window.  Once you've adjusted its size or
+position, press Enter.
+
+If a window has a Resize corner, you can drag that corner to
+resize the window.
+
+ ÜÜÜÜÜÜ
+  Move
+ ßßßßßß
+When you choose Window³Size/Move, the active window moves in
+response to the arrow keys.  Once you've moved the window to where
+you want it, press Enter.
+
+You can also move a window by dragging its title bar with the
+mouse.
+
+.topic Zoom
+ Window³Zoom Ü (F5)
+  ßßßßßßßßßßßß
+Choose Zoom to resize the active window to the maximum size.  If
+the window is already zoomed, you can choose this command to
+restore it to its previous size.
+
+You can also double-click anywhere on the window's title bar
+(except where an icon appears) to zoom or unzoom the window.
+
+.topic Next
+ Window³Next Ü (F6)
+  ßßßßßßßßßßßß
+Choose Next to cycle forwards through the windows on the desk top.
+
+.topic Close
+ Window³Close Ü (Alt+F3)
+  ßßßßßßßßßßßßß
+Choose Close to close the active window.
+
+You can also click the Close box in the upper right corner to
+close a window.
+
+.topic Options
+ Options Ü (Alt+O)
+  ßßßßßßßß
+The Options menu contains commands that let you set {screen:Screen}
+options, change the {colors:OColors}, adjust the VGA
+{palette:AdjustPalette} and restore the {default:DefaultFont} font.
+
+.topic Screen
+ Options³Screen... Ü
+  ßßßßßßßßßßßßßßßßßß
+Screen brings up the {Screen:ScreenDialog} dialog box,
+where you can customize the appearance of the desk top.
+
+.topic OColors
+ Options³Colors... Ü
+  ßßßßßßßßßßßßßßßßßß
+Colors brings up the {Colors:ColorDialog} dialog box,
+where you can customize the colors of the desk top.  Make sure you
+use only the first 8 colors (0 - 7), since the last 8 colors
+(8 - 15) are reserved for font 2 table.  You may have to
+set {font 2:Screen} table to the same VGA table as font 1 table to
+see the color block next to the names.  Remember that colors 8 - 15
+are for font 2 table, so there is no telling what it contains.
+
+.topic AdjustPalette
+ Options³Adjust palette... Ü
+  ßßßßßßßßßßßßßßßßßßßßßßßßßß
+Adjust palette brings up the {Adjust palette:PaletteDialog} dialog
+box, where you adjust the VGA's DAC registers to any of the 262,144
+possible colors.
+
+.topic DefaultFont
+ Options³Default font Ü (F4)
+  ßßßßßßßßßßßßßßßßßßßßß
+Loads the default font into font 1 table.  The default font is the
+font loaded during start up.
+
+.topic PaletteDialog
+ Adjust palette dialog box Ü
+  ßßßßßßßßßßßßßßßßßßßßßßßßßß
+Select color to adjust.  The color names are arbitrary and
+can be made any color.  You may have to set {font 2:Screen} table
+to the same VGA table as font 1 table to see the color block next
+to the names.  Remember that colors 8 - 15 are for graphics, so
+there is no telling what is in font 2 table.
+
+ Color
+ ÚÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ¿
+ ³  àáâÛBlack       àáâÛGray           ³
+ ³  àáâÛBlue        àáâÛLight Blue     ³
+ ³  àáâÛGreen       àáâÛLight Green    ³
+ ³  àáâÛCyan        àáâÛLight Cyan     ³
+ ³  àáâÛRed         àáâÛLight Red      ³
+ ³  àáâÛMagenta     àáâÛLight Magenta  ³
+ ³  àáâÛBrown       àáâÛYellow         ³
+ ³  àáâÛLight Gray  àáâÛWhite          ³
+ ÀÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÙ
+
+The Red, Green and Blue sliders allow you the change the RGB levels
+of the current color.  The [Cancel] or [Default] buttons restores
+the VGA palette to the colors in effect prior to adjustments.
+
+  Red
+ ±±±ş±±±±±±±±±±±±±±±±±±±±±±±±±±±±±
+  Green
+ ±±±ş±±±±±±±±±±±±±±±±±±±±±±±±±±±±±
+  Blue
+ ±±±ş±±±±±±±±±±±±±±±±±±±±±±±±±±±±±
+
+.topic ScreenDialog
+ Screen dialog box Ü
+  ßßßßßßßßßßßßßßßßßß
+The Screen dialog allows you to set various screen modes and select
+which VGA font tables to use.  Windows 3.x and other OSs that allow
+task switching may corrupt VGA font tables 2 - 7 during task
+switches.  Only the two BIOS supported tables 0 and 1 are restored
+correctly under Windows 3.1 with some VGA drivers.  You can
+{save:SaveFile} your current configuration prior to task switching
+and later {load:LoadFile} it if needed.
+
+Use 640 X 400 to eliminate one pixel gaps caused by standard 720 X
+400 VGA text mode.
+
+Paging causes VGA screen page 0 to be copied between pages
+1 and 2.  This help smooth movement and eliminate flicker.  If the
+desk top becomes too sluggish then you may want to turn off
+Paging.
+
+8 color mode masks off the high bit of all attribute nibbles
+forcing colors 8 - 15 the be the same as 0 - 7.  If 8 color mode is
+turned off then all 16 colors can be used.
+
+ Screen Mode
+ ÚÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ¿
+ ³  äåæ 640 X 400            ³
+ ³  äåæ Paging               ³
+ ³  äåæ 8 Colors             ³
+ ÀÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÙ
+
+Select which VGA font table to use for the desk top.  Make sure
+that a font resides in the desired VGA table or the screen may turn
+to garbage.  If this happens just restore the {default:DefaultFont}
+font.
+
+ Font 1 table
+ ÚÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ¿
+ ³  àáâ 0  àáâ 4 ³
+ ³  àáâ 1  àáâ 5 ³
+ ³  àáâ 2  àáâ 6 ³
+ ³  àáâ 3  àáâ 7 ³
+ ÀÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÙ
+
+Select which VGA font table to use for viewing two color PCX
+images.  If font 2 table is set the same as font 1 table when
+you load a PCX file then the screen will turn to garbage.  If
+this happens just restore the {default:DefaultFont} font.
+
+ Font 2 table
+ ÚÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ¿
+ ³  àáâ 0  àáâ 4 ³
+ ³  àáâ 1  àáâ 5 ³
+ ³  àáâ 2  àáâ 6 ³
+ ³  àáâ 3  àáâ 7 ³
+ ÀÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÙ
+
+When saving fonts as .CGF files you can specify the first and last
+character to save.
+
+ First char ÛÛÛÛÛ
+ Last  char ÛÛÛÛÛ
+
+.topic PCXWindow
+ PCX Window Ü
+  ßßßßßßßßßßß
+The PCX window is a 256 by 128 graphics window
+for {viewing:LoadFile} 2 color .PCX files in text mode.  Set
+{font 2 table:Screen} to desired VGA font table and
+foreground {color:OColors} to 8 - 15.
+
+.topic MakeSnipDialog
+ Make Snip dialog box Ü
+  ßßßßßßßßßßßßßßßßßßßßß
+The Make Snip dialog box allows you to create a Snip (.SNP) animation
+file from all 256 color PCX files in the current {file list:FileList}.
+
+Set Snip delay with slider in 1/18th second increments.
+
+  Delay
+ ±±±ş±±±±±±±±±±±±±±±±±±±±  ÛÛÛÛÛ
+
+Press [OK] to begin processing or [Cancel] to exit before, during or
+after processing.  The first PCX file determines Snip size and
+palette.  All PCX files are scanned to make sure they are the same
+size and type as the first.
+
+.topic FileList
+
+The file list holds names sent by a {Tree window:TreeWindow} called
+File List Builder.  Various functions require a file list to complete
+their tasks.
+
+ ÉÍ[ş]ÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍ File List ÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍ»
+ º                                                                         º
+ º  H:\BP\CYBER\CYBASE\ALLTYPES.DB                                        º
+ º  H:\BP\CYBER\CYBASE\NUMTEST.DB                                        ş º
+ º  H:\BP\CYBER\CYBASE\SMASTER.DB                                        ± º
+ º  H:\BP\CYBER\CYBASE\SYM2.DB                                           ± º
+ º  H:\BP\CYBER\CYBASE\SYMBOLS.DB                                        ± º
+ º  H:\BP\CYBER\CYBASE\TEST.DB                                            º
+ º                                                                         º
+ ÈÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍ¼
+
+
+.topic TreeWindow
+ Tree window Ü
+  ßßßßßßßßßßßß
+The Tree window contains a directory tree, name input line, file list and
+file information panel.
+
+ ÉÍ[ş]ÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍ»
+ º                                                                 º
+ º Dir                   Name                               OK   Ü º
+ º ÚÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ¿ ÛALLTYPES.DBÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛ  ßßßßßßßß º
+ º ³ÄCYBASE            ³ Files                             Root  Ü º
+ º ³                   ³ ÛALLTYPES.DBÛÛÛ³ÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛ  ßßßßßßßß º
+ º ³                   ³ ÛNUMTEST.DBÛÛÛÛ³ÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛ  Expand Ü º
+ º ³                   ³ ÛSMASTER.DBÛÛÛÛ³ÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛ  ßßßßßßßß º
+ º ³                   ³ ÛSYM2.DBÛÛÛÛÛÛÛ³ÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛ   Mask  Ü º
+ º ³                   ³ ÛSYMBOLS.DBÛÛÛÛ³ÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛ  ßßßßßßßß º
+ º ³                   ³ ÛTEST.DBÛÛÛÛÛÛÛ³ÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛ  Drive  Ü º
+ º ³                   ³ Û..\ÛÛÛÛÛÛÛÛÛÛÛ³ÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛ  ßßßßßßßß º
+ º ÀÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÙ ±±±ş±±±±±±±±±±±±±±±±±±±±±±±±±  Update Ü º
+ º                                                        ßßßßßßßß º
+ º ÛH:\BP\CYBER\CYBASE\*.DBÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛ   All   Ü º
+ º ÛALLTYPES.DB  26624     Jun 16, 1994   2:33amÛÛÛÛÛÛÛÛ  ßßßßßßßß º
+ ÈÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍ¼
+
+ Dir
+ ÚÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ¿
+ ³ÄCYBASE            ³
+ ³                   ³
+ ³                   ³
+ ³                   ³
+ ³                   ³
+ ³                   ³
+ ³                   ³
+ ³                   ³
+ ÀÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÙ
+
+The directory tree window allows you browse through directories on the
+current drive.  Use [*] to expand all child nodes and [-] to retract all
+child nodes.
+
+ Name
+ ÛALLTYPES.DBÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛ
+
+The Name input line is where you enter the name of the file.  Filtering
+is used to insure only valid characters are accepted.
+
+ Files
+ ÛALLTYPES.DBÛÛÛ³ÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛ
+ ÛNUMTEST.DBÛÛÛÛ³ÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛ
+ ÛSMASTER.DBÛÛÛÛ³ÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛ
+ ÛSYM2.DBÛÛÛÛÛÛÛ³ÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛ
+ ÛSYMBOLS.DBÛÛÛÛ³ÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛ
+ ÛTEST.DBÛÛÛÛÛÛÛ³ÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛ
+ Û..\ÛÛÛÛÛÛÛÛÛÛÛ³ÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛ
+ ±±±ş±±±±±±±±±±±±±±±±±±±±±±±±±
+
+The Files list box lists the names of files in the current directory that
+match the file-name mask.
+
+ ÛH:\BP\CYBER\CYBASE\*.DBÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛ
+ ÛALLTYPES.DB  26624     Jun 16, 1994   2:33amÛÛÛÛÛÛÛÛ
+
+The File information panel shows the path name, file name, date,
+time, and size of the selected file.
+
+None of the items on this information panel are selectable.
+
+ Button functions
+ ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
+
+ [   OK   ]
+
+Preforms assigned action on file in name line.
+
+ [  Root  ]
+
+Reads root directory of current drive and the first level of child
+directories.
+
+ [ Expand ]
+
+Expand node toggle.
+
+ [  Mask  ]
+
+ ÉÍ[ş]ÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍ»
+ º                                                          º
+ º  File mask Û*.DBÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛ  º
+ º                                                          º
+ º                                       OK   Ü    Cancel Ü º
+ º                                     ßßßßßßßß    ßßßßßßßß º
+ º                                                          º
+ ÈÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍ¼
+
+Use any valid DOS file mask to filter what files are displayed in the Files
+list box.
+
+ [ Drive  ]
+
+ ÉÍ[ş]ÍÍÍ»
+ º       º
+ º ÛA:Û º
+ º ÛB:Ûş º
+ º ÛC:Û± º
+ º ÛH:Û º
+ º       º
+ ÈÍÍÍÍÍÍÍ¼
+
+Select any valid DOS drive on the system with [Enter] or double-click
+mouse.
+
+ [ Update ]
+
+Refresh Files list box to reflect any changes to current directory.
+
+ [  All   ]
+
+Preforms assigned action on ALL files in Files list box.  Use with caution!
+
+.topic ChDirDialog
+ Change dir dialog box Ü
+  ßßßßßßßßßßßßßßßßßßßßßß
+The Change directory dialog box consists of an input box, a list
+box, OK, Chdir and Revert buttons.
+
+ Ú Directory Name ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ¿
+ ³                                     ³
+ ÀÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÙ
+The Directory Name input box is where you type in the path of the
+new directory.
+
+ Ú Directory Tree ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ¿
+ ³   Drives                            ³
+ ³   ÀÄÂC:\                            ³
+ ³     ÀÄÂCYEDIT                       ³
+ ³       ÀÄÄBOLDFNTS                   ³
+ ÀÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÙ
+The Directory Tree list box enables you to navigate directories
+by using the selecting bar and pressing Enter.
+
+If you're using the keyboard, press Enter to make the selected
+directory be the current directory, then choose OK or press Esc
+to exit the dialog box.
+
+ [ Chdir  ]
+
+The Chdir button changes the current directory once you've
+selected or typed in a directory name.
+
+ [ Revert ]
+
+The Revert button goes back to the previous directory, as long as
+you haven't yet exited the dialog box.
+
+.topic ColorDialog
+ Colors dialog box Ü
+  ßßßßßßßßßßßßßßßßßß
+This dialog box is where you can change the colors of different
+parts of this program.
+
+ ÚÄ Group ÄÄÄÄÄÄÄÄÄÄÄÄÄ¿
+ ³   Desktop          ³
+ ³   Menus            ş³
+ ³   Help             ±³
+ ³   Gray Windows     ±³
+ ³   Blue Windows     ±³
+ ³   Cyan Windows     ±³
+ ³                    ³
+ ÀÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÙ
+The Group list box contains the names of the different regions of
+the program that you can customize.
+
+ ÚÄ Item ÄÄÄÄÄÄÄÄÄÄÄÄÄÄ¿
+ ³   Color            ³
+ ³                    ş³
+
+When you select a group from the Group list, the Item list box
+displays the names of the different views in that region.
+
+ Ú Foreground ¿   Ú Background ¿
+ ³ °±²°±²°±²° ³   ³ ²°±²°±²°±² ³
+ ³ ²°±²°±²°±² ³   ³ °±²°±²°±²° ³
+ ³ ±²°±²°±²°± ³   ÀÄÄÄÄÄÄÄÄÄÄÄÄÙ
+ ÀÄÄÄÄÄÄÄÄÄÄÄÄÙ
+
+ ÚÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ¿
+ ³ Text Text Text ³
+ ³ Text Text Text ³
+ ÀÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÙ
+The display text shows the current color or attribute settings.
+
+Changes do not take effect on the desktop until you close the
+Colors dialog box by choosing OK.
+
+;
+; Place all such manually declared help contexts at end of file.
+;
+
+.topic CloseAll=65314
+ Window³Close all Ü
+  ßßßßßßßßßßßßßßßßß
+Choose Close all to remove all windows from the desk top.
+
+.topic Previous=65318
+ Window³Previous Ü (Shift+F6)
+  ßßßßßßßßßßßßßßßß
+Choose Previous to cycle backwards through the windows on the desk
+top.

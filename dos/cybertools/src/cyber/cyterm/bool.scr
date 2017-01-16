@@ -1,0 +1,73 @@
+;
+;CyberTerm boolean function test suite.  DOUBLE and LONGINT tests do not
+;work with Demoware version.
+;
+
+LogOn
+String  NullStr
+String  Str1
+LongInt Int1
+Double  Double1
+
+Assign Str1,'ABC'
+Assign Int1,5
+Assign Double1,99.01
+
+WaitForSepChar ','
+WaitForSecs 1
+
+WaitFor 'String test:'
+If= Str1,'ABC'
+  WaitFor 'Equal'
+If<> Str1,'ABD'
+  WaitFor 'Not equal'
+If< Str1,'ABD'
+  WaitFor 'Less'
+If> Str1,'ABB'
+  WaitFor 'Great'
+If<= Str1,'ABC'
+  WaitFor 'Less'
+If>= Str1,'ABC'
+  WaitFor 'Great'
+
+WaitFor 'Null string test:'
+If= NullStr,NullStr
+  WaitFor 'Equal'
+If<> NullStr,'ABD'
+  WaitFor 'Not equal'
+If< NullStr,'ABD'
+  WaitFor 'Less'
+If> Str1,NullStr
+  WaitFor 'Great'
+If<= NullStr,'ABD'
+  WaitFor 'Less'
+If>= Str1,NullStr
+  WaitFor 'Great'
+
+WaitFor 'Int test:'
+If= Int1,5
+  WaitFor 'Equal'
+If<> Int1,6
+  WaitFor 'Not equal'
+If< Int1,6
+  WaitFor 'Less'
+If> Int1,4
+  WaitFor 'Great'
+If<= Int1,6
+  WaitFor 'Less'
+If>= Int1,4
+  WaitFor 'Great'
+
+WaitFor 'Double test:'
+If= Double1,99.01
+  WaitFor 'Equal'
+If<> Double1,99.02
+  WaitFor 'Not equal'
+If< Double1,99.02
+  WaitFor 'Less'
+If> Double1,99.00
+  WaitFor 'Great'
+If<= Double1,99.02
+  WaitFor 'Less'
+If>= Double1,99.00
+  WaitFor 'Great'

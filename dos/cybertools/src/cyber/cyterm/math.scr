@@ -1,0 +1,70 @@
+;CyberTerm script to test math functions of all var types using WaitFor to
+;show output in log.  Also test divide by zero error.  DOUBLE and LONGINT
+;tests do not work with Demoware version.
+
+LogOn
+WaitForSepChar ','
+WaitForSecs 1
+
+;Declare vars
+
+String  Str1
+LongInt Int1
+Double  Dbl1
+
+;Add
+
+Assign Str1,'ONE'
+Add Str1,'TWO'
+WaitFor Str1
+Assign Int1,5
+Add Int1,10
+WaitFor Int1
+Assign Dbl1,1.1
+Add Dbl1,2.9
+WaitFor Dbl1
+
+;Subtract
+
+Assign Str1,'ONE'
+Sub Str1,'TWO'
+WaitFor Str1
+Assign Int1,5
+Sub Int1,10
+WaitFor Int1
+Assign Dbl1,1.1
+Sub Dbl1,2.9
+WaitFor Dbl1
+
+;Multiply
+
+Assign Str1,'ONE'
+Mul Str1,'TWO'
+WaitFor Str1
+Assign Int1,5
+Mul Int1,10
+WaitFor Int1
+Assign Dbl1,1.1
+Mul Dbl1,2.9
+WaitFor Dbl1
+
+;Divide
+
+Assign Str1,'ONE'
+Div Str1,'TWO'
+WaitFor Str1
+Assign Int1,10
+Div Int1,3
+WaitFor Int1
+Assign Dbl1,10.0
+Div Dbl1,2.5
+WaitFor Dbl1
+
+;This line halts engine with divide by zero error
+
+Div Dbl1,0.0
+
+;This line will not be executed because of previous divide by zero error
+;halted engine.
+
+WaitFor Dbl1

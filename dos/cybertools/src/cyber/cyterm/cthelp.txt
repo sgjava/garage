@@ -1,0 +1,1048 @@
+;
+; CyberTerm help text
+;
+; This file must be compiled with the Version 1.1 of TVHC.EXE.
+;
+
+.topic NoContext=0
+ ±±±±±±±±±±±±±±±±±±±±±±±±±±±±
+ ±        CyberTerm         ±Û
+ ± (C) 1994 Steve Goldsmith ±Û
+ ±   All Rights Reserved    ±Û
+ ±±±±±±±±±±±±±±±±±±±±±±±±±±±±Û
+   ßßßßßßßßßßßßßßßßßßßßßßßßßßß
+CyberTerm is a professional multi-session terminal program.  All menus
+are accessed by pressing Alt+highlighted letter.  For example,
+the "File" menu is pulled down by Alt+F.  You can also access
+the menu by pressing F10 or clicking the mouse on the desired
+menu item.
+
+ {Desk top:DeskTop} ³ {Menu} ³ {Status line:StatusLine}
+
+Press [Esc] to put this help screen away.
+
+   ÛÜ                                                 ÜÜÜ Û
+  ŞÛÛÛÛÜÜ            ÜÜÜÜÜÜÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛß  ÜÜÛÛÛÛÛßß Şİ
+  ŞÛÛÛßÛÛßßÜÜ   ÜÜÛÜÜÜÛßßßßÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛß ÜÛÛÛÛßß ÜÜÜÛ ÛÛ
+   ÛÛÛÛÛÛÛÛß ÜÛÜÜÛßß ÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛ ßßÛß  ÜÛÛÛÛÛ  ŞÛ ÛÜÜ
+    ÛÛÛÛÛÛÛ ÛÛßßÛÛÜÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÜÜÜÜ  ßßÛÛİİ ÛİŞÛŞİİ
+     Ûßß ÜÜÜÜÜ ßßÛßİÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÜÜ  ß Ûß ßÛŞ İ
+      Ü ÜÜÛÛÛÜÜÛÜ ÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛ      ÛÛÛÛÛÛÜ Ûß   Ş Û
+     ŞÜÛßßßßßßßßÛÜÛÛÛÛÛÛÛÛÛÛÛÛßßßßßßßßßß   ßßÛÜÜÛÛÛÛÛÛÛİ     Ûß
+     Ûİß ÜÛÛÛÜÜ ßÛİÛÛÛÛÛÛßß ÜÜÜÛÛÛÛÛÛÛÛÜÜÜÜ ßßÛßİÛÛÛÛÛÛÛ    ß
+     ÛÛ ÛÛÛÛÛÛÛ  ÛÛÛÛÛÛß ÜÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÜÜÜ ßÛÛÛÛÜßÜÛİ
+    ŞİİŞÛÛÛÛÛÛİİŞŞİÛÛÛ ÜÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛ ßÛÛÛİÛŞÛİ
+    Şİ ÛÛÛÛÛÛÛ  ÛÛÜßÛ ÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛ ßÛÛßÜßÛİ
+     Û ÛÛÛÛÛÛÛ  ÛÛßÛ ÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛ ÛÛÛÛÛÛÜ
+     Û ÛÛÛÛÛÛÛ  ÛßÛ ÛÛÛÛÛÛÛÛÛÛÛÛÛß  ßÛÛÛÛÛÛÛÛÛÛÛÛ ÛÛÛÛÛŞİÛÜ ÜÜ
+     Û ÛÛÛÛÛÛßÛ Ûß ÛÛÛÛÛÛÛÛÛÛÛÛÛİ  Ü ŞÛÛÛÛÛÛÛÛÛÛÛ ÛÛÛÛÛŞÛÛÛßßÜÜÛÜ
+     Ş ŞÛÛÛÛİ Ü ÜÜÛÛÛÛÛÛÛÛÛÛÛÛÛÛ   Şİ ÛÛÛÛÛÛÛÛÛİİŞÛÛÛÛÛÛÛÛÛÛÛÛÛßÜÛÜ
+      İŞÛÛÛÛ  ß ÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛ    İ ÛÛÛÛÛÛÛÛÛÛ ÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛ ÛÛİ
+      Ş ÛÛÛÛ    ÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛ      ÛÛÛÛÛÛÛÛİİŞÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛŞİÛ
+        ŞÛÛÛİ  ŞÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛİ    ŞÛÛÛÛÛÛÛÛß ÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛİ
+         ÛÛÛÛÜÜÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÜ  ÜÛÛÛÛÛÛÛßß ÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛ ÛÛ
+          Ûßß ÜÜÜÜÜ ßß Ü ßÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛßß ÜÜÜÜÜÜ ßÜÛÛÛÛÛÛÛÛÛÛÛÛŞİÛ
+           Ü ß     ßßßÜ ÛÜÜ ßßßßÛÛÛÛÛÛßßßß ÜÛÛÛÛÛÛÛÛÜ ÛÛÜÛÛÛÛÛÛÛÛÛÛ Û
+          Û ÛÜÜÜÜ      ÜÛÛÛÛÛÛÛÜÜÜÜÜÜÜÜÜÜÛÛÛÛÛÛÛÛÛÛÛÛİŞÛÛßßßßÛÛÛÛÛÛşÛ
+          ŞÛÜÜÜÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛßßÛÛÛÛÛÛÛÛÛÛ Ş         ßßÛÛÛ
+           ßÛßÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛßßÜÛÛÛÛÛÛÛÛ ŞÛÛÜ ÜÜ       Ûİ
+             ß ßÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛßßßßßßÜÜÜÛÛÛÛÛÛÛÛßß ÜÛÛÛÛßßÜÛÜ    Üß
+                ßßßßßßßÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛßß ÜÜÛÛÛÛÛÛÛÛÛÛßÜÛ
+               ßÛÛÜÜÜÜ ßßßßßßßßßßßßßßßßßßß ÜÜÜÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛŞİİ
+                    CyberTerm - Multi-session ANSI terminal
+
+.topic DeskTop
+The desk top contains a {menu:Menu}, background and
+{status line:StatusLine}.  All work takes place on the desk top.
+
+.topic Menu
+The menu is accessed by pressing F10 or Alt+highlighted letter.
+For example, the File menu is pulled down by Alt+F.  Use cursor
+keys to move and Enter to select.  A mouse can be used by clicking
+on the desired item.
+
+.topic StatusLine
+Status line items are accessed by pressing Alt+highlighted letter
+or function key.  For example, to exit press Alt+X.  A mouse can be
+used by clicking on the desired item.
+
+.topic File
+ File Ü (Alt+F)
+  ßßßßß
+The File menu includes choices for {running:RunScript} scripts,
+{editing:Text} text files, {down:Download} loading files,
+{up:Upload} loading files, using file {lists:List},
+loading and saving {config:Config} configuration
+files, {document:ViewDoc} file, {version:About} information and
+{exiting:Exit} the program.
+
+.topic RunScript
+ File³Run script Ü
+  ßßßßßßßßßßßßßßßß
+Run script compiles and runs the script in the focused editor window.  The
+script is composed of {commands:ScriptCommands} that allow you to automate
+many on-line tasks.
+
+.topic Text
+ File³Text Ü
+  ßßßßßßßßßß
+The Text menu includes choices for {opening:OpenText}, {creating:NewText},
+{saving:SaveText}, {saving as:SaveAsText} and {saving all:SaveAllText} text
+files.
+
+.topic OpenText
+ File³Text³Open... Ü (F3)
+  ßßßßßßßßßßßßßßßßßß
+Open allows editing of existing text files up to 64K in length.
+
+.topic NewText
+ File³Text³New Ü (F4)
+  ßßßßßßßßßßßßßß
+New creates a new editor window.  The window's name is "Untitled" and is
+empty.
+
+.topic SaveText
+ File³Text³Save Ü (F2)
+  ßßßßßßßßßßßßßßß
+Save allows you to save the current editor window to a disk
+file.  If the window already has a name, the file will be saved under
+this same name.  If you wish to save the file under a new name, select
+{Save As:SaveAsText} instead.
+
+.topic SaveAsText
+ File³Text³Save As... Ü
+  ßßßßßßßßßßßßßßßßßßßßß
+Save As allows you to save the current editor window to a new file name.  If
+an editor window does not have a name it is called "Untitled".
+
+.topic SaveAllText
+ File³Text³Save all Ü
+  ßßßßßßßßßßßßßßßßßßß
+Save all saves all editor windows (if any) to disk.
+
+.topic Download
+ File³Down load Ü
+  ßßßßßßßßßßßßßßß
+Down load allows you to receive files from the focused {terminal:TermWindow}
+using one of the following protocols:
+
+ ÚÄÄÄÄÄÄÄÄÄÄÄÄÄ¿
+ ³ Z modem     ³
+ ³ Y modem     ³
+ ³ Y modem G   ³
+ ³ X modem     ³
+ ³ X modem 1K  ³
+ ³ X modem 1KG ³
+ ³ Kermit      ³
+ ³ Ascii       ³
+ ÀÄÄÄÄÄÄÄÄÄÄÄÄÄÙ
+
+Some protocols require the file name to exist in a {file list:FileList} if
+not provided by the protocol.
+
+.topic Upload
+ File³Up load Ü
+  ßßßßßßßßßßßßß
+Up load allows you to send files from the focused {terminal:TermWindow}
+using one of the following protocols:
+
+ ÚÄÄÄÄÄÄÄÄÄÄÄÄÄ¿
+ ³ Z modem     ³
+ ³ Y modem     ³
+ ³ Y modem G   ³
+ ³ X modem     ³
+ ³ X modem 1K  ³
+ ³ X modem 1KG ³
+ ³ Kermit      ³
+ ³ Ascii       ³
+ ÀÄÄÄÄÄÄÄÄÄÄÄÄÄÙ
+
+The file names to up load must exist in a {file list:FileList}.
+
+.topic List
+ File³List Ü
+  ßßßßßßßßßß
+The List menu includes choices for opening a new
+{file list:NewFileList} and opening a file list {builder:FileListBuild}.
+
+.topic NewFileList
+ File³List³New Ü
+  ßßßßßßßßßßßßßß
+Opens a new {file list:FileList}.
+
+.topic FileListBuild
+ File³List³Builder...Ü
+  ßßßßßßßßßßßßßßßßßßßß
+Opens a {tree window:TreeWindow} which allows you to add files to a
+{file list:FileList}.
+
+.topic Config
+ File³Config Ü
+  ßßßßßßßßßßßß
+The Config menu includes choices for {saving:SaveConfig} and
+{loading:LoadConfig} a configuration file.
+
+.topic LoadConfig
+ File³Load config Ü (Ctrl+F3)
+  ßßßßßßßßßßßßßßßßß
+Loading a new configuration (.CFG) file allows you to change the
+desk top {colors:ColorDialog}, {terminal:TermOpts} options and
+{phone book:PhoneBookDlg}.
+
+.topic SaveConfig
+ File³Save config Ü (Ctrl+F2)
+  ßßßßßßßßßßßßßßßßß
+Saving the current configuration (.CFG) file allows you to preserve the
+desk top {colors:ColorDialog}, {terminal:TermOpts} options and
+{phone book:PhoneBookDlg}.
+
+.topic ViewDoc
+ File³View doc Ü
+  ßßßßßßßßßßßßßß
+Loads CYBER.DOC into a scrolling {window:Windows} for viewing.
+CYBER.DOC contains information about CyberTools.  See ORDER.DOC or
+ORDER.TXT for ordering information.
+
+.topic About
+ File³About Ü
+  ßßßßßßßßßßß
+Displays version, copyright and mode information.  Press [Esc] or
+[Enter] to close box.
+
+.topic Exit
+ File³Exit Ü (Alt+X)
+  ßßßßßßßßßß
+Terminates program.
+
+.topic Edit
+ Edit Ü (Alt+E)
+  ßßßßß
+The Edit menu includes choices for {undoing:undo}, {cutting:cut},
+{coping:copy}, {pasting:paste} and {clearing:clear} text in the editor
+and clipboard.  Copy and Paste also work with the table editor.
+
+.topic Undo
+ Edit³Undo Ü
+  ßßßßßßßßßß
+Undo allows you to revert back to the last editor action you performed.  For
+example, if the line:
+
+  This is an editor test
+
+is changed to:
+
+  This was an editor test
+
+the Undo command will become active.  Executing the Undo command will
+cause the line to revert back to its original version.  Note that
+changes which can be undone are grouped into similar actions, such as
+typing, or deleting characters.  Any action type you perform that is
+different than the last action type will cause the Undo information to
+be lost.
+
+.topic Cut
+ Edit³Cut Ü
+  ßßßßßßßßß
+Cut removes the selected text and places it on the
+Clipboard.  Any information previously on the clipboard is lost.  Text
+cut from the editor may be immediately replaced by selecting the
+{Undo} command before moving the cursor.
+
+.topic Copy
+ Edit³Copy Ü
+  ßßßßßßßßßß
+Copy places a copy of the selected text on the Clipboard.  The selected
+information is left unchanged, but any information previously on the
+clipboard is lost.
+
+.topic Paste
+ Edit³Paste Ü
+  ßßßßßßßßßßß
+Paste inserts the contents of the clipboard into the current editor window
+at the cursor position.  The contents of the clipboard remain unchanged.  If
+any text is selected in the current editor window, the highlighted text is
+replaced by the text coming from the clipboard.  Information pasted into an
+editor may be removed immediately by using the {Undo} command before moving
+the cursor.
+
+.topic Clear
+ Edit³Clear Ü
+  ßßßßßßßßßßß
+Clear removes any selected text from the current editor without placing a
+copy of the text on the clipboard.  The effects of this command may be
+reversed by selecting {Undo} before moving the cursor.
+
+.topic ShowClip
+ Edit³Show clipboard Ü
+  ßßßßßßßßßßßßßßßßßßßß
+Show clipboard will display the Clipboard contents is an ordinary editor
+window.  Note that {Cut} and {Paste} commands are not enabled while the
+clipboard is the focused window.
+
+
+.topic Search
+ Search Ü (Alt+S)
+  ßßßßßßß
+The Search menu includes choices for {finding:Find} and
+{replacing:Replace} text in the topmost edit
+window.  {Search again:SearchAgain} repeats last Find or Replace.
+
+.topic Find
+ Search³Find Ü
+  ßßßßßßßßßßßß
+Find performs a text search in the editor.
+
+.topic Replace
+ Search³Replace Ü
+  ßßßßßßßßßßßßßßß
+Replace performs a text search and replace in the editor.
+
+.topic SearchAgain
+ Search³Search again Ü
+  ßßßßßßßßßßßßßßßßßßßß
+Search again repeats the last {Find} or {Replace}.
+
+
+
+.topic Terminal
+ Terminal Ü (Alt+T)
+  ßßßßßßßßß
+The Terminal menu includes choices for {dialing:PhoneBook} numbers,
+{capturing:Capture} session, {hanging:HangUp} up line, toggling
+local {echo:EchoToggle}, aborting {script:AbortScript} and aborting
+{protocol:AbortXfer} transfer.
+
+.topic PhoneBook
+ Terminal³Phone book... Ü (F3)
+  ßßßßßßßßßßßßßßßßßßßßßßß
+Phone book brings up the {phone book:PhoneBookDlg} dialog which
+allows you to store phone numbers and terminal configuration
+information which can be {saved:SaveConfig} with the configuration.
+
+.topic Capture
+ Terminal³Capture Ü
+  ßßßßßßßßßßßßßßßßß
+Toggles focused {terminal's:TermWindow} capture file on and off.  When
+toggling capture off the file name is ignored.
+
+.topic HangUp
+ Terminal³Hang up Ü
+  ßßßßßßßßßßßßßßßßß
+Drops focused {terminal's:TermWindow} connection using cancel character in
+dial phase or DTR any other time.
+
+.topic EchoToggle
+ Terminal³Echo toggle Ü
+  ßßßßßßßßßßßßßßßßßßßßß
+Toggle focused {terminal's:TermWindow} local echo on or off.
+
+.topic AbortScript
+ Terminal³Script abort Ü
+  ßßßßßßßßßßßßßßßßßßßßßß
+
+Immediately aborts focused {terminal's:TermWindow} script, but leaves
+terminal connected.
+
+.topic AbortXfer
+ Terminal³Transfer abort Ü
+  ßßßßßßßßßßßßßßßßßßßßßßßß
+
+Immediately aborts focused {terminal's:TermWindow} protocol.  Some hosts
+will require a few ^X to abort the protocol at the host's end.
+
+.topic Windows
+ Window Ü (Alt+W)
+  ßßßßßßß
+The Window menu contains commands to close, move and perform
+other window-management commands.
+
+Most of the windows in this program have all the standard window
+elements, including scroll bars, a close box, and zoom icons.
+
+.topic Tile
+ Window³Tile Ü
+  ßßßßßßßßßßßß
+Choose Window³Tile to tile all file viewers on the desk top.
+
+ ÚÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ¿
+ ³ ÉÍÍÍÍÍÍÍÍÍÍÍÍ1ÍÍ»ÚÄÄÄÄÄÄÄÄÄÄÄÄ2ÄÄ¿ ³
+ ³ º               º³               ³ ³
+ ³ º               º³               ³ ³
+ ³ º               º³               ³ ³
+ ³ º               º³               ³ ³
+ ³ ÈÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍ¼ÀÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÙ ³
+ ³ ÚÄÄÄÄÄÄÄÄÄÄÄÄ3ÄÄ¿ÚÄÄÄÄÄÄÄÄÄÄÄÄ4ÄÄ¿ ³
+ ³ ³               ³³               ³ ³
+ ³ ³               ³³               ³ ³
+ ³ ³               ³³               ³ ³
+ ³ ³               ³³               ³ ³
+ ³ ÀÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÙÀÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÙ ³
+ ÀÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÙ
+             Tiled Windows
+
+.topic Cascade
+ Window³Cascade Ü
+  ßßßßßßßßßßßßßßß
+Choose Window³Cascade to stack all file viewers on the desk top.
+
+ ÚÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ1Ä¿
+ ³ÚÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ2Ä¿
+ ³³ÚÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ3Ä¿
+ ³³³ÉÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍ4Í»
+ ³³³º                         º
+ ³³³º                         º
+ ³³³º                         º
+ ³³³º                         º
+ ³³³º                         º
+ ÀÀÀÈÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍ¼
+
+        Cascaded Windows
+
+.topic Resize
+ Window³Size/Move Ü (Ctrl+F5)
+  ßßßßßßßßßßßßßßßßß
+Choose this command to change the size or position of the active
+window.
+
+ ÜÜÜÜÜÜ
+  Size
+ ßßßßßß
+If you press Shift while you use the arrow keys, you can change
+the size of the active window.  Once you've adjusted its size or
+position, press Enter.
+
+If a window has a Resize corner, you can drag that corner to
+resize the window.
+
+ ÜÜÜÜÜÜ
+  Move
+ ßßßßßß
+When you choose Window³Size/Move, the active window moves in
+response to the arrow keys.  Once you've moved the window to where
+you want it, press Enter.
+
+You can also move a window by dragging its title bar with the
+mouse.
+
+.topic Zoom
+ Window³Zoom Ü (F5)
+  ßßßßßßßßßßßß
+Choose Zoom to resize the active window to the maximum size.  If
+the window is already zoomed, you can choose this command to
+restore it to its previous size.
+
+You can also double-click anywhere on the window's title bar
+(except where an icon appears) to zoom or unzoom the window.
+
+.topic Next
+ Window³Next Ü (F6)
+  ßßßßßßßßßßßß
+Choose Next to cycle forwards through the windows on the desk top.
+
+.topic Close
+ Window³Close Ü (Alt+F3)
+  ßßßßßßßßßßßßß
+Choose Close to close the active window.
+
+You can also click the Close box in the upper right corner to
+close a window.
+
+.topic NewLogWin
+ Window³New log window Ü
+  ßßßßßßßßßßßßßßßßßßßßßß
+Opens a new {log:LogWindow} window.
+
+.topic Options
+ Options Ü (Alt+O)
+  ßßßßßßßß
+The Options menu contains commands that let you
+change the {terminal}, {colors:OColors} and
+{toggle video:VideoToggle}.
+
+.topic OTerminal
+ Options³Terminal... Ü
+  ßßßßßßßßßßßßßßßßßßßß
+Terminal brings up the {Terminal:TermOpts} options dialog box,
+where you can customize general terminal options.
+
+.topic OColors
+ Options³Colors... Ü
+  ßßßßßßßßßßßßßßßßßß
+Colors brings up the {Colors:ColorDialog} dialog box,
+where you can customize the colors of the desk top.
+
+.topic VideoToggle
+ Options³Video toggle Ü
+  ßßßßßßßßßßßßßßßßßßßßß
+Toggle video allows you to switch between 43/50 line mode and 25
+line mode on EGA/VGA displays.
+
+.topic PhoneBookDlg
+ Phone book dialog Ü
+  ßßßßßßßßßßßßßßßßßß
+
+  List
+ ÚÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ¿
+ ³ A                        ³                         ³ 38400³8N1  
+ ³ Baldeagle                ³749-5565                 ³ 38400³8N1  ş
+ ³ ChipsWorld!              ³751-2252                 ³ 38400³8N1  ±
+ ³ Clone                    ³966-9328                 ³ 38400³8N1  ±
+ ³ Different                ³351-7870                 ³ 38400³8N1  ±
+ ³ Excalibur                ³322-2575                 ³ 38400³8N1  
+ ÀÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÙ
+
+The phone list is used to call the remote device.  Press [Enter] or
+double-click on item you want to call.
+
+ Name
+ ÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛ
+
+The name line is the name of the remote device you are connecting to.  This
+will most likely be a BBS or commercial service.
+
+ Phone
+ ÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛ
+
+The phone line is the phone number of the remote device.  Leave blank if you
+are connecting to a local device and do not wish to dial.
+
+ Down load path
+ ÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛ
+
+Use any valid DOS path or leave blank to down load to default (logged)
+directory.
+
+ Modem initialize string
+ ÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛ
+
+Use any valid modem command(s) to initialize your modem before dialing
+phone number.  Leave blank if you do not want an initialize string sent.
+
+  Com
+ ÚÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ¿
+ ³ (ù) 1  ( ) 4  ( ) 7 ³
+ ³ ( ) 2  ( ) 5  ( ) 8 ³
+ ³ ( ) 3  ( ) 6        ³
+ ÀÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÙ
+
+  Baud
+ ÚÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ¿
+ ³ (ù) 300   ( ) 4800   ( ) 38400  ³
+ ³ ( ) 1200  ( ) 9600   ( ) 57600  ³
+ ³ ( ) 2400  ( ) 19200  ( ) 115200 ³
+ ÀÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÙ
+
+ Data bits
+ ÚÄÄÄÄÄÄÄÄÄÄÄÄÄÄ¿
+ ³ (ù) 5  ( ) 8 ³
+ ³ ( ) 6        ³
+ ³ ( ) 7        ³
+ ÀÄÄÄÄÄÄÄÄÄÄÄÄÄÄÙ
+
+ Parity
+ ÚÄÄÄÄÄÄÄÄÄÄÄÄÄÄ¿
+ ³ (ù) N  ( ) M ³
+ ³ ( ) O  ( ) S ³
+ ³ ( ) E        ³
+ ÀÄÄÄÄÄÄÄÄÄÄÄÄÄÄÙ
+
+ Stop bits
+ ÚÄÄÄÄÄÄÄ¿
+ ³ (ù) 1 ³
+ ³ ( ) 2 ³
+ ³       ³
+ ÀÄÄÄÄÄÄÄÙ
+
+Set com parameters to desired settings.
+
+ Options
+ ÚÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ¿
+ ³ [ ] Use DTR  [ ] Req CTS   [ ] Echo    ³
+ ³ [ ] Use RTS  [ ] XON/XOFF  [ ] VT100   ³
+ ³ [ ] Req DSR  [ ] FIFO      [ ] Raw Cap ³
+ ÀÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÙ
+
+Set flow control, UART FIFO buffering, local echo, VT100 emulation and
+unfiltered (raw) session capture.
+
+ Button functions
+ ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
+
+ [   OK   ]
+
+Dial currently focused item in list.
+
+ [  Add   ]
+
+Add entry to phone book list.  Duplicate names are not allowed.
+
+ [ Delete ]
+
+Delete currently focused item in list.
+
+ [  Edit  ]
+
+Edit currently focused item in list.
+
+ [ Cancel ]
+
+Exit dialog.  All changes to the phone list are preserved.
+
+.topic FileList
+
+The file list holds names sent by a {Tree window:TreeWindow} called
+File List Builder.  Various functions require a file list to complete
+their tasks.
+
+ ÉÍ[ş]ÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍ File List ÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍ»
+ º                                                                         º
+ º  H:\BP\CYBER\CYBASE\ALLTYPES.DB                                        º
+ º  H:\BP\CYBER\CYBASE\NUMTEST.DB                                        ş º
+ º  H:\BP\CYBER\CYBASE\SMASTER.DB                                        ± º
+ º  H:\BP\CYBER\CYBASE\SYM2.DB                                           ± º
+ º  H:\BP\CYBER\CYBASE\SYMBOLS.DB                                        ± º
+ º  H:\BP\CYBER\CYBASE\TEST.DB                                            º
+ º                                                                         º
+ ÈÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍ¼
+
+
+.topic TreeWindow
+ Tree window Ü
+  ßßßßßßßßßßßß
+The Tree window contains a directory tree, name input line, file list and
+file information panel.
+
+ ÉÍ[ş]ÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍ»
+ º                                                                 º
+ º Dir                   Name                               OK   Ü º
+ º ÚÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ¿ ÛALLTYPES.DBÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛ  ßßßßßßßß º
+ º ³ÄCYBASE            ³ Files                             Root  Ü º
+ º ³                   ³ ÛALLTYPES.DBÛÛÛ³ÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛ  ßßßßßßßß º
+ º ³                   ³ ÛNUMTEST.DBÛÛÛÛ³ÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛ  Expand Ü º
+ º ³                   ³ ÛSMASTER.DBÛÛÛÛ³ÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛ  ßßßßßßßß º
+ º ³                   ³ ÛSYM2.DBÛÛÛÛÛÛÛ³ÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛ   Mask  Ü º
+ º ³                   ³ ÛSYMBOLS.DBÛÛÛÛ³ÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛ  ßßßßßßßß º
+ º ³                   ³ ÛTEST.DBÛÛÛÛÛÛÛ³ÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛ  Drive  Ü º
+ º ³                   ³ Û..\ÛÛÛÛÛÛÛÛÛÛÛ³ÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛ  ßßßßßßßß º
+ º ÀÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÙ ±±±ş±±±±±±±±±±±±±±±±±±±±±±±±±  Update Ü º
+ º                                                        ßßßßßßßß º
+ º ÛH:\BP\CYBER\CYBASE\*.DBÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛ   All   Ü º
+ º ÛALLTYPES.DB  26624     Jun 16, 1994   2:33amÛÛÛÛÛÛÛÛ  ßßßßßßßß º
+ ÈÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍ¼
+
+ Dir
+ ÚÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ¿
+ ³ÄCYBASE            ³
+ ³                   ³
+ ³                   ³
+ ³                   ³
+ ³                   ³
+ ³                   ³
+ ³                   ³
+ ³                   ³
+ ÀÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÙ
+
+The directory tree window allows you browse through directories on the
+current drive.  Use [*] to expand all child nodes and [-] to retract all
+child nodes.
+
+ Name
+ ÛALLTYPES.DBÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛ
+
+The Name input line is where you enter the name of the file.  Filtering
+is used to insure only valid characters are accepted.
+
+ Files
+ ÛALLTYPES.DBÛÛÛ³ÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛ
+ ÛNUMTEST.DBÛÛÛÛ³ÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛ
+ ÛSMASTER.DBÛÛÛÛ³ÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛ
+ ÛSYM2.DBÛÛÛÛÛÛÛ³ÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛ
+ ÛSYMBOLS.DBÛÛÛÛ³ÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛ
+ ÛTEST.DBÛÛÛÛÛÛÛ³ÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛ
+ Û..\ÛÛÛÛÛÛÛÛÛÛÛ³ÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛ
+ ±±±ş±±±±±±±±±±±±±±±±±±±±±±±±±
+
+The Files list box lists the names of files in the current directory that
+match the file-name mask.
+
+ ÛH:\BP\CYBER\CYBASE\*.DBÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛ
+ ÛALLTYPES.DB  26624     Jun 16, 1994   2:33amÛÛÛÛÛÛÛÛ
+
+The File information panel shows the path name, file name, date,
+time, and size of the selected file.
+
+None of the items on this information panel are selectable.
+
+ Button functions
+ ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
+
+ [   OK   ]
+
+Preforms assigned action on file in name line.
+
+ [  Root  ]
+
+Reads root directory of current drive and the first level of child
+directories.
+
+ [ Expand ]
+
+Expand node toggle.
+
+ [  Mask  ]
+
+ ÉÍ[ş]ÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍ»
+ º                                                          º
+ º  File mask Û*.DBÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛ  º
+ º                                                          º
+ º                                       OK   Ü    Cancel Ü º
+ º                                     ßßßßßßßß    ßßßßßßßß º
+ º                                                          º
+ ÈÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍ¼
+
+Use any valid DOS file mask to filter what files are displayed in the Files
+list box.
+
+ [ Drive  ]
+
+ ÉÍ[ş]ÍÍÍ»
+ º       º
+ º ÛA:Û º
+ º ÛB:Ûş º
+ º ÛC:Û± º
+ º ÛH:Û º
+ º       º
+ ÈÍÍÍÍÍÍÍ¼
+
+Select any valid DOS drive on the system with [Enter] or double-click
+mouse.
+
+ [ Update ]
+
+Refresh Files list box to reflect any changes to current directory.
+
+ [  All   ]
+
+Preforms assigned action on ALL files in Files list box.  Use with caution!
+
+.topic LogWindow
+ Log window Ü
+  ßßßßßßßßßßß
+The Log window allows you to track communication events.  Time, com port and
+event are displayed on each line.  Output goes to first log in Z order.
+
+ ÉÍ[ş]ÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍ Log ÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍ[ ]Í»
+ º06:20:02 COM2 Opening port                             
+ º06:20:02 COM2 ATZ                                      ±
+ º06:20:02 COM2 OK                                       ±
+ º06:20:02 COM2 Woodland 2, 750-8914, 1 of 1000, CONNECT ş
+ º06:20:35 COM2 Sending ANSI device status [2;1R         
+ ÈÍ±±ş±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±ÄÙ
+
+.topic TermWindow
+ Terminal window Ü
+  ßßßßßßßßßßßßßßßß
+
+The Terminal window is a ANSI/VT100 terminal using virtual buffering and
+smart cursor tracking.
+
+ ÉÍ[ş]ÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍ Clone ÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍ[ ]Í»
+ ºÛÛÛŞŞÛÛÛÛÛŞŞÛÛÛÛÛİÜÜÜÜÜÜÜÜÜÜÜÜÜÜÜÜÜÜÜÜÜÜÜÜÜÜÜÜÜÜÜÜÜÜÜÜÜÜÜÜÜÜÜÜÜÜÜÜÜÜÜÜÜÜÜ
+ ºÛÛÛŞŞÛÛÛÛİÛÛÛÛÛÛÛ ²²±°   1:137/402 - Practical Peripherals presents...Û°Û±
+ ºÛÛÛİ ÛÛÛÛİÛÛÛÛÛÛ ÜÖÄÒÄ¿ Ò  Â ÒÄÄ¿   ÖÄÄ¿ Ò    ÖÄÄ¿ ÖÄÄ¿ ÒÄÄ¿   ÒÄ¿  ÒÄ¿  ±
+ ºÛÛÛ  ÛÛÛÛ ŞŞÛÛÛİ ²  º   ÇÄÄ´ ÇÄ     º    º    º  ³ º  ³ ÇÄ     ÇÄÁ¿ ÇÄÁ¿ ±
+ º ß Ü ßßß Ü ßßßß ²±  Ğ   Ğ  Á ĞÄÄÙ   ÓÄÄÙ ĞÄÄÙ ÓÄÄÙ Ğ  Á ĞÄÄÙ   ĞÄÄÙ ĞÄÄÙ ±
+ º ²²±²²²²²±²²²²²²±°ÛÛ ÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛ    ÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛş
+ º ²²±±±°°°Û°°±±±°°ÛServing all your BBSing needs... 700 Megs of Files, ÛÛÛ±
+ º ²±°°°°ÛÛÛÛÛÛÛÛÛÛ international EchoMail, Doors, we've got it all!!!ÛÛÛ  ±
+ º ±°°°ÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛ                ÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛ    ÛÛ±
+ º ±°°ÛÛÛÛ°ÛÛSysop: Adam Lotz                           CoSysop: Brian King±
+ º ±°Û°ÛÛÛÛÛ  ÛÛÛ                        ÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛÛ    ÛÛÛÛÛÛÛÛÛ±
+ º                                                                         ±
+ ºRemoteAccess 2.01                                                        ±
+ ºPlease enter your full name:                                             
+ ÈÍ±±±ş±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±ÄÙ
+
+ Home              ³ moves to left most column
+ End               ³ moves to right most column
+ Left Arrow        ³ sends ANSI one left
+ Right Arrow       ³ sends ANSI one right
+ Down Arrow        ³ sends ANSI one down
+ Up Arrow          ³ sends ANSI one up
+ Page Up           ³ moves one page up
+ Page Down         ³ moves one page down
+ Control Page Up   ³ moves to top of window
+ Control Page Down ³ moves to bottom of window
+
+The window cannot be closed during up loads and down loads.  You must
+{abort:AbortXfer} the protocol or wait for it to finish before closing.
+
+.topic TermOpts
+ Terminal options Ü
+  ßßßßßßßßßßßßßßßßß
+
+The Terminal options dialog allows you to set general options for all
+terminals.
+
+ ÉÍ[ş]ÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍ Terminal ÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍ»
+ º                                                  º
+ º Width   Length  Draw    Input   Output  CTS wait º
+ º  80      100     2048    4096    4096    5       º
+ º Dial prefix             Wait    Pause   Redial   º
+ º  ATDT                    45      30      999     º
+ º OK      Error   Connect No carr No ans  Busy     º
+ º  OK      ERROR   CONNE   NO CA   NO AN   BUSY    º
+ º Voice   Ring    No tone Can chr Re wait DTR low  º
+ º  VOICE   RING    NO TO  13      5       2        º
+ º                                                  º
+ º                  OK   Ü   Cancel Ü               º
+ º                ßßßßßßßß   ßßßßßßßß               º
+ ÈÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍ¼
+
+ Fields
+ ÄÄÄÄÄÄ
+
+Width
+
+Sets the virtual terminal width.  Most PC type BBSs will require 80 because
+they might wrap lines.  If you are connecting to a mini or mainframe you can
+use 132 to view wide reports, etc.
+
+Length
+
+Sets the virtual terminal length.  This will allow you to view full page
+reports, 80 X 50 ANSI screens, etc.  Using large lengths of 500+ may
+effect terminal performance depending on PC and modem connect rate.
+
+Draw
+
+Sets maximum character buffering before drawing the terminal window.  All in
+coming characters are stored in the virtual buffer until the com buffer is
+empty or the Draw value is reached.  Used to increase terminal performance
+using 14.4, 28.8 modems or slower type PCs.
+
+Input
+
+Sets com input buffer size.
+
+Output
+
+Sets com output buffer size.
+
+CTS wait
+
+Seconds to wait for CTS when opening terminal window.  This will make sure
+the modem can start accepting commands and data.
+
+Dial prefix
+
+Use your modem's dial string.  Most modems will use ATDT for tone and ATDP
+for pulse dialing.  Also include any PBX type switching such as ATDT 9, to
+dial 9 and wait before dialing number.
+
+Wait
+
+Seconds to wait for modem response after dialing.
+
+Pause
+
+Seconds to pause between redials.
+
+Redial
+
+Number of time to redial before failing.
+
+Can chr
+
+Character code for used to hang up (cancel character) during dial phase.
+
+Re wait
+
+Seconds to wait for response to non-dial commands.
+
+DTR low
+
+Seconds to hold DTR low during hang up.
+
+ Modem responses
+ ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
+
+The following is a list of responses CyberTerm uses when waiting for
+command responses:
+
+ OK       OK
+ Error    ERROR
+ Connect  CONNECT
+ No carr  NO CARRIER
+ No ans   NO ANSWER
+ Busy     BUSY
+ Voice    VOICE
+ Ring     RING
+ No tone  NO DIALTONE
+
+You can use numeric responses or other word strings as needed.
+
+.topic ScriptCommands
+ Script commands Ü
+  ßßßßßßßßßßßßßßßß
+CyberScript (tm) is a powerful high level script language which allows the
+automation of many on-line tasks.
+
+Features:
+
+ Numeric variable types in addition to string type
+ Up to 16,000 variables
+ Up to 16,000 level deep call nesting
+ Basic math functions
+ Boolean functions and other flow control commands
+ Fast compile times (13000 lines a minute on a 386/33 in 16 bit DPMI).
+
+Each line can consist of a blank, a comment (;), or a command.  You can
+also indent comments, commands and params.
+
+The format for a comment is:
+
+ ;This is a comment
+
+The format for a command is:
+
+ COMMAND PARAMS
+
+Examples:
+
+ String  FirstName
+ Assign  FirstName,'Steve'
+ WaitFor 'First Name:'
+ Send    FirstName
+
+CyberScript currently supports STRING, LONGINT and DOUBLE user definable
+variable types.  A variable must be declared prior to referencing it in your
+script.  The format for declaring a variable is:
+
+ String  FirstName
+ LongInt MessageCount
+ Double  SellPrice
+
+Commands like WAITFOR and SEND can handle all variable types.  For example
+if you want to send a DOUBLE out the port use:
+
+ Assign SellPrice,50000.00
+ Assign Tax,5000.00
+ Add    SellPrice,Tax
+ Send   SellPrice
+
+Will result in the string '55000.00' being sent out the port.  Commands like
+GETRESP only accept STRING and others like WAITFORSECS except only LONGINT.
+Constants can used in place of variables for many commands:
+
+ Send #27
+
+Can be used to send an escape character or other non-editable character.
+Numeric constants can also be used:
+
+ Add MessageCount,1
+ Mul Tax,.05
+
+             CyberScript command table
+             ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
+ ÚÄÄÄÄÄÄÄÄÄÄÄÄÄÄ¿ÚÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ¿ÚÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ¿
+ ³COMMAND       ³³PARAM TYPE      ³³VAR TYPE       ³
+ ÀÄÄÄÄÄÄÄÄÄÄÄÄÄÄÙÀÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÙÀÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÙ
+ ÚÄÄÄÄÄÄÄÄÄÄÄÄÄÄ¿ÚÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ¿ÚÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ¿
+ ³WAITFOR       ³³constant/var    ³³all            ³
+ ³SEND          ³³constant/var    ³³all            ³
+ ³GETRESP       ³³var             ³³string         ³
+ ³GETBLOCK      ³³constant/var    ³³string         ³
+ ³IF=           ³³var,constant/var³³all            ³
+ ³IF<>          ³³var,constant/var³³all            ³
+ ³IF<           ³³var,constant/var³³all            ³
+ ³IF>           ³³var,constant/var³³all            ³
+ ³IF<=          ³³var,constant/var³³all            ³
+ ³IF>=          ³³var,constant/var³³all            ³
+ ³ASSIGN        ³³var,constant/var³³all            ³
+ ³ADD           ³³var,constant/var³³all            ³
+ ³SUB           ³³var,constant/var³³longint,double ³
+ ³MUL           ³³var,constant/var³³longint,double ³
+ ³DIV           ³³var,constant/var³³longint,double ³
+ ³WAITFORSECS   ³³constant/var    ³³longint        ³
+ ³CALL          ³³label           ³³               ³
+ ³RETURN        ³³                ³³               ³
+ ³GOTO          ³³label           ³³               ³
+ ³LABEL         ³³label name      ³³               ³
+ ³CAPTUREAPP    ³³constant/var    ³³string         ³
+ ³CAPTURENEW    ³³constant/var    ³³string         ³
+ ³DOWNLOADZMODEM³³constant/var    ³³string         ³
+ ³STRING        ³³var name        ³³               ³
+ ³LONGINT       ³³var name        ³³               ³
+ ³DOUBLE        ³³var name        ³³               ³
+ ³WAITFORSEPCHAR³³constant/var    ³³string         ³
+ ³ADDGETDELIM   ³³constant/var    ³³string         ³
+ ³INIT          ³³                ³³               ³
+ ³DIAL          ³³                ³³               ³
+ ³HANGUP        ³³                ³³               ³
+ ³LOGON         ³³                ³³               ³
+ ³LOGOFF        ³³                ³³               ³
+ ³END           ³³                ³³               ³
+ ÀÄÄÄÄÄÄÄÄÄÄÄÄÄÄÙÀÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÙÀÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÙ
+
+.topic TextEditor
+ Text file editor Ü
+  ßßßßßßßßßßßßßßßßß
+The Text file editor allows you to edit the contents of a text file.  You
+can use the arrow keys to move about in the file.  You will use the
+editor to edit {script:ScriptCommands} files.
+
+.topic ColorDialog
+ Colors dialog box Ü
+  ßßßßßßßßßßßßßßßßßß
+This dialog box is where you can change the colors of different
+parts of this program.
+
+ ÚÄ Group ÄÄÄÄÄÄÄÄÄÄÄÄÄ¿
+ ³   Desktop          ³
+ ³   Menus            ş³
+ ³   Help             ±³
+ ³   Gray Windows     ±³
+ ³   Blue Windows     ±³
+ ³   Cyan Windows     ±³
+ ³                    ³
+ ÀÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÙ
+The Group list box contains the names of the different regions of
+the program that you can customize.
+
+ ÚÄ Item ÄÄÄÄÄÄÄÄÄÄÄÄÄÄ¿
+ ³   Color            ³
+ ³                    ş³
+
+When you select a group from the Group list, the Item list box
+displays the names of the different views in that region.
+
+ Ú Foreground ¿   Ú Background ¿
+ ³ °±²°±²°±²° ³   ³ ²°±²°±²°±² ³
+ ³ ²°±²°±²°±² ³   ³ °±²°±²°±²° ³
+ ³ ±²°±²°±²°± ³   ÀÄÄÄÄÄÄÄÄÄÄÄÄÙ
+ ÀÄÄÄÄÄÄÄÄÄÄÄÄÙ
+
+ ÚÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ¿
+ ³ Text Text Text ³
+ ³ Text Text Text ³
+ ÀÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÙ
+The display text shows the current color or attribute settings.
+
+Changes do not take effect on the desktop until you close the
+Colors dialog box by choosing OK.
+
+;
+; Place all such manually declared help contexts at end of file.
+;
+
+.topic CloseAll=65314
+ Window³Close all Ü
+  ßßßßßßßßßßßßßßßßß
+Choose Close all to remove all windows from the desk top.
+
+.topic Previous=65318
+ Window³Previous Ü (Shift+F6)
+  ßßßßßßßßßßßßßßßß
+Choose Previous to cycle backwards through the windows on the desk
+top.
