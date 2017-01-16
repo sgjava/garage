@@ -6,7 +6,7 @@ I'm using [dosemu](http://www.dosemu.org/) on Ubuntu 16.04 x64. Of course you ca
 `sudo apt-get install dosemu`
 
 Categories
-* [Turbo Vision CyberTools](https://github.com/sgjava/garage/tree/master/dos/cybertools).
+* [Turbo Vision CyberTools](https://github.com/sgjava/garage/tree/master/dos/cybertools) To make your Turbo Vision apps professional you needed professional quality tools. Turn TV into a fast graphics TUI without having to use new classes for views and windows. You also get a full blown VT-100 terminal window and Paradox table editor!
 
 ### FreeBSD License
 Copyright (c) Steven P. Goldsmith
