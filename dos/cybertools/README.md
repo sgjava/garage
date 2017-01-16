@@ -160,7 +160,7 @@ CyberTools takes advantage of OOP programming techniques to create reusable modu
 
  ![Cyedit](images/cyedit.png)
 
-* Easily add CyberFont's functionality to new or existing programs. You DO NOT have to use a different coordinate system (BGI), special object types (GView, GWindow, etc.) or BGI drivers like other slow graphic enhancements. CyberFont is 100% compatible with all your current and future TV applications. CyberFont doesn't require you to modify or patch the RTL, so it will also be compatible with future TV, RTL and 32 bit protected mode releases!
+Easily add CyberFont's functionality to new or existing programs. You DO NOT have to use a different coordinate system (BGI), special object types (GView, GWindow, etc.) or BGI drivers like other slow graphic enhancements. CyberFont is 100% compatible with all your current and future TV applications. CyberFont doesn't require you to modify or patch the RTL, so it will also be compatible with future TV, RTL and 32 bit protected mode releases!
 * Low level access to the VGA's CRT, attribute, graphics and sequencer controllers is provided for VGA hackers who like to
 tinker.  All assembler code is in BASM (Built in Assembler), so no external assembly is needed. BIOS routines are also included for the highest level of compatibility.
 * Fast graphics primitives included for pixels, lines and ellipses. Do graphic pie charts, bar graphs, line graphs, etc.
