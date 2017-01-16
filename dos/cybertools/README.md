@@ -420,66 +420,30 @@ CYBASE.PAS is a full featured generic data base application using PX Edit unit t
 
 CyberTerm for Async Professional 2.x is a professional multi-session async communications application with CyberScript
 (tm) script language, IDE and supporting tools.  If you were disappointed with other Turbo Vision terminals then CyberTerm is for you!
-
-CYBERTERM FEATURES
-
-CyberTerm provides a complete ANSI/VT100 terminal package.
-
-Run multiple terminal windows and protocols at the same time!  Run
-a Z modem download and play a door game on multiple BBSs.  You can
-have up to four serial devices operating at the same time.
-
-All the standard Async Professional features:  115K baud, 16550
-UART FIFO buffering, all protocols Z/Y/X/K/A, hardware and software
-flow control, COM1 - COM8, etc.
-
-ANSI/VT100 emulation object includes support for IBM keyboard
-remapping.
-
-Fast ANSI terminal window with virtual buffering up to 132 column
-X 1000 lines and Smart Cursor Tracking (tm).  Size not limited to
-132 X 1000.
-
-Local echo with ANSI emulation.
-
-Capture file in raw (include ANSI codes) or cooked (strip ANSI
-codes) mode.  This makes it easy to snag your favorite BBS screens
-or entire sessions.
-
-Log windows to track communication events from multiple sessions.
-Display as little or as much information as you like.  Great for
-debugging async applications or tracking connect time for cost
-analysis.
-
-Phone book with many configuration options.  Just double click on
-entry to dial modem or connect to a local device.  Phone book is
-saved with configuration stream to allow multiple phone books to
-exist.
-
-CyberScript (tm) is a powerful high level script language which
-allows the automation of many on-line tasks.
+* CyberTerm provides a complete ANSI/VT100 terminal package.
+* Run multiple terminal windows and protocols at the same time! Run a Z modem download and play a door game on multiple BBSs.  You can have up to four serial devices operating at the same time.
+* All the standard Async Professional features: 115K baud, 16550UART FIFO buffering, all protocols Z/Y/X/K/A, hardware and software flow control, COM1 - COM8, etc.
+* ANSI/VT100 emulation object includes support for IBM keyboard remapping.
+* Fast ANSI terminal window with virtual buffering up to 132 column X 1000 lines and Smart Cursor Tracking (tm). Size not limited to 132 X 1000.
+* Local echo with ANSI emulation.
+* Capture file in raw (include ANSI codes) or cooked (strip ANSI codes) mode. This makes it easy to snag your favorite BBS screens or entire sessions.
+* Log windows to track communication events from multiple sessions. Display as little or as much information as you like. Great for debugging async applications or tracking connect time for cost analysis.
+* Phone book with many configuration options. Just double click on entry to dial modem or connect to a local device. Phone book is saved with configuration stream to allow multiple phone books to exist.
+* CyberScript (tm) is a powerful high level script language which allows the automation of many on-line tasks.
 
 Features:
-
-     Numeric variable types in addition to string type
-
-     Up to 16,000 variables
-
-     Up to 16,000 level deep call nesting
-     Basic math functions
-
-     Boolean functions and other flow control commands
-
-     Fast compile times (13000 lines a minute on a 386/33 in 16 bit
-     DPMI).
-
-Each line can consist of a blank, a comment (;), or a command.  You
-can also indent comments, commands and params.
+* Numeric variable types in addition to string type
+* Up to 16,000 variables
+* Up to 16,000 level deep call nesting
+* Basic math functions
+* Boolean functions and other flow control commands
+* Fast compile times (13000 lines a minute on a 386/33 in 16 bit DPMI).
+* Each line can consist of a blank, a comment (;), or a command. You can also indent comments, commands and params.
 
 The format for a comment is:
-
+```
  ;This is a comment
-
+```
 The format for a command is:
 
  COMMAND PARAMS
@@ -491,36 +455,31 @@ Examples:
  WaitFor 'First Name:'
  Send    FirstName
 
-CyberScript currently supports STRING, LONGINT and DOUBLE user
-definable variable types.  A variable must be declared prior to
-referencing it in your script.  The format for declaring a variable
-is:
+CyberScript currently supports STRING, LONGINT and DOUBLE user definable variable types. A variable must be declared prior to referencing it in your script. The format for declaring a variable is:
+```
+String  FirstName
+LongInt MessageCount
+Double  SellPrice
+```
+Commands like WAITFOR and SEND can handle all variable types. For example if you want to send a DOUBLE out the port use:
+```
+Assign SellPrice,50000.00
+Assign Tax,5000.00
+Add    SellPrice,Tax
+Send   SellPrice
+```
+Will result in the string '55000.00' being sent out the port. Commands like GETRESP only accept STRING and others like
+WAITFORSECS except only LONGINT. Constants can used in place of variables for many commands:
+```
+Send #27
+```
+Can be used to send an escape character or other non-editable character. Numeric constants can also be used:
+```
+Add MessageCount,1
+Mul Tax,.05
+```
 
- String  FirstName
- LongInt MessageCount
- Double  SellPrice
-
-Commands like WAITFOR and SEND can handle all variable types.  For
-example if you want to send a DOUBLE out the port use:
-
- Assign SellPrice,50000.00
- Assign Tax,5000.00
- Add    SellPrice,Tax
- Send   SellPrice
-
-Will result in the string '55000.00' being sent out the port.
-Commands like GETRESP only accept STRING and others like
-WAITFORSECS except only LONGINT.  Constants can used in place of
-variables for many commands:
-
- Send #27
-
-Can be used to send an escape character or other non-editable
-character.  Numeric constants can also be used:
-
- Add MessageCount,1
- Mul Tax,.05
-
+```
              CyberScript command table
              ─────────────────────────
 ┌──────────────┐┌────────────────┐┌───────────────┐
@@ -562,11 +521,12 @@ character.  Numeric constants can also be used:
 │LOGOFF        ││                ││               │
 │END           ││                ││               │
 └──────────────.└────────────────.└───────────────.
+```
 
-HOW DOES CYBERTERM WORK?
+####How does CyberTerm work?
 
 The terminal window uses a state engine capable of multiple states.
-
+```
 ctCmdInit      = $00000001; {send init string}
 ctCmdDial      = $00000002; {send dial string}
 ctCmdDialPause = $00000004; {pausing between redials}
@@ -585,42 +545,25 @@ ctCmdDownload  = $00004000; {download = 1, upload = 0}
 ctCmdXferAbort = $00008000; {abort file xfer}
 ctCmdXferMask  = $0000f800; {mask of just xfer commands}
 ctCmdGenPause  = $00010000; {general pause}
+```
 
-For example, you can set the command state bits as follows to wait
-for CTS to go high, send initialize string to modem and dial
-number:
+For example, you can set the command state bits as follows to wait for CTS to go high, send initialize string to modem and dial number:
 
 TW^.CmdState := ctCmdInit+ctCmdDial+ctCmdCTSWait;
 
-The terminal window's state engine knows to wait for CTS first,
-send the initialize string next and dial number in that order.  You
-could also just dial the number:
+The terminal window's state engine knows to wait for CTS first, send the initialize string next and dial number in that order. You could also just dial the number:
 
 TW^.CmdState := ctCmdDial;
 
-Any time the command state is <> 0 then the ANSI emulator is not
-called.  Also you cannot close a terminal window during protocols
-unless you abort the protocol or wait for it to finish.  This
-allows the protocols to exit in a stable state.
+Any time the command state is <> 0 then the ANSI emulator is not called. Also you cannot close a terminal window during protocols unless you abort the protocol or wait for it to finish. This allows the protocols to exit in a stable state.
 
-It is important that you do not leave the state engine in a invalid
-state!  Study CyberTerm app for valid engine combinations.
+It is important that you do not leave the state engine in a invalid state! Study CyberTerm app for valid engine combinations.
 
-Your apps idle method allows each terminal window a small amount of
-processing time.  This is a simple form of time slicing which
-allows your app to do other things while not servicing the terminal
-windows.  Any time you set a terminal window's CmdState then that
-command is processed during the next Idle cycle.
+Your apps idle method allows each terminal window a small amount of processing time. This is a simple form of time slicing which allows your app to do other things while not servicing the terminal windows. Any time you set a terminal window's CmdState then that command is processed during the next Idle cycle.
 
-CYBERTERM APPLICATION
+####CyberTerm application
 
-CYTERM.PAS is a complete ANSI terminal with point and shoot
-operation.  With the addition of the CyberScript compiler you can
-create powerful vertical market applications.  Realestate MLS
-systems, Internet and other services are just ripe for a CyberTerm
-app.  You could also parse input directly into a Paradox table
-instead of parsing a capture file.  Drop in a Paradox browser and
-view/edit the data real-time!
+CYTERM.PAS is a complete ANSI terminal with point and shoot operation. With the addition of the CyberScript compiler you can create powerful vertical market applications. Realestate MLS systems, Internet and other services are just ripe for a CyberTerm app. You could also parse input directly into a Paradox table instead of parsing a capture file. Drop in a Paradox browser and view/edit the data real-time!
 
 ### Critical error handler
 
