@@ -5,7 +5,7 @@ Turbo Vision (tm) is a great object-oriented framework for building DOS applicat
 CyberTools was used all over the world in everything from embedded systems to foreign language products.
 
 ###Requirements
-* IBM PC or 100% compatible
+* IBM PC, 100% compatible or VM
 * MS DOS compatible OS
 * Borland Pascal 7.x or Turbo Pascal 7.x with Turbo Vision 2.x
 * VGA display for CyberFont apps and CyberAnimaton app
