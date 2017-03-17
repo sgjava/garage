@@ -1,4 +1,4 @@
-#Commodore                                                
+# Commodore                                                
 
 I'm using [VICE 3.0](http://vice-emu.sourceforge.net) on Ubuntu 16.04 x64. Of course you can use a real C64 or C128 if you convert the disk images to floppies. All of my projects include everything you need to boot, compile and run the code.
  
@@ -26,7 +26,7 @@ The first programs I typed in circa 1981 were in the back of the VIC 20 manual f
 
 If you were involved in the early days of Commodore development then you have to tip your hat to [Jim Butterfield](https://en.wikipedia.org/wiki/Jim_Butterfield). His excellent memory maps, articles and books opened up Commodore's hardware to me and many others I'm sure. That was the difference between generic BASIC programs you could run on any computer and building unique Commodore programs. If you had to roll up your sleeves and write machine language for performance reasons then that's what you did. It pushed me to the next level.
 
-###FreeBSD License
+### FreeBSD License
 Copyright (c) Steven P. Goldsmith
 
 All rights reserved.

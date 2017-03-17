@@ -1,4 +1,4 @@
-#CP/M                                                
+# CP/M                                                
 
 I lot of the code I developed for the C128 was specifically for CP/M 80 column mode. This was more interesting to me than what native mode had to offer. I could use high level languages like Pascal and C and easily integrate Z80 Assembler or in line machine code to speed things up when needed. The Turbo Pascal editor was excellent for its time and offered an easy way to edit text files.
 

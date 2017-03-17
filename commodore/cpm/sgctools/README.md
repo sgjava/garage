@@ -1,18 +1,18 @@
-#SG C Tools 1.8                                               
+# SG C Tools 1.8                                               
 
 ![Demo](images/sgctools1.png)
 
-##Introduction
+## Introduction
 Let's face it, the [C128](https://en.wikipedia.org/wiki/Commodore_128) (I bought a C128D in 1987 after my C64 died) wasn't that fast with the original Commodore CP/M (85 and 87 releases). I eventually graduated to [ZPM 3](http://web.mit.edu/randy/www/antigrav/supercharge.html) and things were better. ZPM was compiled for the Z80 (vs 8080) and had performance/bug fixes included. Now that I had a decent C128 OS I wanted to develop programs that took advantage of the C128's unique hardware under CP/M.
 
 I was developing with Turbo Pascal in the 80s and early 90s (on x86 hardware) and was happy to locate Turbo Pascal for CP/M. Not happy with the 8K runtime Turbo Pascal always added to the .com file I wanted to find something more efficient for the small TPA of the C128. I was also looking for an excuse to learn ANSI C and happened upon Hi-Tech C 3.09 for the Z80. SG C Tools is the result! Version 1.7 was the last release I did to GEnie.
 
 This is the first release of version 1.8 on github more than 20 years later! I split the demo program into a c file and header file. I also added several other demo programs that I will explain below. If you happen to use the code on real hardware send me a photo or short video.
 
-##Overview
+## Overview
 SG C Tools ANSI C library unlocks the power of the C128 running CP/M!  High level and low level functions are included to access the [VDC](https://en.wikipedia.org/wiki/MOS_Technology_8563), [SID](https://en.wikipedia.org/wiki/MOS_Technology_SID) and [CIA](https://en.wikipedia.org/wiki/MOS_Technology_CIA). All source code is compatible with the Freeware version of Hi Tech C. A demo is included to show you how to use most features.
 
-##Features
+## Features
 * CIA
 
  ![CIA](images/sgctools2.png)
@@ -63,7 +63,7 @@ SG C Tools ANSI C library unlocks the power of the C128 running CP/M!  High leve
     * You can play .RAW or Zounds type sound files in your C programs
     * Demo shows you how to play a .RAW file
 
-##Requirments
+## Requirments
 * [MyZ80](http://www.z80.eu/myz80cpm.html) running under [dosemu](http://www.dosemu.org/) (tested under Ubuntu 16.04), [VICE](http://vice-emu.sourceforge.net/) emulator, A C128 or C128D running CP/M 3.0 with at least two 1581s, one 1571, large RAM disk or hard drive. Building from source is really slow using a real C128, so I would use the MyZ80 emulator.
 * 80 column monitor for VDC specific routines. 640 X 480 interlace graphics requires a monitor that can handle this format.
 * ANSI C programming experience.

@@ -1,10 +1,10 @@
-#Turbo Vision CyberTools                                                
+# Turbo Vision CyberTools                                                
 
 Turbo Vision (tm) is a great object-oriented framework for building DOS applications. Unfortunately, fonts, graphics, 256 color animation, ANSI terminals, generic database browsers and other 'drop-in' tools are not included. You could spend a lot of time looking at libraries just to find out you have a disjointed set of TV gizmos and gadgets. Turbo Vision CyberTools gives you the edge by creating professional applications with a flexible set of tools. Powerful tools are important, but applications that show you how to use the library are equally important. All too often you get a 'powerful' library with 100 line demo programs that barely scratch the surface (or gasp, have error handling). With CyberTools you get full blown applications and not empty skeleton code.
 
 CyberTools was used all over the world in everything from embedded systems to foreign language products.
 
-###Requirements
+### Requirements
 * IBM PC, 100% compatible or VM
 * MS DOS compatible OS
 * Borland Pascal 7.x or Turbo Pascal 7.x with Turbo Vision 2.x
@@ -13,7 +13,7 @@ CyberTools was used all over the world in everything from embedded systems to fo
 * Turbo Power Async Professional 2.x for CyberTerm app
 * Working knowledge of Pascal, OOP and Turbo Vision
 
-###Using Borland Pascal under dosemu
+### Using Borland Pascal under dosemu
 
 Using Borland Pascal under dosemu is going to be the most efficient way to work on code. I'm providing you my development environment from the 90s since it was already configured and has all the required tools and patches. I've updated it to work on fast CPUs (fixed runtime 200 errors), but there could be other issues. It looks like everything is Y2K compliant including Paradox Engine! See application source for IDE paths. Help files (??HELP.TXT) need to be compiled with Turbo Vision Help Compiler 1.1 (\BP\EXAMPLES\DOS\TVDEMO\TVHC.PAS) that comes with TVDEMO.
 * Install dosemu `sudo apt-get install dosemu`
@@ -24,7 +24,7 @@ Using Borland Pascal under dosemu is going to be the most efficient way to work 
 * `bp`
 * Under Options|Directories... `\BP\UNITS;\BP\EXAMPLES\DOS\TVDEMO;\BP\EXAMPLES\DOS\TVFM;\BP\APRO;\BP\CYBER\COMMON;\BP\PXENGINE\PASCAL\SOURCE;\BP\PXENGINE\PASCAL` for Include, Object and Unit.
 
-###CyberTools object graph
+### CyberTools object graph
 
 CyberTools takes advantage of OOP programming techniques to create reusable modular code.  Take some time and study the tree to give you an overview of the CyberTools object hierarchy. This was the 2.5 object graph. I've added stuff in the unreleased 2.6, but it's not documented yet :)
 
@@ -157,7 +157,7 @@ CyberTools takes advantage of OOP programming techniques to create reusable modu
     └──TWriteSnpFile
 ```
 
-###CyberFont
+### CyberFont
 
  ![Cyedit](images/cyedit.png)
 
@@ -178,11 +178,11 @@ tinker.  All assembler code is in BASM (Built in Assembler), so no external asse
 * New CYBERAPI shows you an example of overlaying VGA primitives in a DLL.
 * CyberFont (tm) provides fonts, graphics, PCX images, sprites, bitmap animation and DAC palettes. CyberFont is simply the fastest and easiest to use Turbo Vision graphics enhancement around. Now with new Windows (tm) look for CyberFont apps!
 
-####How does CyberFont work?
+#### How does CyberFont work?
 
 CyberFont takes advantage of the VGA's ability to redefine character sets, display 512 characters at the same time and display 640 pixels per line in text mode. The VGA BIOS can manipulate fonts, but is limited by slow speed, screen flicker, 720 pixels per line and write only font memory.
 
-####Accessing font memory
+#### Accessing font memory
 
 Read/write access to font memory is provided by AccessFontMem in the VGA.PAS unit. AccessFontMem switches in bit plane 2 which is addressed at A000:0000.  During font memory access you must not access screen memory at B800:0000 or the display will freeze.  This is a limitation of the VGA's memory addressing scheme and not CyberFont. Use TV's HideMouse to prevent the mouse cursor from writing to the screen. Each character takes up 32 bytes in the table regardless of actual size and starts with the first row of 8 pixels defining the character. To find the first byte of any character use A000:???? + character code * 32.  The ???? represents the character table offset in memory. Each byte makes up a row of pixels with 1 bits being foreground color and 0 bit being background color.  AccessScreenMem switches the VGA back to access screen memory with ASCII codes in bit plane 0 and attributes in bit plane 1.
 ```
@@ -232,16 +232,16 @@ Sample 8 X 16 letter 'A' is formed by setting bits for foreground color and clea
  
 Character table locations at segment A000 while accessing bit plane 2.
 
-####Displaying 512 characters on the screen
+#### Displaying 512 characters on the screen
 
 To get 512 characters on the screen you need to change the character map select register of the sequencer controller with
 FontMapSelect.  The 256 characters from the first font are selected by using foreground colors 0 - 7. The second 256 characters are selected by using colors 8 - 15 or setting bit 3 of the attribute byte. This allows you to use the first font for the TV desk top and the second font for graphics, sprites, etc. You can use any of the 8 tables from above for either font.
 
-####Setting text screen to 640 x 200 pixels
+#### Setting text screen to 640 x 200 pixels
 
 To change the screen from 720 X 400 pixels to 640 X 400 pixels use SetChrWidth8.  This reprograms the VGA clock to 25.175 MHz and makes each character 8 pixels wide instead of 9 pixels. SetChrWidth9 or setting the video mode with a BIOS function sets the screen back to 720 X 400.
 
-####Character generator file (CGF) file format
+#### Character generator file (CGF) file format
 
 CGF files are quite simple to decode and use on any system using character generators or bit map graphics. CGF files can be used on EGA, VGA, Windows apps and other hardware platforms. The 128 byte header is as follows:
 
@@ -263,7 +263,7 @@ CGF files are quite simple to decode and use on any system using character gener
 * After the header is TotalChrs characters starting with StartChr.
 * Each character is Height bytes long in the file.
 
-####Character sprites
+#### Character sprites
 
 Character sprites like to ones in CyberGame use a technique that has been around for years.  I first used it in 1981 on a Commodore VIC 20. Use CyberEdit or any paint program that supports PCX files to create your sprite using one or more characters. Copy that sprite to adjacent characters and modify it to create movement. For example, you can create a bomb like the one in CyberGame with four characters:
 
@@ -289,7 +289,7 @@ Character sprites like to ones in CyberGame use a technique that has been around
 
 You display characters one at a time in the same screen location. When the 4th frame is finished being displayed you move one character down and start over with 1.  I do not OR the sprite with any background character patterns, but that logic could be added at a loss of performance. CyberGame implements sprites descended from TView and is the best example of using character sprites in a CyberFont app.
 
-####CyberFont applications
+#### CyberFont applications
 
 All CyberFont applications include a graphic desk top, load and/or save fonts and PCX images, configuration streams and context sensitive help.
 
@@ -297,7 +297,7 @@ All CyberFont applications include a graphic desk top, load and/or save fonts an
 * CYGRAPH.PAS is a graphics application utilizing a resizable graphics window for lines, ellipses, rectangles, business X,Y type line graphs and a star field simulation. Configuration file compatible with CyberEdit 2.0.
 * CYGAME.PAS is a multi-level 'Invaders' type arcade game using sprites, bit map animation, PC speaker sound and custom game controls. Turn page mode on in Options|Screen if the game animation runs too fast on your machine.  Uses custom configuration file to save control settings along with standard app data.
 
-###CyberAnimation
+### CyberAnimation
 
  ![Cyani](images/cyani.png)
 
@@ -311,11 +311,11 @@ animation formats that can be decoded to screen or memory.
 * Snip files are typically 30% smaller than the same FLI encoded file.
 * Snip files will appeal to multimedia and game programmers.
 
-####How does CyberAnimate work?
+#### How does CyberAnimate work?
 
 CyberAnimate decodes Snip files in real-time and does not require a decoded work file like CineMaker. You can decode to a mode 13H VGA screen or memory. Unchained mode 13H (mode x) can be implemented with many mode x libraries. I converted the original Michael Abrash articles from DDJ to TP6 BASM in 1991 before many of the mode x libraries appeared. Study the mode 13H BIOS decoder before writing your own mode x decoder.
 
-####Snip file format
+#### Snip file format
 
 A Snip file contains a moving image.  The bytes in the file that make up word and longword values are all stored in low-to-high sequential (Intel) order.  First comes the 16 byte header:
 
@@ -351,11 +351,11 @@ I figured out the Reserved fields with a binary file viewer and experimentation!
     * The first frame in a Snip is considered all new so that there would be exactly HorzRes*VertRes bytes in the range 64 to 255. The amount of change from one frame to the next determines the amount of compression. Rapidly changing backgrounds will yield less compression as in side scrolling cartoons.
 
 
-####CyberAnimate application
+#### CyberAnimate application
 
 CYANI.PAS allows you to play Snips, export current frame as a PCX or create a Snip from PCX files. You can also view 256 and 2 color PCX files. Includes CyberFont desk top and smooth video mode changes.
 
-###CyberBase
+### CyberBase
 
 ![Cybase](images/cybase.png)
 
@@ -372,7 +372,7 @@ A powerful new Paradox table editor allows you to easily create single and multi
 * Full control of engine configuration allows you to make changes without recompiling application.
 * Use CyberFont to add graphics or charts to your database applications!
 
-####How does CyberBase work?
+#### How does CyberBase work?
 
 CyberBase uses a powerful Paradox table editor which is basically composed of a record collection of field collections (a dynamic 2 dimension array). The records are translated and stored in a viewable format which accounts for its responsiveness.  A special input line is used as a table cursor to edit and browse. When editing a field you cannot resize the window. Also if you try to leave focus in edit mode that field will be validated and written. Basic validation is provided by field type and can be easily modified to handle custom validation.
 
@@ -415,7 +415,7 @@ end;
 
 CYBASE.PAS is a full featured generic data base application using PX Edit unit to edit multiple Paradox tables on single user or network systems. Generic table and index creation fully supported. Add a report generator and you will have one powerful generic data base tool!
 
-###CyberTerm
+### CyberTerm
 
 ![Cyterm](images/cyterm.png)
 
@@ -483,48 +483,108 @@ Mul Tax,.05
 ```
              CyberScript command table
              ─────────────────────────
-┌──────────────┐┌────────────────┐┌───────────────┐
-│COMMAND       ││PARAM TYPE      ││VAR TYPE       │
-└──────────────┘└────────────────┘└───────────────┘
-┌──────────────┐┌────────────────┐┌───────────────┐
-│WAITFOR       ││constant/var    ││all            │
-│SEND          ││constant/var    ││all            │
-│GETRESP       ││var             ││string         │
-│GETBLOCK      ││constant/var    ││string         │
-│IF=           ││var,constant/var││all            │
-│IF<>          ││var,constant/var││all            │
-│IF<           ││var,constant/var││all            │
-│IF>           ││var,constant/var││all            │
-│IF<=          ││var,constant/var││all            │
-│IF>=          ││var,constant/var││all            │
-│ASSIGN        ││var,constant/var││all            │
-│ADD           ││var,constant/var││all            │
-│SUB           ││var,constant/var││longint,double │
-│MUL           ││var,constant/var││longint,double │
-│DIV           ││var,constant/var││longint,double │
-│WAITFORSECS   ││constant/var    ││longint        │
-│CALL          ││label           ││               │
-│RETURN        ││                ││               │
-│GOTO          ││label           ││               │
-│LABEL         ││label name      ││               │
-│CAPTUREAPP    ││constant/var    ││string         │
-│CAPTURENEW    ││constant/var    ││string         │
-│DOWNLOADZMODEM││constant/var    ││string         │
-│STRING        ││var name        ││               │
-│LONGINT       ││var name        ││               │
-│DOUBLE        ││var name        ││               │
-│WAITFORSEPCHAR││constant/var    ││string         │
-│ADDGETDELIM   ││constant/var    ││string         │
-│INIT          ││                ││               │
-│DIAL          ││                ││               │
-│HANGUP        ││                ││               │
-│LOGON         ││                ││               │
-│LOGOFF        ││                ││               │
-│END           ││                ││               │
-└──────────────┘└────────────────┘└───────────────┘
+┌───────────────┐┌────────────────┐┌───────────────┐┌───────────────┐
+│COMMAND        ││PARAM TYPE      ││VAR TYPE       ││ACTION         │
+└───────────────┘└────────────────┘└───────────────┘└───────────────┘
+┌───────────────┐┌────────────────┐┌───────────────┐┌───────────────────────────────────────┐
+│ABORTOFF       ││                ││               ││Turn time out abort off
+│ABORTON        ││                ││               ││Turn time out abort on
+│ADD            ││var,constant/var││all            ││Add right var to left var
+│ADDGETDELIM    ││constant/var    ││string         ││Add to getblock delim set
+│ASSIGN         ││var,constant/var││all            ││Assign right var to left var
+│BLOBCLOSE      ││                ││               ││Close blob memo field
+│BLOBGET        ││table,field num ││               ││Get field value
+│BLOBIMPORT     ││table,field num ││               ││Import import.txt into blob memo field
+│BLOBOPEN       │        
+│CALL           ││label           ││               │
+│CAPTUREAPP     ││constant/var    ││string         │
+│CAPTURENEW     ││constant/var    ││string         │
+│CAPTUREOFF     ││                ││               │
+│CLOSEINI       ││                ││               │
+│CLOSETEXTREAD  ││                ││               │
+│CONNECTSTATUS  │
+│DELAY          │
+│DIAL           ││                ││               │
+│DIV            ││var,constant/var││longint,double │
+│DOUBLE         ││var name        ││               │
+│DOWNLOADZMODEM ││constant/var    ││string         │
+│DRAW           │
+│DRAWLISTBOX    │
+│ECHOOFF        ││                ││               │
+│ECHOON         ││                ││               │
+│EDITFILE       │
+│END            ││                ││               │
+│ERASEFILE      │
+│FIELDGET       │
+│FIELDPUT       │
+│GETBLOCK       ││constant/var    ││string         │
+│GETINI         │
+│GETRESP        ││var             ││string         │
+│GETTEXT        │
+│GOTO           ││label           ││               │
+│HANGUP         ││                ││               │
+│IF<            ││var,constant/var││all            │
+│IF<=           ││var,constant/var││all            │
+│IF<>           ││var,constant/var││all            │
+│IF=            ││var,constant/var││all            │
+│IF>            ││var,constant/var││all            │
+│IF>=           ││var,constant/var││all            │
+│INIT           ││                ││               │
+│INPUTBOX       │
+│INPUTBOXWAIT   │
+│LABEL          ││label name      ││               │
+│LISTBOX        │
+│LOCK           ││                ││               │
+│LOGOFF         ││                ││               │
+│LOGON          ││                ││               │
+│LOGSYSOFF      ││                ││               │
+│LOGSYSON       ││                ││               │
+│LONGINT        ││var name        ││               │
+│MOUSEX         │
+│MOUSEY         │
+│MUL            ││var,constant/var││longint,double │
+│OPENINI        │
+│OPENTEXTREAD   │
+│PADRIGHTRESP   │
+│PUTINI         │
+│RECORDCLEAR    │
+│RECORDDELETE   │
+│RECORDGET      │
+│RECORDPUT      │
+│RECORDUPDATE   │
+│RETURN         │
+│SEARCHPRIMARY  │
+│SEARCHSECONDARY│
+│SEND           ││constant/var    ││all            │
+│SENDCAPTURE    │
+│SENDLIST       │
+│SENDLOG        │
+│SETRESP        │
+│STRING         ││var name        ││               │
+│SUB            ││var,constant/var││all            ││Subtract right var from left var
+│SUBMIT         │
+│SUBSTRRESP     │
+│TABLE          │
+│TABLECLOSE     │
+│TABLECREATE    │
+│TABLEEND       │
+│TABLEERROR     │
+│TABLEHOME      │
+│TABLENAME      │
+│TABLENEXT      │
+│TABLEOPEN      │
+│TABLEPREV      │
+│UNLOCK         │
+│UNZIPFILE      │
+│UPLOADXMODEM   ││constant/var    ││string         │
+│UPLOADZMODEM   ││constant/var    ││string         │
+│WAITFOR        ││constant/var    ││all            ││Wait for string
+│WAITFORSECS    ││constant/var    ││longint        ││Set waitfor seconds
+│WAITFORSEPCHAR ││constant/var    ││string         ││Set separator char
+└───────────────┘└────────────────┘└───────────────┘└─
 ```
 
-####How does CyberTerm work?
+#### How does CyberTerm work?
 
 The terminal window uses a state engine capable of multiple states.
 ```
@@ -562,7 +622,7 @@ It is important that you do not leave the state engine in a invalid state! Study
 
 Your apps idle method allows each terminal window a small amount of processing time. This is a simple form of time slicing which allows your app to do other things while not servicing the terminal windows. Any time you set a terminal window's CmdState then that command is processed during the next Idle cycle.
 
-####CyberTerm application
+#### CyberTerm application
 
 CYTERM.PAS is a complete ANSI terminal with point and shoot operation. With the addition of the CyberScript compiler you can create powerful vertical market applications. Realestate MLS systems, Internet and other services are just ripe for a CyberTerm app. You could also parse input directly into a Paradox table instead of parsing a capture file. Drop in a Paradox browser and view/edit the data real-time!
 

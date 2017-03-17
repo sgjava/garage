@@ -1,4 +1,4 @@
-#Digiblaster 64
+# Digiblaster 64
 
 ![Digi Blaster 64](images/digiblaster64.png)
 

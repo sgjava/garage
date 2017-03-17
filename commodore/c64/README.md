@@ -1,4 +1,4 @@
-#Commodore 64                                               
+# Commodore 64                                               
 
 I took the natural Commodore progression from VIC 20 to C64 and finally the C128. The C64 was one of the best game machines of that period, but I really bought it to continue working in Assembler code and possibly other languages besides BASIC. As time progressed I was coding in HLLs such as Pascal on other platforms, but there was still something challenging about crafting a good Assembler based program. In college I took Structured Assembler for the IBM 360/370 (the book's author was also the professor). You will see the difference in my early and later code :)
 
