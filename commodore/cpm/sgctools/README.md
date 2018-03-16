@@ -3,7 +3,7 @@
 ![Demo](images/sgctools1.png)
 
 ## Introduction
-Let's face it, the [C128](https://en.wikipedia.org/wiki/Commodore_128) (I bought a C128D in 1987 after my C64 died) wasn't that fast with the original Commodore CP/M (85 and 87 releases). I eventually graduated to [ZPM 3](ftp://www.zimmers.net/pub/cpm/sys/c128/system/zpm3n10.pma) and things were better. ZPM was compiled for the Z80 (vs 8080) and had performance/bug fixes included. Now that I had a decent C128 OS I wanted to develop programs that took advantage of the C128's unique hardware under CP/M.
+Let's face it, the [C128](https://en.wikipedia.org/wiki/Commodore_128) (I bought a C128D in 1987 after my C64 died) wasn't that fast with the original Commodore CP/M (85 and 87 releases). I eventually graduated to [ZPM 3](http://www.commodore.ca/manuals/funet/cpm/sys/c128/system) and things were better. ZPM was compiled for the Z80 (vs 8080) and had performance/bug fixes included. Now that I had a decent C128 OS I wanted to develop programs that took advantage of the C128's unique hardware under CP/M.
 
 I was developing with Turbo Pascal in the 80s and early 90s (on x86 hardware) and was happy to locate Turbo Pascal for CP/M. Not happy with the 8K runtime Turbo Pascal always added to the .com file I wanted to find something more efficient for the small TPA of the C128. I was also looking for an excuse to learn ANSI C and happened upon Hi-Tech C 3.09 for the Z80. SG C Tools is the result! Version 1.7 was the last release I did to GEnie.
 
