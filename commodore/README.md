@@ -1,8 +1,13 @@
 # Commodore                                                
 
-I'm using [VICE 3.0](http://vice-emu.sourceforge.net) on Ubuntu 16.04 x64. Of course you can use a real C64 or C128 if you convert the disk images to floppies. All of my projects include everything you need to boot, compile and run the code.
- 
-`sudo apt-get install vice`
+I'm using [VICE 3.2](http://vice-emu.sourceforge.net) on Ubuntu 18.04 x64. Of course you can use a real C64 or C128 if you convert the disk images to floppies. All of my projects include everything you need to boot, compile and run the code.
+* `sudo apt-get install build-essential byacc texi2html flex libreadline-dev libxaw7-dev texinfo libxaw7-dev libgtk2.0-cil-dev libgtkglext1-dev libpulse-dev xa65`
+* [Download](http://vice-emu.sourceforge.net/index.html#download) latest VICE source and extract.
+* `cd vice-3.x` (use actual directory name)
+* `./configure --enable-fullscreen --with-pulse --with-x --enable-gnomeui`
+* `make`
+* `sudo make install`
+* `x64`
 
 Categories
 * [C128 CP/M](https://github.com/sgjava/garage/tree/master/commodore/cpm) Way cool stuff takes CP/M to the next level. Forget Wordstar, how about games, graphics, digital sound, graphical UIs, custom characters, windows, etc. C, Pacsal and Z80 Assembler APIs that allows easy access to the C128's unique hardware.
