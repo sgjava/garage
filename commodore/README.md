@@ -1,7 +1,7 @@
 # Commodore                                                
 
 I'm using [VICE 3.2](http://vice-emu.sourceforge.net) on Ubuntu 18.04 x64. Of course you can use a real C64 or C128 if you convert the disk images to floppies. All of my projects include everything you need to boot, compile and run the code.
-* `sudo apt-get install xa65 libreadline-dev libxaw7-dev libgtkmm-3.0-dev libpulse-dev`
+* `sudo apt-get install build-essential byacc texi2html flex xa65 libreadline-dev libxaw7-dev libgtkmm-3.0-dev libpulse-dev`
 * [Download](http://vice-emu.sourceforge.net/index.html#download) latest VICE source and extract.
 * `cd vice-3.x` (use actual directory name)
 * `./configure --enable-native-gtk3ui`
