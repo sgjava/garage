@@ -64,7 +64,7 @@ SG C Tools ANSI C library unlocks the power of the C128 running CP/M!  High leve
     * Demo shows you how to play a .RAW file
 
 ## Requirments
-* [MyZ80](http://www.z80.eu/myz80cpm.html) running under [dosemu](http://www.dosemu.org/) (tested under Ubuntu 16.04), [VICE](http://vice-emu.sourceforge.net/) emulator, A C128 or C128D running CP/M 3.0 with at least two 1581s, one 1571, large RAM disk or hard drive. Building from source is really slow using a real C128, so I would use the MyZ80 emulator.
+* [MyZ80](http://www.z80.eu/myz80cpm.html) running under [dosemu](http://www.dosemu.org/) (tested under Ubuntu 18.04), [VICE](http://vice-emu.sourceforge.net/) emulator, A C128 or C128D running CP/M 3.0 with at least two 1581s, one 1571, large RAM disk or hard drive. Building from source is really slow using a real C128, so I would use the MyZ80 emulator.
 * 80 column monitor for VDC specific routines. 640 X 480 interlace graphics requires a monitor that can handle this format.
 * ANSI C programming experience.
 

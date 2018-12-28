@@ -1,6 +1,6 @@
 # DOS                                                
 
-I'm using [dosemu](http://www.dosemu.org/) on Ubuntu 16.04 x64. Of course you can use a real/emulated PC with DOS, Windows 3.1, WIndows 95, etc. I started programming in DOS around the mid 80s which started with BASIC before moving on to Turbo Pascal 2.0. This progression took me all the way through Borland Pascal 7.0. This coincided with my first IT job which was programming a Qantel mini and various departmental DOS applications in 1987. I also learned OOP concepts, [Turbo Vision](https://en.wikipedia.org/wiki/Turbo_Vision) and graphics programming during this time.
+I'm using [dosemu](http://www.dosemu.org) on Ubuntu 18.04 x64. Of course you can use a real/emulated PC with DOS, Windows 3.1, Windows 95, etc. I started programming in DOS around the mid 80s which started with BASIC before moving on to Turbo Pascal 2.0. This progression took me all the way through Borland Pascal 7.0. This coincided with my first IT job which was programming a Qantel mini and various departmental DOS applications in 1987. I also learned OOP concepts, [Turbo Vision](https://en.wikipedia.org/wiki/Turbo_Vision) and graphics programming during this time.
 
  
 `sudo apt-get install dosemu`
