@@ -13,10 +13,9 @@ This is the first release of version 1.8 on github more than 20 years later! I s
 SG C Tools ANSI C library unlocks the power of the C128 running CP/M!  High level and low level functions are included to access the [VDC](https://en.wikipedia.org/wiki/MOS_Technology_8563), [SID](https://en.wikipedia.org/wiki/MOS_Technology_SID) and [CIA](https://en.wikipedia.org/wiki/MOS_Technology_CIA). All source code is compatible with the Freeware version of Hi Tech C. A demo is included to show you how to use most features.
 
 ## Features
-* CIA
-
  ![CIA](images/sgctools2.png)
 
+* CIA
     * Get/set TOD clocks
     * Convert TOD BCD to HH:MM:SS AM    
     * Set interrupt controllers  
@@ -24,10 +23,10 @@ SG C Tools ANSI C library unlocks the power of the C128 running CP/M!  High leve
     * Convert Hz to timer latch value  
     * Read joy sticks and low level keyboard scan
     * Demo shows you how to read 2 joy sticks, 4 paddles, 2 mice and the extended 128 keyboard
-* VDC
-
+ 
  ![VDC](images/sgctools3.png)
 
+* VDC
     * Fast I/O
     * Buffered I/O
     * Copies
@@ -38,19 +37,21 @@ SG C Tools ANSI C library unlocks the power of the C128 running CP/M!  High leve
     * Supports 16K and 64K mode
     * Fast graphics primitives for pixel plotting, lines, ellipses and text
     * Demo shows you how to do windows and graphics
-    * CHED 80 character editor included
+ 
  ![CHED80](images/ched80.png)
-    
-* View PCX images
+
+* CHED 80 character editor included
+    * Easily edit characters for VDC or VIC.
 
  ![PCX](images/sgctools4.png)
- 
+
+* View PCX images
     * Use industry standard .PCX images in your C programs
     * Demo shows you how to view 640 X 200 and 640 X 480 images
-* SID
 
  ![SID](images/sgctools5.png)
 
+* SID
     * Read pots
     * Read 1351 compatible mouse
     * Clear SID
