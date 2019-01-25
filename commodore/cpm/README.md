@@ -5,6 +5,8 @@ A lot of the code I developed for the C128 was specifically for CP/M 80 column m
 Categories
 * [SG C Tools](https://github.com/sgjava/garage/tree/master/commodore/cpm/sgctools) - C API for C128 in CPM with low level access to VDC, CIA and SID, fast high resolution graphics, digitized sound player, etc.
 * [Blue Bastards from Outer Space](https://github.com/sgjava/garage/tree/master/commodore/cpm/bbfos) - Graphic game for C128 CP/M that utilizes digitized guitar chords to compose a intro song, voice for game actions and intro. This was written in Turbo Pascal 3.01 using SG C Tools for Pascal.
+* [VIC Demo](https://github.com/sgjava/garage/tree/master/commodore/cpm/vicdemo) is the newest addition to my CP/M collection. Watch CP/M take control of the VIC and make it do
+its bidding. Raster polling, page flipping, high speed text output, sprites and bitmap graphics are all in this demo.
 
 ## Programming considerations
 * The VDC should be configured to its default CP/M 3.0 settings at the start and end of each program.
