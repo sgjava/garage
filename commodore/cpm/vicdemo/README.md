@@ -64,7 +64,13 @@ refactoring and formatting I used the following method:
 I also booted into 80 column mode to program, so I was using the C128 in dual
 head mode. I cannot see anyone editing code in standard 40 column mode. If you
 are running vicdemo.com on a real C128 you can boot in 40 column mode and run
-from the command line. 
+from the command line.
+
+To compile boot [d81 disk](https://github.com/sgjava/garage/raw/master/commodore/cpm/vicdemo/vicdemo.zip)
+and enter the following at the command prompt  `c -o -x vicdemo.c`. Use warp mode to speed things up.
+I used the turbo editor which is on the disk.
+
+To run boot disk and enter `vicdemo` at command prompt.
 
 ### How to manage VIC memory in CP/M
 I did a smoke test of using MMU bank 1 for the VIC instead of bank 0 (the CP/M
