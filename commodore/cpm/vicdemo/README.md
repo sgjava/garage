@@ -61,6 +61,19 @@ refactoring and formatting I used the following method:
 * Import file to commodore formatted disk with `c1541 -attach export.d71 -write vicdemo.c vicdemo.c,s`
 * Use BBR to transfer source from commodore formatted disk to CP/M formatted disk.
 
+If you want to save some steps doing the import/export from disk image to Linux:
+you can build ctools.  
+* `git clone https://github.com/mist64/ctools`
+* `cd ctools/src`
+* Make simple changes in [PR](https://github.com/mist64/ctools/pull/1/commits/f9c41bed64ebf818cfba8dad497451c16b034abe)
+* `make`
+* `make install`
+
+Files are installed to ../bin. To export a file from d64/d71 (d81 not supported):
+* `ctools export.d71 g memtest.c`
+
+This is way easier than fiddling with BBR. 
+
 I also booted into 80 column mode to program, so I was using the C128 in dual
 head mode. I cannot see anyone editing code in standard 40 column mode. If you
 are running vicdemo.com on a real C128 you can boot in 40 column mode and run
