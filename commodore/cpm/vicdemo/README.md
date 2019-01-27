@@ -61,8 +61,8 @@ refactoring and formatting I used the following method:
 * Import file to commodore formatted disk with `c1541 -attach export.d71 -write vicdemo.c vicdemo.c,s`
 * Use BBR to transfer source from commodore formatted disk to CP/M formatted disk.
 
-If you want to save some steps doing the import/export from disk image to Linux:
-you can build ctools.  
+If you want to save some steps doing the import/export from disk image to Linux
+you can build ctools:
 * `git clone https://github.com/mist64/ctools`
 * `cd ctools/src`
 * Make simple changes in [PR](https://github.com/mist64/ctools/pull/1/commits/f9c41bed64ebf818cfba8dad497451c16b034abe)
