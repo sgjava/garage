@@ -12,22 +12,22 @@
 #include <hitech.h>
 
 /*
- * VIC offset in memory (bank 1)
+ * VIC offset in memory (bank 1).
  */
 ushort vicOfs = 0x4000;
 
 /*
- * Color memory
+ * Color memory.
  */
 ushort colMem = 0xd800;
 
 /*
- * Lookup for fast pixel selection
+ * Lookup for fast pixel selection.
  */
 uchar bitTable[8] = { 128, 64, 32, 16, 8, 4, 2, 1 };
 
 /*
- * Sprite definition
+ * Sprite definition.
  */
 uchar sprData[] = { 0x00, 0x7e, 0x00, 0x03, 0xff, 0xc0, 0x07, 0xff, 0xe0, 0x1f,
         0xff, 0xf8, 0x1f, 0xff, 0xf8, 0x3f, 0xff, 0xfc, 0x7f, 0xff, 0xfe, 0x7f,
@@ -37,43 +37,24 @@ uchar sprData[] = { 0x00, 0x7e, 0x00, 0x03, 0xff, 0xc0, 0x07, 0xff, 0xe0, 0x1f,
         0xff, 0xc0, 0x00, 0x7e, 0x00 };
 
 /*
- * Scan standard and extended keys.
+ * Get standard or extended key code for single row. 0xff is returned if no key
+ * pressed. keyRow is 0 - 10.
  */
-uchar *keyScan() {
-    uchar saveDdrA, saveDdrB, keyMask, i;
-    uchar *ciaKeyScan = malloc(11);
-    /* Save CIA 1 DDRs */
-    saveDdrA = inp(0xdc02);
-    saveDdrB = inp(0xdc03);
-    outp(0xdc02, 0xff);
-    outp(0xdc03, 0x00);
-    /* Scan standard keys */
-    for (i = 0, keyMask = 1; i < 8; i++, keyMask <<= 1) {
-        outp(0xdc00, ~keyMask);
-        ciaKeyScan[i] = inp(0xdc01);
-    }
-    /* Scan extended keys */
-    for (keyMask = 1; i < 11; i++, keyMask <<= 1) {
-        outp(0xd02f, ~keyMask);
+uchar readKey(uchar keyRow) {
+    uchar keyCode;
+    static uchar keyCol[8] = { 0xfe, 0xfd, 0xfb, 0xf7, 0xef, 0xdf, 0xbf, 0x7f };
+    /* Standard keys? */
+    if (keyRow < 8) {
+        outp(0xd02f, 0xff);
+        outp(0xdc00, keyCol[keyRow]);
+        keyCode = inp(0xdc01);
+    } else {
+        /* Extended keys */
         outp(0xdc00, 0xff);
-        ciaKeyScan[i] = inp(0xdc01);
+        outp(0xd02f, keyCol[keyRow - 8]);
+        keyCode = inp(0xdc01);
     }
-    outp(0xdc00, 0x7f);
-    outp(0xd02f, 0xff);
-    /* Restore CIA 1 DDRs */
-    outp(0xdc02, saveDdrA);
-    outp(0xdc03, saveDdrB);
-    return ciaKeyScan;
-}
-
-/*
- * Return single row of key scan.
- */
-readKey(uchar index) {
-    uchar *ciaKeyScan = keyScan();
-    uchar key = ciaKeyScan[index];
-    free(ciaKeyScan);
-    return key;
+    return keyCode;
 }
 
 /*
@@ -102,7 +83,7 @@ void outVdc(uchar regNum, uchar regVal) {
 void vdcToChrMem(uchar *chr, ushort vdcMem, ushort chars) {
     register uchar c;
     ushort i;
-    outVdc(18, (uchar) (vdcMem >> 8));
+    outVdc(18, (uchar)(vdcMem >> 8));
     outVdc(19, (uchar) vdcMem);
     for (i = 0; i < chars; i++) {
         for (c = 0; c < 8; c++) {
@@ -533,6 +514,10 @@ void sprites(uchar *scr1, uchar *scr2, uchar *spr, uchar numSpr) {
                 yDir[i] = 1;
             }
         }
+
+        /* Raster off screen? */
+        while ((inp(0xd011) & 0x80) != 0x80)
+            ;
         /* Move sprites */
         for (i = 0; i < numSpr; i++) {
             setSprLoc(i, sprX[i], sprY[i]);
@@ -610,7 +595,7 @@ void snowPage(uchar *scr1, uchar *scr2) {
         }
     }
     regVal = (inp(0xd018) & 0x0e) | (((ushort) scr2 - vicOfs) / 64);
-    while (inp(0xd012) != 0xff)
+    while ((inp(0xd011) & 0x80) != 0x80)
         ;
     outp(0xd018, regVal);
 }
@@ -665,12 +650,12 @@ void scroll(uchar *scr1, uchar *scr2, uchar *chr, uchar *spr) {
     clearScr(scr1, 32);
     clearScr(scr2, 32);
     clearCol(1);
-    /* Set botom 2 lines to gray */
+    /* Set bottom 2 lines to gray */
     for (i = 0; i < 40; i++) {
         outp(colMem + 920 + i, 15);
         outp(colMem + 960 + i, 12);
     }
-    /* Define chars 0-7 as decending bars */
+    /* Define chars 0-7 as descending bars */
     for (i = 0; i < 8; i++) {
         chr[(i * 8) + i] = 0xff;
     }
@@ -708,8 +693,8 @@ void scroll(uchar *scr1, uchar *scr2, uchar *chr, uchar *spr) {
         sprY += dir;
         if (sprY < 100) {
             sprY = 100;
-        } else if (sprY > 225) {
-            sprY = 225;
+        } else if (sprY > 200) {
+            sprY = 200;
         }
         if (scr == scr1) {
             scrollPage(scr1, scr2, y, chrPos);
@@ -718,7 +703,7 @@ void scroll(uchar *scr1, uchar *scr2, uchar *chr, uchar *spr) {
             scrollPage(scr2, scr1, y, chrPos);
             scr = scr1;
         }
-        while (inp(0xd012) != 0xfc)
+        while ((inp(0xd011) & 0x80) != 0x80)
             ;
         /* Sprite Y */
         outp(0xd001 + (sprNum << 1), sprY);
@@ -755,14 +740,17 @@ main() {
             "\nBuf:  %04x\nChr:  %04x\nScr1: %04x\nScr2: %04x\nSpr:  %04x\nBmp:  %04x",
             vicMem, chr, scr1, scr2, spr, bmp);
     puts("\n\nPress Return for next screen!");
-    /* Clear CIA 1 ICR status */
-    inp(0xdc0d);
     /* Clear all CIA 1 IRQ enable bits */
     outp(0xdc0d, 0x7f);
-    /* Clear CIA 2 ICR status */
-    inp(0xdd0d);
+    /* Clear CIA 1 ICR status */
+    inp(0xdc0d);
     /* Clear all CIA 2 IRQ enable bits */
     outp(0xdd0d, 0x7f);
+    /* Clear CIA 2 ICR status */
+    inp(0xdd0d);
+    /* Set CIA 1 DDRs for keyboard scan */
+    outp(0xdc02, 0xff);
+    outp(0xdc03, 0x00);
     text(scr1, scr2, chr, spr);
     bitmap(bmp, scr1, chr);
     /* CPM default */
